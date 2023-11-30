@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.datio</groupId>
+        <artifactId>spark-pom-parent</artifactId>
+        <version>2.0.0-3.1</version>
+    </parent>
+
+    <groupId>com.bbva.gl.kbtq</groupId>
+    <artifactId>kbtq-gl-spk-out-codatakbtqcddeconinformati</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1.0-SNAPSHOT</version>
+
+    <name>Parent kbtq-gl-spk-out-codatakbtqcddeconinformati</name>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.datio.dataproc.sdk</groupId>
+                <artifactId>dataproc-sdk-bom</artifactId>
+                <version>0.4.9-3.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <!-- Add global dependencies for project -->
+
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+
+                <!-- Add plugins for project -->
+
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+
+            <!-- Add global plugins fot project -->
+
+        </plugins>
+    </build>
+
+<modules>  <module>kbtq-gl-spk-out-codatakbtqcddeconinformati-spark</module>
+    <module>testAT</module>
+  </modules>
+</project>
