@@ -4,16 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bbva.gl.kbtq</groupId>
-        <artifactId>kbtq-gl-spk-out-codatakbtqcddeconinformati</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <groupId>com.bbva.datioamproduct</groupId>
+        <artifactId>datacbtqcddeconinformation</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>testAT</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.0-SNAPSHOT</version>
 
-    <name>kbtq-gl-spk-out-codatakbtqcddeconinformati Acceptance Tests</name>
+    <name>cbtq-co-spk-out-datacbtqcddeconinformation Acceptance Tests</name>
 
     <properties>
         <cucumber.version>5.6.0</cucumber.version>
@@ -22,9 +21,9 @@
     <dependencies>
         <!-- Test -->
         <dependency>
-            <groupId>com.bbva.gl.kbtq</groupId>
-            <artifactId>kbtq-gl-spk-out-codatakbtqcddeconinformati-spark</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
+            <groupId>com.bbva.datioamproduct</groupId>
+            <artifactId>cddGlobalEcoInformation</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -58,6 +57,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>com.datio.dataproc.sdk</groupId>
+            <artifactId>dataproc-sdk-datiofilesystem</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_${scala.binary.version}</artifactId>
             <scope>test</scope>
@@ -83,6 +87,12 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.datio.spark.bdt</groupId>
+            <artifactId>spark-bdt</artifactId>
+            <version>${datio-spark-bdt.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

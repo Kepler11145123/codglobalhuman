@@ -33,7 +33,7 @@ steps must be targeted to local (relative) paths (example: `src/test/resource/co
 ### Initialize process with an Id
 
 ```
-Given The id of the process as KbtqGlSpkOutCodatakbtqcddeconinformati
+Given The id of the process as CbtqCoSpkOutDatacbtqcddeconinformation
 ```
 
 ### Initialize environment variables

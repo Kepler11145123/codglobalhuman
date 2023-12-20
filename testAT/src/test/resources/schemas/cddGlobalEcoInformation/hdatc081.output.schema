@@ -1,0 +1,144 @@
+{
+  "namespace": "ccog",
+  "name": "t_ccog_hdatc081_tasas_cambio",
+  "doc": "Tabla que contiene las tasas de cambio de las diferentes monedas a pesos",
+  "database": "master",
+  "storageZone": "Masterdata",
+  "storageType": "HDFS-Parquet",
+  "physicalPath": "/data/master/ccog/data/t_ccog_hdatc081_tasas_cambio",
+  "partitions": ["partition_data_year_id", "partition_data_month_id", "partition_data_day_id"],
+  "securityLevel": "L1",
+  "type": "record",
+  "fields": [{
+    "name": "exchange_rate_report_date",
+    "type": "date",
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "co"
+  }, {
+    "name": "currency_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(3)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "exchange_currency_type",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "currency_quote_operation_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "exchange_rate_amount",
+    "type": ["null", "decimal(17,10)"],
+    "logicalFormat": "DECIMAL(17,10)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(17,10)",
+    "locale": "co"
+  }, {
+    "name": "buyer_exchange_rate_amount",
+    "type": ["null", "decimal(17,10)"],
+    "logicalFormat": "DECIMAL(17,10)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(17,10)",
+    "locale": "co"
+  }, {
+    "name": "seller_exchange_rate_amount",
+    "type": ["null", "decimal(17,10)"],
+    "logicalFormat": "DECIMAL(17,10)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(17,10)",
+    "locale": "co"
+  }, {
+    "name": "audit_date",
+    "type": ["timestamp", "null"],
+    "logicalFormat": "TIMESTAMP",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+    "locale": "co"
+  }, {
+    "name": "last_modify_entity_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(5)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "last_modify_branch_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(5)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "last_modify_terminal_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "last_modify_user_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(8)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "exchange_rate_apply_entity_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(5)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "partition_data_year_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "partition_data_month_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "partition_data_day_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "operational_audit_insert_date",
+    "type": "timestamp",
+    "logicalFormat": "TIMESTAMP",
+    "deleted": false,
+    "metadata": true,
+    "default": "",
+    "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+    "locale": "co"
+  }]
+}

@@ -1,0 +1,7 @@
+{
+    "type": "dataproc",
+    "uuaa": "kbtq",
+    "country": "CO",
+    "owners": ["james.parreno@bbva.com" , "pablosantiago.bustos@bbva.com"],
+    "kind": "legacy_scala"
+}

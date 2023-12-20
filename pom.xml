@@ -8,19 +8,23 @@
         <version>2.0.0-3.1</version>
     </parent>
 
-    <groupId>com.bbva.gl.kbtq</groupId>
-    <artifactId>kbtq-gl-spk-out-codatakbtqcddeconinformati</artifactId>
+    <groupId>com.bbva.datioamproduct</groupId>
+    <artifactId>codatakbtqcddeconinformati</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>Parent kbtq-gl-spk-out-codatakbtqcddeconinformati</name>
+
+    <properties>
+        <datio-spark-bdt.version>1.0.2-3.1</datio-spark-bdt.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.datio.dataproc.sdk</groupId>
                 <artifactId>dataproc-sdk-bom</artifactId>
-                <version>0.4.9-3.1</version>
+                <version>0.4.8-3.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -49,7 +53,8 @@
         </plugins>
     </build>
 
-<modules>  <module>kbtq-gl-spk-out-codatakbtqcddeconinformati-spark</module>
-    <module>testAT</module>
-  </modules>
+    <modules>
+        <module>cddGlobalEcoInformation</module>
+        <module>testAT</module>
+    </modules>
 </project>

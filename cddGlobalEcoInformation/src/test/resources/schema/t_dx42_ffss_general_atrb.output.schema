@@ -1,0 +1,263 @@
+{
+	"namespace": "comp.dx42",
+	"name": "t_dx42_ffss_general_atrb",
+	"doc": "dx42",
+	"database": "master",
+	"storageZone": "Masterdata",
+	"storageType": "HDFS-Parquet",
+	"physicalPath": "/data/master/dx42/data/t_dx42_ffss_general_atrb",
+	"securityLevel": "L2",
+	"objectVersion": "3.0.0",
+	"partitions": ["g_entific_id","gf_cutoff_date","gf_ffss_origin_appl_type"],
+	"type": "record",
+
+	"fields":    [ {
+				"name": "gf_cutoff_date",
+				"type": "date",
+				"legacyName": "",
+				"logicalFormat": "DATE",
+				"format": "yyyy-MM-dd",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_customer_id",
+				"type": "string",
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(15)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_financial_statements_id",
+				"type": "string",
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(22)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_status_type",
+				"type": "string",
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_template_type",
+				"type": "string",
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_ffss_origin_appl_type",
+				"type": "string",
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(2)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_time_ind_type",
+				"type": "string",
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_closing_ind_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_employees_number",
+				"type": ["decimal(17)", "null"],
+				"legacyName": "",
+				"logicalFormat": "DECIMAL(17)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_coa_template_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_source_ind_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_entries_group_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_ffss_confirmation_user_id",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(9)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_ffss_initial_user_id",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(9)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_ffss_confirmation_date",
+				"type": ["timestamp", "null"],
+				"legacyName": "",
+				"logicalFormat": "TIMESTAMP",
+				"format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_ffss_start_date",
+				"type": ["date", "null"],
+				"legacyName": "",
+				"logicalFormat": "DATE",
+				"format": "yyyy-MM-dd",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_ffss_end_date",
+				"type": ["date", "null"],
+				"legacyName": "",
+				"logicalFormat": "DATE",
+				"format": "yyyy-MM-dd",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_economic_info_month_number",
+				"type": ["decimal(2)", "null"],
+				"legacyName": "",
+				"logicalFormat": "DECIMAL(2)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_adjusted_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_certification_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_submitted_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_audit_origin_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_ffss_tax_template_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(2)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_currency_id",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(3)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_magnitude_unit_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_ffss_auditor_full_name",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(100)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_auditor_opinion_type",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(1)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_ffss_auditor_opinion_desc",
+				"type": ["string", "null"],
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(500)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "g_entific_id",
+				"type": "string",
+				"legacyName": "",
+				"logicalFormat": "ALPHANUMERIC(2)",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}, {
+				"name": "gf_audit_date",
+				"type": ["timestamp", "null"],
+				"legacyName": "",
+				"logicalFormat": "TIMESTAMP",
+				"format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+				"deleted": false,
+				"metadata": false,
+				"default": ""
+			}]
+
+}
+
+

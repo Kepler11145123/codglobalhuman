@@ -1,0 +1,260 @@
+{
+  "namespace": "cbtq",
+  "name": "t_cbtq_udapebaven_base_de_ventas",
+  "doc": "Esta base contiene informacion economica de los clientes, el cual se genera a partir de los aplicativos de RA (Mayorista), WebPymes y Rating Comercial, estas bases se unifican a traves de SAS, conforme al levantamiento realizado, se identifico que los procesos tienen una complejidad, los cuales requieren un mayor tiempo para poder levantar, por esta razon se deja como deuda tecnica y para no impactar los tiempos del proyecto de CDD, se debera ingestar dicha base.",
+  "database": "master",
+  "storageZone": "Masterdata",
+  "storageType": "HDFS-Parquet",
+  "physicalPath": "/data/master/cbtq/data/t_cbtq_udapebaven_base_de_ventas",
+  "partitions": ["partition_data_year_id", "partition_data_month_id"],
+  "securityLevel": "L2",
+  "type": "record",
+  "fields": [{
+    "name": "personal_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "personal_verif_digit_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "personal_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(11)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "ly_financial_stmt_last_year_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "total_net_annual_sales_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(20,2)",
+    "locale": "co"
+  }, {
+    "name": "financial_statements_date",
+    "type": ["date", "null"],
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "co"
+  }, {
+    "name": "source_system_name",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(50)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "rating_status_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "internal_rating_score_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(5)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "quantitative_score_number",
+    "type": ["null", "decimal(5,2)"],
+    "logicalFormat": "DECIMAL(5,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(5,2)",
+    "locale": "co"
+  }, {
+    "name": "qualitative_score_number",
+    "type": ["null", "decimal(5,2)"],
+    "logicalFormat": "DECIMAL(5,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(5,2)",
+    "locale": "co"
+  }, {
+    "name": "total_rating_score_number",
+    "type": ["null", "decimal(5,2)"],
+    "logicalFormat": "DECIMAL(5,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(5,2)",
+    "locale": "co"
+  }, {
+    "name": "rating_model_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "ffss_total_asset_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "format": "(20,2)",
+    "locale": "co"
+  }, {
+    "name": "company_economic_activity_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "customer_sector_type_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(50)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "ciiu_risk_sectorial_group_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(50)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "sectorial_group_risk_vlty_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(50)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "user_audit_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(7)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "fin_statements_audit_mark_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "employee_number_load_date",
+    "type": ["date", "null"],
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "co"
+  }, {
+    "name": "permanent_employee_number",
+    "type": ["null", "int32"],
+    "logicalFormat": "NUMERIC SHORT",
+    "deleted": false,
+    "metadata": false,
+    "default": null
+  }, {
+    "name": "temporary_employee_number",
+    "type": ["null", "int32"],
+    "logicalFormat": "NUMERIC SHORT",
+    "deleted": false,
+    "metadata": false,
+    "default": null
+  }, {
+    "name": "total_employee_number",
+    "type": ["null", "int32"],
+    "logicalFormat": "NUMERIC SHORT",
+    "deleted": false,
+    "metadata": false,
+    "default": null
+  }, {
+    "name": "business_area_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "company_name",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(60)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "customer_economic_activity_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(6)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "business_group_name",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(50)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "business_group_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(8)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "rtg_mdl_recalibrated_vr_number",
+    "type": ["null", "int32"],
+    "logicalFormat": "NUMERIC SHORT",
+    "deleted": false,
+    "metadata": false,
+    "default": null
+  }, {
+    "name": "partition_data_year_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "partition_data_month_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "operational_audit_insert_date",
+    "type": "timestamp",
+    "logicalFormat": "TIMESTAMP",
+    "deleted": false,
+    "metadata": true,
+    "default": "",
+    "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+    "locale": "co"
+  }]
+}

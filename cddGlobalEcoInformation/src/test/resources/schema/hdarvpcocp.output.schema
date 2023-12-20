@@ -1,0 +1,447 @@
+{
+  "namespace": "cbtq",
+  "name": "t_cbtq_hdarvpcocp_pco_capac_pago",
+  "doc": "Tabla que contiene el reporte de capacidad de pago de los clientes.",
+  "database": "master",
+  "storageZone": "Masterdata",
+  "storageType": "HDFS-Parquet",
+  "physicalPath": "/data/master/cbtq/data/t_cbtq_hdarvpcocp_pco_capac_pago",
+  "partitions": ["partition_data_year_id", "partition_data_month_id", "partition_data_day_id"],
+  "securityLevel": "L2",
+  "type": "record",
+  "fields": [{
+    "name": "proposal_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(10)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "financial_statement_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(10)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "eval_identification_number",
+    "type": "int32",
+    "logicalFormat": "ALPHANUMERIC(3)",
+    "deleted": false,
+    "metadata": false,
+    "default": 0
+  }, {
+    "name": "personal_type",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "personal_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(15)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "personal_verif_digit_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "supplier_rot_metric_val_number",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "financial_debt_per",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "leverage_per",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "financing_cycle_metric_number",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "period_cash_bhav_metric_number",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "ebitda_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "roe_per",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "max_available_balance_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "maximum_cap_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "working_capital_ratio_per",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "short_term_cust_rqst_amount",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "cust_requested_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "short_term_pymt_capital_amount",
+    "type": ["null", "decimal(20,7)"],
+    "logicalFormat": "DECIMAL(20,7)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "short_term_risk_verdict_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(15)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "lt_annual_installment_amount",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "lt_fin_annual_instlmt_amount",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "customer_benefit_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(15)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "long_term_cust_rqst_amount",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "long_term_risk_verdict_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(15)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "vrdt_lt_pmt_capacity_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "gl_account_group_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gl_ac_gp_lt_pmt_cap_amount",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "gl_account_second_group_id",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "lt_risk_second_verdict_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(15)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "sec_vrdt_lt_pmt_cap_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "gl_account_third_group_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "gl_ac_thr_gp_lt_pmt_cap_amount",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "gl_account_fourth_group_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "total_gnt_val_amount",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "cust_covrg_mrgn_metric_number",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "st_cust_covrg_val_mtrc_number",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "lt_cust_covrg_val_mtrc_number",
+    "type": ["null", "decimal(20,14)"],
+    "logicalFormat": "DECIMAL(20,14)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "st_guarantee_risk_verdict_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "lt_guarantee_risk_verdict_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "cust_fixed_asset_metric_number",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "cust_fix_asset_sum_mtrc_number",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "guartr_cust_fixed_asset_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "guartr_cust_fix_ast_sum_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "st_fixed_asset_coverage_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "lt_fixed_asset_coverage_amount",
+    "type": ["null", "decimal(20,2)"],
+    "logicalFormat": "DECIMAL(20,2)",
+    "deleted": false,
+    "metadata": false,
+    "default": null,
+    "locale": "co"
+  }, {
+    "name": "st_fixed_asset_risk_vrdt_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "lt_fixed_asset_risk_vrdt_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "st_cust_proposed_sanction_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "lt_cust_proposed_sanction_type",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(20)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "employees_number",
+    "type": ["null", "int32"],
+    "logicalFormat": "NUMERIC LARGE",
+    "deleted": false,
+    "metadata": false,
+    "default": null
+  }, {
+    "name": "visit_report_number",
+    "type": ["null", "int32"],
+    "logicalFormat": "NUMERIC LARGE",
+    "deleted": false,
+    "metadata": false,
+    "default": null
+  }, {
+    "name": "visit_report_last_date",
+    "type": ["date", "null"],
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "co"
+  }, {
+    "name": "partition_data_year_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "partition_data_month_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "partition_data_day_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "operational_audit_insert_date",
+    "type": "timestamp",
+    "logicalFormat": "TIMESTAMP",
+    "deleted": false,
+    "metadata": true,
+    "default": "",
+    "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+    "locale": "co"
+  }]
+}
