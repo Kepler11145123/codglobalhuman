@@ -21,7 +21,7 @@
             <version>0.1.22</version>
         </dependency>
         <dependency>
-            <groupId>com.bbva.datioamproduct</groupId>
+            <groupId>com.bbva.co.csan</groupId>
             <artifactId>cddAgileDocsDataproc</artifactId>
             <version>0.4.0</version>
             <exclusions>
