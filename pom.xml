@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>Parent kbtq-gl-spk-out-codatakbtqcddeconinformati</name>
+    <name>Parent codatakbtqcddeconinformati</name>
 
     <properties>
         <datio-spark-bdt.version>1.0.2-3.1</datio-spark-bdt.version>

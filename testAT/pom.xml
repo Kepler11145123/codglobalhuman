@@ -5,7 +5,7 @@
 
     <parent>
         <groupId>com.bbva.datioamproduct</groupId>
-        <artifactId>datacbtqcddeconinformation</artifactId>
+        <artifactId>codatakbtqcddeconinformati</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
