@@ -99,7 +99,8 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
       |      }
       |      dfAccountLevelPath{
       |         type = parquet
-      |         path = "src/test/resources/data/inputs/t_dx42_ffss_account_level/g_entific_id=CO"
+      |         path = "src/test/resources/data/inputs/t_dx42_ffss_account_level"
+      |         partitions= ["g_entific_id=CO"]
       |      }
       |      dfPerimeterUnnPath{
       |         type = parquet
