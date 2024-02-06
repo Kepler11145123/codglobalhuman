@@ -111,6 +111,7 @@ class ParametryEcoInformationTest extends FlatSpec with Matchers with ContextPro
     assert(ParametryEcoInformation.PARAMETER_NULL.equals("parameter_null"))
     assert(ParametryEcoInformation.GF_CO_SIZE_CAL_TL_ASSET_AMOUNT.equals("gf_co_size_cal_tl_asset_amount"))
     assert(ParametryEcoInformation.GF_CO_SIZE_CAL_EMPLYS_NUMBER.equals("gf_co_size_cal_emplys_number"))
+    assert(ParametryEcoInformation.LOGGER_ERROR.equals("Parameter configuration file path is mandatory. Exiting..."))
   }
 
   "2. When get Parametry" should "get a not null values" in{

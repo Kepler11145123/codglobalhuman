@@ -8,7 +8,7 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextProvider {
 
-  val config: Config = ConfigFactory.load("config/applicationLocal.conf").getConfig("cddGlobalEcoInformation")
+  val config: Config = ConfigFactory.load("config/cddGlobalEcoInformation.conf").getConfig("cddGlobalEcoInformation")
   val dfSegmentsPath = "inputs.dfSegmentsPath"
   val dfsaleBasePath = "inputs.dfsaleBasePath"
   val infoCusPath = "inputs.infoCusPath"

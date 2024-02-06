@@ -6,7 +6,7 @@ import com.typesafe.config.{Config, ConfigFactory, ConfigValueFactory}
 import org.scalatest.{FlatSpec, Matchers}
 
 class EvaluateEcoInformationTest  extends FlatSpec with Matchers with ContextProvider {
-  val oldConfig: Config = ConfigFactory.load("config/applicationLocal.conf")
+  val oldConfig: Config = ConfigFactory.load("config/cddGlobalEcoInformation.conf")
   "1. When execute Evaluate.run with ideal case" should "have response 0" in {
     spark.sparkContext.setCheckpointDir("src/test/resources/data/inputsTmp/segmentos")
     val runtimeContext = new FakeRuntimeContext(oldConfig)

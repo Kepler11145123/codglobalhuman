@@ -8,7 +8,7 @@
         <version>2.0.0-3.1</version>
     </parent>
 
-    <groupId>com.bbva.datioamproduct</groupId>
+    <groupId>com.bbva.gl.kbtq</groupId>
     <artifactId>codatakbtqcddeconinformati</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
@@ -32,24 +32,15 @@
     </dependencyManagement>
 
     <dependencies>
-
-        <!-- Add global dependencies for project -->
-
     </dependencies>
 
     <build>
         <pluginManagement>
             <plugins>
-
-                <!-- Add plugins for project -->
-
             </plugins>
         </pluginManagement>
 
         <plugins>
-
-            <!-- Add global plugins fot project -->
-
         </plugins>
     </build>
 

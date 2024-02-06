@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bbva.datioamproduct</groupId>
+        <groupId>com.bbva.gl.kbtq</groupId>
         <artifactId>codatakbtqcddeconinformati</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -19,9 +19,8 @@
     </properties>
 
     <dependencies>
-        <!-- Test -->
         <dependency>
-            <groupId>com.bbva.datioamproduct</groupId>
+            <groupId>com.bbva.gl.kbtq</groupId>
             <artifactId>cddGlobalEcoInformation</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>test</scope>

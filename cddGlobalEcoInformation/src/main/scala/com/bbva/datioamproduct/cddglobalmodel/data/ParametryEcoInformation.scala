@@ -81,6 +81,7 @@ object ParametryEcoInformation {
   lazy val GF_RTL_CUST_PMT_ABLTY_AMOUNT = "gf_rtl_cust_pmt_ablty_amount"
   lazy val GF_RNTL_ICM_CRE_IN_EXP_PER = "gf_rntl_icm_cre_in_exp_per"
   lazy val PARTITION_GF_CUTOFF_DATE = "gf_cutoff_date"
+  lazy val LOGGER_ERROR = "Parameter configuration file path is mandatory. Exiting..."
 
   lazy val dfSalesBase = "dfSalesBase"
   lazy val CFG_SALES_PATH = "inputs.udapebaven_base_de_ventas"

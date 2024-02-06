@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bbva.datioamproduct</groupId>
+        <groupId>com.bbva.gl.kbtq</groupId>
         <artifactId>codatakbtqcddeconinformati</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.bbva.co.csan</groupId>
             <artifactId>cddAgileDocsDataproc</artifactId>
-            <version>0.4.0</version>
+            <version>0.4.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.bbva.datioamproduct</groupId>

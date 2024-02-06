@@ -21,7 +21,7 @@ class EvaluateEcoInformation(runtimeContext: RuntimeContext) extends LazyLogging
       val inputs = new GetDataProcessEcoInformation(spark, config).getInputs
       val dfEcoInformation = new GenerateEcoInformation(spark, config).generateEcoInformation(inputs)
       new WriterWithDataproc(config).apply(dfEcoInformation, ParametryEcoInformation.OUTPUT_ROUTE)
-      deleteTmpPath(config.getString(WRITE_TEMP),spark,config)
+      deleteTmpPath(config.getString(WRITE_TEMP),spark)
       exitCode = ParametryEcoInformation.EXIT_CODE_SUCCESS
     } catch {
       case permissionException: org.apache.hadoop.security.AccessControlException =>
@@ -34,7 +34,7 @@ class EvaluateEcoInformation(runtimeContext: RuntimeContext) extends LazyLogging
     exitCode
   }
 
-  def deleteTmpPath(path: String, spark: SparkSession, config : Config): Boolean = {
+  def deleteTmpPath(path: String, spark: SparkSession): Boolean = {
     val hadoopConfig = spark.sparkContext.hadoopConfiguration
     val hadoopFileSystem = FileSystem.get(hadoopConfig)
     val pathHdfsPartition = new Path(path)

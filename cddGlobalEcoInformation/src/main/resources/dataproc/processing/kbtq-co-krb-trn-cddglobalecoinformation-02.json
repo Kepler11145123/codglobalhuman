@@ -1,14 +1,13 @@
 {
-  "params" : {
-    "artifactUrl": "${repository.endpoint.vdc}/${repository.repo.proc.releases}/com/datio/kirby/kirby-ingestion/2.12.7/kirby-ingestion-2.12.7-jar-with-dependencies.jar",
-    "extraLibs": "${repository.endpoint.vdc}/${repository.repo.proc.releases}/com/bbva/projectsdatio/CDD-extkirby/2.10.6/CDD-extkirby-2.10.6-jar-with-dependencies.jar",
-    "configUrl" : "${repository.endpoint.vdc}/${repository.repo.proc}/com/bbva/datioamproduct/cddGlobalEcoInformation/${version}/cddGlobalEcoInformationCTL.conf",
-    "mainClass" : "com.datio.kirby.Launcher"
+  "_id": "kbtq-co-krb-trn-cddglobalecoinformation-02",
+  "description": "Job kbtq-co-krb-trn-cddglobalecoinformation-02 created for CDD Processing",
+  "kind": "processing",
+  "params": {
+    "artifactUrl": "${repository.endpoint.vdc}/${repository.repo.proc.releases}/com/bbva/projectsdatio/CDD-extkirby3/3.1.0/CDD-extkirby3-3.1.0-jar-with-dependencies.jar",
+    "configUrl": "${repository.endpoint.vdc}/${repository.repo.proc}/com/bbva/gl/kbtq/cddGlobalEcoInformation/${version}/cddGlobalEcoInformationCTL.conf",
+    "mainClass": "com.bbva.projectsdatio.cdd.ctlgenerator.Launcher"
   },
-  "size" : "XS",
-  "description" : "Job kbtq-co-krb-trn-cddglobalecoinformation-02 created for CDD Processing",
-  "_id" : "kbtq-co-krb-trn-cddglobalecoinformation-02",
-  "runtime" : "spark:2.2.1",
-  "streaming": false,
-  "kind": "processing"
+  "runtime": "spark:3.1",
+  "size": "XS",
+  "streaming": false
 }

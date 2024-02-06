@@ -6,7 +6,7 @@ import com.bbva.datioamproduct.cddglobalmodel.ContextProvider
 
 class GetDataProcessEcoInformationTest extends FlatSpec with Matchers with ContextProvider {
 
-  val config: Config = ConfigFactory.load("config/applicationLocal.conf").getConfig("cddGlobalEcoInformation")
+  val config: Config = ConfigFactory.load("config/cddGlobalEcoInformation.conf").getConfig("cddGlobalEcoInformation")
 
   "1. When read the function GetDataProcess with getInputsStandard" should "get a dataframe with at least 15 rows and 1 columns" in {
     spark.sparkContext.setCheckpointDir("src/test/resources/data/inputsTmp/segmentos")
