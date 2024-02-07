@@ -11,11 +11,11 @@ import com.typesafe.scalalogging.LazyLogging
 class EvaluateEcoInformation(runtimeContext: RuntimeContext) extends LazyLogging {
   def run(): Int = {
     var exitCode = ParametryEcoInformation.EXIT_CODE_INITIAL
+    val config = runtimeContext.getConfig.getConfig(LAUNCHER)
+    val datioSparkSession = DatioSparkSession.getOrCreate()
+    val spark = datioSparkSession.getSparkSession
+    spark.sparkContext.setCheckpointDir(config.getString(WRITE_TEMP))
     try {
-      val datioSparkSession = DatioSparkSession.getOrCreate()
-      val spark = datioSparkSession.getSparkSession
-      val config = runtimeContext.getConfig.getConfig(LAUNCHER).resolve()
-
       val inputs = new GetDataProcessEcoInformation(spark, config).getInputs
       val dfEcoInformation = new GenerateEcoInformation(spark, config).generateEcoInformation(inputs)
       new WriterWithDataproc(config).apply(dfEcoInformation, ParametryEcoInformation.OUTPUT_ROUTE)
