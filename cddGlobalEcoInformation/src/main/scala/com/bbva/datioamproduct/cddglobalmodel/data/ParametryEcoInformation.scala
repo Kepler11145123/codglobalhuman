@@ -7,8 +7,6 @@ object ParametryEcoInformation {
   lazy val EXIT_CODE_FAIL_PERMISSION: Int = -2
   lazy val EXIT_CODE_FAIL_GENERAL: Int = -1
   lazy val PARAM_EMPTY = ""
-  lazy val NUMBER_FIFTEEN = 15
-  lazy val OVERWRITE = "overwrite"
   lazy val TIME_STAMP_FORMAT = "yyyy-MM-dd HH:mm:ss.SSSSSS"
   lazy val NUMBER_ZERO = 0
   lazy val NUMBER_ONE = 1
@@ -26,7 +24,6 @@ object ParametryEcoInformation {
   lazy val DX_GENERALATRB_PATH = "inputs.dxgeneralatrb"
   lazy val DX_ACCOUNTLEVEL_PATH = "inputs.dxaccountlevel"
   lazy val CFG_LAST_DAY_MONTH = "params.last_day_month"
-  lazy val MONTH = "params.MONTH"
   lazy val OUTPUT_ROUTE = "output.economicalinformation"
   lazy val LAUNCHER = "cddGlobalEcoInformation"
   lazy val WRITE_TEMP = "WRITE_SEGMENTATION"
@@ -74,8 +71,6 @@ object ParametryEcoInformation {
   lazy val dfPayCapac = "dfPayCapac"
   lazy val dfDxGeneralAtrb =  "dfDxGeneralAtrb"
   lazy val dfDxAccountLevel = "dfDxAccountLevel"
-  lazy val REGEX_DOT = "\\."
-  lazy val REGEX_COMA = "\\,"
   lazy val REGEX_LEFT_ZERO = "^[0]*"
   lazy val DOT = "."
   lazy val GF_RTL_CUST_PMT_ABLTY_AMOUNT = "gf_rtl_cust_pmt_ablty_amount"

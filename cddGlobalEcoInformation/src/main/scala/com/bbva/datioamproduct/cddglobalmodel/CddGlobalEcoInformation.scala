@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory
 
 class CddGlobalEcoInformation extends SparkProcess {
 
-  private val logger = LoggerFactory.getLogger(classOf[CddGlobalEcoInformation])
-
   override def runProcess(runtimeContext: RuntimeContext): Int = {
     var exitCode = ParametryEcoInformation.EXIT_CODE_INITIAL
     val evaluate = new EvaluateEcoInformation(runtimeContext)
@@ -20,11 +18,6 @@ class CddGlobalEcoInformation extends SparkProcess {
     exitCode
 
   }
-
-  def defineBusinessInfo: BusinessInformation =
-    BusinessInformation(exitCode = ParametryEcoInformation.EXIT_CODE_SUCCESS, entity = ParametryEcoInformation.PARAM_EMPTY,
-      path = ParametryEcoInformation.PARAM_EMPTY, mode = ParametryEcoInformation.PARAM_EMPTY, schema = ParametryEcoInformation.PARAM_EMPTY,
-      schemaVersion = ParametryEcoInformation.PARAM_EMPTY, reprocessing = ParametryEcoInformation.PARAM_EMPTY)
 
   override def getProcessId: String = LAUNCHER
 }

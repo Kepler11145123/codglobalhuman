@@ -13,9 +13,4 @@ class CddGlobalEcoInformationTest extends FlatSpec with Matchers with ContextPro
     val returnCode = new CddGlobalEcoInformation().runProcess(runtimeContext)
     assert(returnCode === 0)
   }
-
-  "2. An execution Launcher.defineBusinessInfo " should "have response not null" in {
-    val returnCode = new CddGlobalEcoInformation().defineBusinessInfo
-    assert(returnCode != null)
-  }
 }
