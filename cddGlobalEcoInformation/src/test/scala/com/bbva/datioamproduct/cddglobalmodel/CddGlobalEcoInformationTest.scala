@@ -8,7 +8,6 @@ class CddGlobalEcoInformationTest extends FlatSpec with Matchers with ContextPro
   val config: Config = ConfigFactory.load("config/cddGlobalEcoInformation.conf")
 
   "1. An execution Launcher.runProcess with configuration file cddGlobalEcoInformation.conf " should "have response 0" in {
-    spark.sparkContext.setCheckpointDir("src/test/resources/data/inputsTmp/segmentos")
     val runtimeContext = new FakeRuntimeContext(config)
     val returnCode = new CddGlobalEcoInformation().runProcess(runtimeContext)
     assert(returnCode === 0)

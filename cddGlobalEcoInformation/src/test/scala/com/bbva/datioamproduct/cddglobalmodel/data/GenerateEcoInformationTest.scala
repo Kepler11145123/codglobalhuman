@@ -116,13 +116,13 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
   val configccddEcoInformation: Config = ConfigFactory.parseString(configStringcddEcoInformation).getConfig("cddEcoInformation")
 
 
-  "1. The test of GenerateEcoInformation.generateEcoInformation" should "be correct, obtain a object type dataframe with 14 columns and 18 records" in {
-    spark.sparkContext.setCheckpointDir("src/test/resources/data/inputsTmp/segmentos")
+  "1. The test of GenerateEcoInformation.generateEcoInformation" should "be correct, obtain a object type dataframe with 14 columns and 16 records" in {
+    spark.sparkContext.setCheckpointDir(config.getString(ParametryEcoInformation.WRITE_TEMP_DELETE))
     val inputs = new GetDataProcessEcoInformation(spark,config).getInputs
     val evaluate = new GenerateEcoInformation(spark, config).generateEcoInformation(inputs)
     assert(evaluate.isInstanceOf[DataFrame],"the object is not a dataframe")
     assert(evaluate.schema.fieldNames.length == 14,"wrong number of columns" )
-    assert(evaluate.count() == 18, "wrong number of records")
+    assert(evaluate.count() == 16, "wrong number of records")
   }
 
   "2. When read the function createPerimeter  " should "return a Dataframe with 16 rows and 4 columns" in {
@@ -133,12 +133,12 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
     assert(evaluate.isInstanceOf[DataFrame] && evaluate.count() === 16 && evaluate.columns.length === 4)
   }
 
-  "3. When read the function getPerimeterWithHdape094 " should "return a Dataframe with 16 rows and 9 columns" in {
+  "3. When read the function getPerimeterWithHdape094 " should "return a Dataframe with 16 rows and 7 columns" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfPerimeter = reader.apply(dfPerimeterPath)
     val dfHdape094 = reader.apply(dfHdape094Path)
     val evaluate = new GenerateEcoInformation(spark, config).getPerimeterWithHdape094(dfPerimeter, dfHdape094)
-    assert(evaluate.isInstanceOf[DataFrame] && evaluate.count() === 16 && evaluate.columns.length === 9)
+    assert(evaluate.isInstanceOf[DataFrame] && evaluate.count() === 16 && evaluate.columns.length === 7)
   }
 
   "4. When read the function joinClte" should " return a dataframe with 20 rows and 3 columns " in {
@@ -176,24 +176,7 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
     assert(evaluate.schema.length == 9)
   }
 
-  "8. When read the function getGeneralAttributesFilter " should "return a dataframe with 3 rows and 30 columns " in {
-    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
-    val dfGeneralAtrb = reader.apply(t_dx42_ffss_general_atrb)
-    val evaluate = new GenerateEcoInformation(spark, config).getGeneralAttributesFilter(dfGeneralAtrb)
-    assert(evaluate.count() == 3, " number of records")
-    assert(evaluate.schema.length == 30)
-  }
-
-  "9. When read the function getGeneralAtrbWithAccountLvlJoin " should "return a dataframe with 3 rows and 9 columns " in {
-    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
-    val dfGeneralAtrbWithAccountLvlBySingleJoin = reader.apply(dfGeneralAtrbWithAccountLvlBySingleJoinPath)
-    val dfAccountLevel = reader.apply(dfAccountLevelPath)
-    val evaluate = new GenerateEcoInformation(spark, config).getGeneralAtrbWithAccountLvlJoin(dfGeneralAtrbWithAccountLvlBySingleJoin,dfAccountLevel)
-    assert(evaluate.count() == 3, " number of records")
-    assert(evaluate.schema.length == 9)
-  }
-
-  "10. When read the function getSalesBaseWithInformationCus " should "return a dataframe with 16 rows and 33 columns " in {
+  "8. When read the function getSalesBaseWithInformationCus " should "return a dataframe with 16 rows and 34 columns " in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfsaleBase = reader.apply(dfsaleBasePath)
     val dfinfoCus = reader.apply(infoCusPath)
@@ -202,38 +185,12 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
     assert(evaluate.schema.length == 34)
   }
 
-  "11. When read the function getPerimeterUnn " should "return a dataframe with 30 rows and 12 columns " in {
-    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
-    val dfJoinTax = reader.apply(dfJoinTaxPath)
-    val dfJoinTax2 = reader.apply(dfJoinTaxPath)
-    val evaluate = new GenerateEcoInformation(spark, config).getPerimeterUnn(dfJoinTax,dfJoinTax2)
-    assert(evaluate.count() == 30, " number of records")
-    assert(evaluate.schema.length == 12)
-  }
-
-  "12. When read the function getPerimeterFilter" should " return a dataframe with 23 rows and 8 columns " in {
-    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
-    val dfPerimeterUnn = reader.apply(dfPerimeterUnnPath)
-    val evaluate = new GenerateEcoInformation(spark, config).getPerimeterFilter(dfPerimeterUnn)
-    assert(evaluate.count() == 23, " number of records")
-    assert(evaluate.schema.length == 8)
-  }
-
-  "13. When read the function getSegmentTaxonmy" should " return a dataframe with 15 rows and 3 columns " in {
+  "9. When read the function getSegmentTaxonmy" should " return a dataframe with 15 rows and 3 columns " in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfSegments = reader.apply(dfSegmentsPath)
     val dftaxR019 = reader.apply(taxR019Path)
     val evaluate = new GenerateEcoInformation(spark, config).getSegmentTaxonmy(dfSegments,dftaxR019)
     assert(evaluate.count() == 15, " number of records")
     assert(evaluate.schema.length == 3)
-  }
-
-  "14. When read the function getGeneralAtrbWithAccountLvlBySingleJoin" should " return a dataframe with 5 rows and 4 columns " in {
-    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
-    val dfGeneralAttributesFilter = reader.apply(dfGeneralAttributesFilterPath)
-    val dfAccountLevel = reader.apply(dfAccountLevelPath)
-    val evaluate = new GenerateEcoInformation(spark, config).getGeneralAtrbWithAccountLvlBySingleJoin(dfGeneralAttributesFilter, dfAccountLevel)
-    assert(evaluate.count() == 5, " number of records")
-    assert(evaluate.schema.length == 4)
   }
 }

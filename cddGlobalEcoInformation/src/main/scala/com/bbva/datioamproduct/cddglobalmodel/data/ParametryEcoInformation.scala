@@ -10,7 +10,6 @@ object ParametryEcoInformation {
   lazy val TIME_STAMP_FORMAT = "yyyy-MM-dd HH:mm:ss.SSSSSS"
   lazy val NUMBER_ZERO = 0
   lazy val NUMBER_ONE = 1
-  lazy val NUMBER_TWO = 2
   lazy val DATE_FORMAT = "yyyy-MM-dd"
   lazy val DECIMAL_TYPE_26_6 = "decimal(26,6)"
   lazy val DECIMAL_TYPE_12_9 = "decimal(12,9)"
@@ -21,12 +20,11 @@ object ParametryEcoInformation {
   lazy val CFG_CUST_PATH = "inputs.kbtq_eom_customer"
   lazy val CFG_INFCUST_PATH = "inputs.hdape001_info_basica_clte"
   lazy val CFG_PAYCAPAC_PATH = "inputs.hdarvpcocp_pco_capac_pago"
-  lazy val DX_GENERALATRB_PATH = "inputs.dxgeneralatrb"
-  lazy val DX_ACCOUNTLEVEL_PATH = "inputs.dxaccountlevel"
   lazy val CFG_LAST_DAY_MONTH = "params.last_day_month"
   lazy val OUTPUT_ROUTE = "output.economicalinformation"
   lazy val LAUNCHER = "cddGlobalEcoInformation"
-  lazy val WRITE_TEMP = "WRITE_SEGMENTATION"
+  lazy val WRITE_TEMP = "cddGlobalEcoInformation.WRITE_SEGMENTATION"
+  lazy val WRITE_TEMP_DELETE = "WRITE_SEGMENTATION"
   lazy val GF_CUTOFF_DATE = "gf_cutoff_date"
   lazy val G_CUSTOMER_ID = "g_customer_id"
   lazy val GF_TOTAL_ASSET_AMOUNT = "gf_total_asset_amount"
@@ -36,7 +34,7 @@ object ParametryEcoInformation {
   lazy val GF_COMPANY_SIZE_DATE = "gf_company_size_date"
   lazy val GF_BILLING_DATE = "gf_billing_date"
   lazy val G_ENTIFIC_ID = "g_entific_id"
-  lazy val gf_audit_date = "gf_audit_date"
+  lazy val GF_AUDIT_DATE = "gf_audit_date"
   lazy val PERSONAL_ID = "personal_id"
   lazy val LIST_SEGME_COLUMNS: List[String] = List(CUSTOMER_ID, IFRS9)
   lazy val LIST_CUST_COLUMNS: List[String] = List(G_CUSTOMER_ID)
@@ -69,15 +67,13 @@ object ParametryEcoInformation {
   lazy val dfCustomer = "dfCustomer"
   lazy val dfInfCus = "dfInfCus"
   lazy val dfPayCapac = "dfPayCapac"
-  lazy val dfDxGeneralAtrb =  "dfDxGeneralAtrb"
-  lazy val dfDxAccountLevel = "dfDxAccountLevel"
+  lazy val REGEX_DOT = "\\."
+  lazy val REGEX_COMA = "\\,"
   lazy val REGEX_LEFT_ZERO = "^[0]*"
   lazy val DOT = "."
   lazy val GF_RTL_CUST_PMT_ABLTY_AMOUNT = "gf_rtl_cust_pmt_ablty_amount"
   lazy val GF_RNTL_ICM_CRE_IN_EXP_PER = "gf_rntl_icm_cre_in_exp_per"
-  lazy val PARTITION_GF_CUTOFF_DATE = "gf_cutoff_date"
   lazy val LOGGER_ERROR = "Parameter configuration file path is mandatory. Exiting..."
-
   lazy val dfSalesBase = "dfSalesBase"
   lazy val CFG_SALES_PATH = "inputs.udapebaven_base_de_ventas"
   lazy val IN_SALES_BASE_PERSONAL_ID = "personal_id"
@@ -89,39 +85,26 @@ object ParametryEcoInformation {
     FINANCIAL_STATEMENTS_DATE
   )
   lazy val DAY_MAX = 5
-
   lazy val A = "A"
   lazy val B = "B"
   lazy val A_POINT = "A."
   lazy val B_POINT = "B."
-
   lazy val ALL_COLUMN_EXPR = "*"
   lazy val dfHdape094 = "dfHdape094"
   lazy val HDAPE094_LIST: List[String] = List(EMPLOYEES_NUMBER, CUSTOMER_ID)
   lazy val CFG_HDAPE094_PATH = "inputs.hdape094_info_mercadeo"
   lazy val NUMBER_ONE_THOUSAND = 1000
   lazy val MASTER = "master"
-  lazy val GF_FFSS_START_DATE = "gf_ffss_start_date"
-  lazy val GF_FFSS_END_DATE = "gf_ffss_end_date"
-  lazy val G_FFSS_STATUS_TYPE = "g_ffss_status_type"
-  lazy val GF_BAL_SHEET_ACCOUNT_ID = "gf_bal_sheet_account_id"
-  lazy val GF_BAL_SHEET_ACCOUNT_AMOUNT = "gf_bal_sheet_account_amount"
-  lazy val GF_FINANCIAL_STATEMENTS_ID = "gf_financial_statements_id"
-
-  lazy val LIST_DXGENERALATRB_COLUMNS: List[String] = List(GF_FFSS_START_DATE,
-    GF_FFSS_END_DATE, G_FFSS_STATUS_TYPE, G_CUSTOMER_ID, GF_EMPLOYEES_NUMBER, GF_FINANCIAL_STATEMENTS_ID)
-  lazy val LIST_DXACCOUNTLEVEL_COLUMNS: List[String] = List(GF_CUTOFF_DATE,
-    G_CUSTOMER_ID, GF_BAL_SHEET_ACCOUNT_ID, GF_BAL_SHEET_ACCOUNT_AMOUNT, GF_FINANCIAL_STATEMENTS_ID)
-  lazy val PRIORITY ="priority"
-  lazy val SOURCE ="source"
-  lazy val V_ASSET_ID = "V_0101"
-  lazy val PAR_GF_CUSTOMER_SALES_AMOUNT = "gf_customer_sales_amount"
-  lazy val PAR_GF_TOTAL_ASSET_AMOUNT = "gf_total_asset_amount"
-  lazy val PAR_GF_COMPANY_SIZE_DATE = "gf_company_size_date"
-  lazy val PAR_GF_EMPLOYEES_NUMBER = "gf_employees_number"
-  lazy val PAR_G_FFSS_STATUS_TYPE_3 = "g_ffss_status_type_3"
-  lazy val PAR_CR_CUENTA_25 = "cr_cuenta_25"
   lazy val PARAMETER_NULL = "parameter_null"
   lazy val GF_CO_SIZE_CAL_TL_ASSET_AMOUNT= "gf_co_size_cal_tl_asset_amount"
   lazy val GF_CO_SIZE_CAL_EMPLYS_NUMBER= "gf_co_size_cal_emplys_number"
+  val MODE_COMPACTOR = "coalesce"
+  val BLOCK_SIZE_COMPACTOR = 128
+  val COMPACTOR_OVERWRITE = true
+  val SLASH = "/"
+  val EQUALS = "="
+  val SUFFIX_COMPACTOR_PATH: String = "_tmp_compactor"
+  val FORMAT = "parquet"
+  val PATH_OUTPUT = "output.economicalinformation.path"
+  val PARTITIONS = "output.economicalinformation.partition"
 }

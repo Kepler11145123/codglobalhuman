@@ -22,9 +22,7 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
       dfInfCus -> getInputsKirby(LIST_INFCUS_COLUMNS, CFG_INFCUST_PATH),
       dfPayCapac -> getStandardControlDF(LIST_PAYCAPAC_COLUMNS,CFG_PAYCAPAC_PATH),
       dfSalesBase -> getInputsStandard(LIST_SALES_BASE_COLUMNS, CFG_SALES_PATH),
-      dfHdape094 -> getInputsKirby(HDAPE094_LIST, CFG_HDAPE094_PATH),
-      dfDxGeneralAtrb -> getInputsStandard(LIST_DXGENERALATRB_COLUMNS, DX_GENERALATRB_PATH),
-      dfDxAccountLevel -> getInputsParquet(LIST_DXACCOUNTLEVEL_COLUMNS, DX_ACCOUNTLEVEL_PATH)
+      dfHdape094 -> getInputsKirby(HDAPE094_LIST, CFG_HDAPE094_PATH)
     )
     inputs
   }
@@ -54,11 +52,13 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
   def getSegmentIFRS9: DataFrame = {
     val param = new ParametersCDD(spark, config, MASTER).param
     val columns = LIST_SEGME_COLUMNS.map(columnName => trim(col(columnName)).as(columnName))
-    val dfInput = new GenerateAgileDocs(spark, PARAM_EMPTY, PARAM_EMPTY).generateSegments(config)
-    val dfTemp = dfInput.checkpoint()
-    dfTemp
+    val dfInput = new GenerateAgileDocs(spark, PARAM_EMPTY, PARAM_EMPTY).generateSegments(config).checkpoint()
+    dfInput
       .select(columns: _*)
-      .withColumn(CUSTOMER_ID, concat(lit(param(G_ENTITY_ID).toString), lit(NUMBER_ZERO), col(CUSTOMER_ID)))
+      .select(
+        col(IFRS9),
+        concat(lit(param(G_ENTITY_ID).toString), lit(NUMBER_ZERO), col(CUSTOMER_ID)).as(CUSTOMER_ID)
+      )
   }
 
 
@@ -67,14 +67,5 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
     val dateMax = LocalDate.parse(config.getString(CFG_LAST_DAY_MONTH)).plusDays(DAY_MAX)
     new ReaderCalculatedDataproc(spark, config).lastDataLoadDateParquet(inputLevel, dateMax.toString)
       .select(columns: _*)
-  }
-
-  def getInputsParquet(columnList: List[String], inputLevel: String): DataFrame = {
-    val columns = columnList.map(columnName => trim(col(columnName)).as(columnName))
-    var dfInput: DataFrame = spark.emptyDataFrame
-    dfInput = new ReaderWithDataproc(spark,config).apply(inputLevel)
-      .filter(col(PARTITION_GF_CUTOFF_DATE) <= config.getString(CFG_LAST_DAY_MONTH))
-    val maxCutoffDate = dfInput.select(max(col(PARTITION_GF_CUTOFF_DATE))).first().get(NUMBER_ZERO)
-    dfInput.filter(col(PARTITION_GF_CUTOFF_DATE).equalTo(maxCutoffDate)).select(columns: _*)
   }
 }
