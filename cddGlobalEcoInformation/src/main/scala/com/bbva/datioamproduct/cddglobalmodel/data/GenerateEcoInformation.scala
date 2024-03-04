@@ -40,16 +40,13 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   }
 
   def getPerimeterWithHdape094(dfPerimeter: DataFrame, dfHdpape094: DataFrame): DataFrame = {
-    val assetAmount = regexp_replace(regexp_replace(trim(col(FFSS_TOTAL_ASSET_AMOUNT)), REGEX_DOT, PARAM_EMPTY), REGEX_COMA, DOT)
-    val custAmount = regexp_replace(regexp_replace(trim(col(TOTAL_NET_ANNUAL_SALES_AMOUNT)), REGEX_DOT, PARAM_EMPTY), REGEX_COMA, DOT)
-
     dfPerimeter.as(A)
       .join(dfHdpape094.as(B), col(A_POINT + CUSTOMER_ID) === col(B_POINT + CUSTOMER_ID), LEFT_JOIN)
       .select(
         lit(config.getString(CFG_LAST_DAY_MONTH)).cast(DATE_TYPE).as(GF_CUTOFF_DATE),
         col(A_POINT + G_CUSTOMER_ID),
-        assetAmount.cast(DECIMAL_TYPE_26_6).as(GF_TOTAL_ASSET_AMOUNT),
-        custAmount.cast(DECIMAL_TYPE_26_6).as(GF_CUSTOMER_SALES_AMOUNT),
+        col(FFSS_TOTAL_ASSET_AMOUNT).cast(DECIMAL_TYPE_26_6).as(GF_TOTAL_ASSET_AMOUNT),
+        col(TOTAL_NET_ANNUAL_SALES_AMOUNT).cast(DECIMAL_TYPE_26_6).as(GF_CUSTOMER_SALES_AMOUNT),
         when(col(B_POINT + EMPLOYEES_NUMBER).isNull, lit(param(GF_EMPLOYEES_NUMBER)))
           .otherwise(col(B_POINT + EMPLOYEES_NUMBER)).cast(DECIMAL_TYPE_17).as(GF_EMPLOYEES_NUMBER),
         to_date(col(A_POINT + FINANCIAL_STATEMENTS_DATE), DATE_FORMAT).cast(DATE_TYPE).as(GF_COMPANY_SIZE_DATE),

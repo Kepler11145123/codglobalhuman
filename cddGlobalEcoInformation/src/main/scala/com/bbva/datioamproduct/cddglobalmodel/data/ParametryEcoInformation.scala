@@ -67,8 +67,6 @@ object ParametryEcoInformation {
   lazy val dfCustomer = "dfCustomer"
   lazy val dfInfCus = "dfInfCus"
   lazy val dfPayCapac = "dfPayCapac"
-  lazy val REGEX_DOT = "\\."
-  lazy val REGEX_COMA = "\\,"
   lazy val REGEX_LEFT_ZERO = "^[0]*"
   lazy val DOT = "."
   lazy val GF_RTL_CUST_PMT_ABLTY_AMOUNT = "gf_rtl_cust_pmt_ablty_amount"

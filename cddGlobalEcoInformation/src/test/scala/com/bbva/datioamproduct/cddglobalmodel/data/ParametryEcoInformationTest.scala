@@ -65,8 +65,6 @@ class ParametryEcoInformationTest extends FlatSpec with Matchers with ContextPro
     assert(ParametryEcoInformation.dfCustomer.equals("dfCustomer"))
     assert(ParametryEcoInformation.dfInfCus.equals("dfInfCus"))
     assert(ParametryEcoInformation.dfPayCapac.equals("dfPayCapac"))
-    assert(ParametryEcoInformation.REGEX_DOT.equals("\\."))
-    assert(ParametryEcoInformation.REGEX_COMA.equals("\\,"))
     assert(ParametryEcoInformation.REGEX_LEFT_ZERO.equals("^[0]*"))
     assert(ParametryEcoInformation.DOT.equals("."))
     assert(ParametryEcoInformation.GF_RTL_CUST_PMT_ABLTY_AMOUNT.equals("gf_rtl_cust_pmt_ablty_amount"))
