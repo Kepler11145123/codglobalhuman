@@ -642,6 +642,6 @@ testAT/src/test/resources/docker/datio/spark/lib
 
 **/*.zipx
 
-
+**/output
 
 

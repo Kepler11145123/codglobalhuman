@@ -1,5 +1,7 @@
 package com.bbva.datioamproduct.cddglobalmodel.data
 
+import com.bbva.datioamproduct.cddglobalmodel.data.ParametryEcoInformation.dfEndeuda
+
 object ParametryEcoInformation {
 
   lazy val EXIT_CODE_INITIAL = 1
@@ -10,6 +12,11 @@ object ParametryEcoInformation {
   lazy val TIME_STAMP_FORMAT = "yyyy-MM-dd HH:mm:ss.SSSSSS"
   lazy val NUMBER_ZERO = 0
   lazy val NUMBER_ONE = 1
+  lazy val NUMBER_ONE_STR = "1"
+  lazy val NUMBER_FOUR = "4"
+  lazy val NUMBER_THREE = "3"
+  lazy val NUMBER_TWO = "2"
+  lazy val NUMBER_FIVE = "5"
   lazy val DATE_FORMAT = "yyyy-MM-dd"
   lazy val DECIMAL_TYPE_26_6 = "decimal(26,6)"
   lazy val DECIMAL_TYPE_12_9 = "decimal(12,9)"
@@ -18,6 +25,9 @@ object ParametryEcoInformation {
   lazy val TIMESTAMP_TYPE = "timestamp"
   lazy val STRING_TYPE = "String"
   lazy val CFG_CUST_PATH = "inputs.kbtq_eom_customer"
+  lazy val CFG_TASA_PATH = "inputs.ctch_hdatc081_tasas_cambio"
+  lazy val CFG_ENDEUDA = "inputs.hdarvfm02"
+  lazy val CFG_SECTORIZATION = "inputs.sectorization"
   lazy val CFG_INFCUST_PATH = "inputs.hdape001_info_basica_clte"
   lazy val CFG_PAYCAPAC_PATH = "inputs.hdarvpcocp_pco_capac_pago"
   lazy val CFG_LAST_DAY_MONTH = "params.last_day_month"
@@ -31,6 +41,12 @@ object ParametryEcoInformation {
   lazy val GF_CUSTOMER_SALES_AMOUNT = "gf_customer_sales_amount"
   lazy val GF_EMPLOYEES_NUMBER = "gf_employees_number"
   lazy val G_COMPANY_SIZE_TYPE = "g_company_size_type"
+  lazy val G_COMPANY_SIZE_TYPE_NUM = "g_company_size_type_NUM"
+  lazy val MARCA_EMPRESAGRANDE = "Marca_EmpresaGrande"
+  lazy val MARCA_MEDIANAEMPRESA = "Marca_MedianaEmpresa"
+  lazy val MARCA_PEQEMPRESA = "Marca_PeqEmpresa"
+  lazy val MARCA_MICROEMPRESA = "Marca_MicroEmpresa"
+  lazy val MARCA_EMPRESAGRANDE_FALTAINFO = "Marca_EmpresaGrande_faltaINFO"
   lazy val GF_COMPANY_SIZE_DATE = "gf_company_size_date"
   lazy val GF_BILLING_DATE = "gf_billing_date"
   lazy val G_ENTIFIC_ID = "g_entific_id"
@@ -40,6 +56,43 @@ object ParametryEcoInformation {
   lazy val LIST_CUST_COLUMNS: List[String] = List(G_CUSTOMER_ID)
   lazy val LIST_INFCUS_COLUMNS: List[String] = List(PERSONAL_TYPE, PERSONAL_ID, CUSTOMER_ID)
   lazy val LIST_PAYCAPAC_COLUMNS: List[String] = List(PERSONAL_TYPE, PERSONAL_ID, PROPOSAL_ID, SEC_VRDT_LT_PMT_CAP_AMOUNT)
+  lazy val LIST_TASA_COLUMNS: List[String] = List(EXCHANGE_RATE_AMOUNT,CURRENCY_ID,EXCHANGE_RATE_REPORT_DATE,EXCHANGE_CURRENCY_TYPE,EXCHANGE_RATE_APPLY_ENTITY_ID)
+  lazy val LIST_ENDEU: List[String] = List(PERSONAL_TYPE, PERSONAL_ID, PERSONAL_VERIF_DIGIT_TYPE, CONTRACT_BRANCH_ID, CONTRACT_PRODUCT_ID, CONTRACT_SEQUENCE_ID, GL_ACCOUNT_ID, PORTFOLIO_TYPE, CUSTOMER_GROUP_CLASSIF_ID)
+  lazy val LIST_SECTORIZATION: List[String] = List(G_CUSTOMER_ID, G_ASSET_ALLOCATION_SECTOR_TYPE)
+  lazy val LIST_CLASSIFID: List[String] = List(CUSTOMER_GROUP_CLASSIF_G00, CUSTOMER_GROUP_CLASSIF_G01, CUSTOMER_GROUP_CLASSIF_G02, CUSTOMER_GROUP_CLASSIF_G03, CUSTOMER_GROUP_CLASSIF_G04, CUSTOMER_GROUP_CLASSIF_M20, CUSTOMER_GROUP_CLASSIF_M21, CUSTOMER_GROUP_CLASSIF_M22, CUSTOMER_GROUP_CLASSIF_M23, CUSTOMER_GROUP_CLASSIF_M24, CUSTOMER_GROUP_CLASSIF_M25, CUSTOMER_GROUP_CLASSIF_M26)
+  lazy val CUSTOMER_GROUP_CLASSIF_G00 = "customer_group_classif_G00"
+  lazy val CUSTOMER_GROUP_CLASSIF_G01 = "customer_group_classif_G01"
+  lazy val CUSTOMER_GROUP_CLASSIF_G02= "customer_group_classif_G02"
+  lazy val CUSTOMER_GROUP_CLASSIF_G03 = "customer_group_classif_G03"
+  lazy val CUSTOMER_GROUP_CLASSIF_G04 = "customer_group_classif_G04"
+  lazy val CUSTOMER_GROUP_CLASSIF_M20 = "customer_group_classif_M20"
+  lazy val CUSTOMER_GROUP_CLASSIF_M21 = "customer_group_classif_M21"
+  lazy val CUSTOMER_GROUP_CLASSIF_M22 = "customer_group_classif_M22"
+  lazy val CUSTOMER_GROUP_CLASSIF_M23 = "customer_group_classif_M23"
+  lazy val CUSTOMER_GROUP_CLASSIF_M24 = "customer_group_classif_M24"
+  lazy val CUSTOMER_GROUP_CLASSIF_M25 = "customer_group_classif_M25"
+  lazy val CUSTOMER_GROUP_CLASSIF_M26 = "customer_group_classif_M26"
+  lazy val G_ASSET_ALLOCATION_SECTOR_TYPE = "g_asset_allocation_sector_type"
+  lazy val EXCHANGE_RATE_AMOUNT = "exchange_rate_amount"
+  lazy val CONTRACT_BRANCH_ID = "contract_branch_id"
+  lazy val CONTRACT_SEQUENCE_ID = "contract_sequence_id"
+  lazy val GL_ACCOUNT_ID = "gl_account_id"
+  lazy val CUSTOMER_GROUP_CLASSIF_ID = "customer_group_classif_id"
+  lazy val PORTFOLIO_TYPE = "portfolio_type"
+  lazy val CONTRACT_PRODUCT_ID = "contract_product_id"
+  lazy val PERSONAL_VERIF_DIGIT_TYPE = "personal_verif_digit_type"
+  lazy val CURRENCY_ID = "currency_id"
+  lazy val EXCHANGE_RATE_REPORT_DATE = "exchange_rate_report_date"
+  lazy val EXCHANGE_CURRENCY_TYPE = "exchange_currency_type"
+  lazy val EXCHANGE_RATE_APPLY_ENTITY_ID = "exchange_rate_apply_entity_id"
+  lazy val TIPO_TASA_CAMBIO = "tipo_tasa_cambio"
+  lazy val G_ENTITY = "g_entity"
+  lazy val MICROEMPREAS_EMPLEADOS = "MicroEmpreas_empleados"
+  lazy val MEDIANAEMPREAS_EMPLEADOS = "MedianaEmpreas_empleados"
+  lazy val MEDIANAEMPRESA_ACTIVOS = "MedianaEmpresa_activos"
+  lazy val MEDIANAEMPRESA_VOLUMEN = "MedianaEmpresa_volumen"
+  lazy val PORTFOLIO_TYPE_2 = "portfolio_type_2"
+  lazy val ASSET_ALLOCATION_SECTOR_TYPE_O = "asset_allocation_sector_type_O"
   lazy val EMPLOYEES_NUMBER = "employees_number"
   lazy val GF_INITIAL_CATALOG_VAL_ID = "gf_initial_catalog_val_id"
   lazy val GF_FINAL_CATALOG_VAL_ID = "gf_final_catalog_val_id"
@@ -51,12 +104,21 @@ object ParametryEcoInformation {
   lazy val FINANCIAL_STATEMENTS_DATE = "financial_statements_date"
   lazy val TOTAL_NET_ANNUAL_SALES_AMOUNT = "total_net_annual_sales_amount"
   lazy val FFSS_TOTAL_ASSET_AMOUNT = "ffss_total_asset_amount"
+  lazy val GF_CUSTOMER_SALES_AMOUNT_EUR = "gf_customer_sales_amount_EUR"
+  lazy val MICROEMPRESA_IMPORTE = "MicroEmpresa_importe "
+  lazy val PEQEMPRESA_IMPORTE = "PeqEmpresa_importe"
+  lazy val PEQEMPRESA_EMPLEADOS = "PeqEmpresa_empleados"
+  lazy val GF_TOTAL_ASSET_AMOUNT_EUR = "gf_total_asset_amount_EUR"
   lazy val BOOLEAN_TRUE = true
   lazy val IFRS9 = "IFRS9"
   lazy val AS_PCO = "pco"
   lazy val AS_IBC = "ibc"
   lazy val AS_NUM = "num"
   lazy val AS_CLTE = "clte"
+  lazy val AS_PERIM = "perim"
+  lazy val AS_TASA = "tasa"
+  lazy val ROW = "ROW"
+  lazy val ONE = 1
   lazy val TAX = "tax"
   lazy val C289 = "C289"
   lazy val LEFT_JOIN = "left"
@@ -66,6 +128,9 @@ object ParametryEcoInformation {
   lazy val dfSegment = "dfSegment"
   lazy val dfCustomer = "dfCustomer"
   lazy val dfInfCus = "dfInfCus"
+  lazy val dfTasaCambio ="dfTasaCambio"
+  lazy val dfEndeuda = "dfEndeuda"
+  lazy val dfSectorization = "dfSectorization"
   lazy val dfPayCapac = "dfPayCapac"
   lazy val REGEX_LEFT_ZERO = "^[0]*"
   lazy val DOT = "."
@@ -91,6 +156,7 @@ object ParametryEcoInformation {
   lazy val dfHdape094 = "dfHdape094"
   lazy val HDAPE094_LIST: List[String] = List(EMPLOYEES_NUMBER, CUSTOMER_ID)
   lazy val CFG_HDAPE094_PATH = "inputs.hdape094_info_mercadeo"
+  lazy val CFG_TASCAMB_PATH = "inputs.ctch_hdatc081_tasas_cambio"
   lazy val NUMBER_ONE_THOUSAND = 1000
   lazy val MASTER = "master"
   lazy val PARAMETER_NULL = "parameter_null"

@@ -14,6 +14,7 @@ import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 
 class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) extends LazyLogging {
 
+  val param: Map[String, Any] = new ParametersCDD(spark, config, MASTER).param
   def getInputs: Map[String, DataFrame] = {
     val inputs = Map(
       dfTaxonomy -> getTaxonomy,
@@ -22,7 +23,10 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
       dfInfCus -> getInputsKirby(LIST_INFCUS_COLUMNS, CFG_INFCUST_PATH),
       dfPayCapac -> getStandardControlDF(LIST_PAYCAPAC_COLUMNS,CFG_PAYCAPAC_PATH),
       dfSalesBase -> getInputsStandard(LIST_SALES_BASE_COLUMNS, CFG_SALES_PATH),
-      dfHdape094 -> getInputsKirby(HDAPE094_LIST, CFG_HDAPE094_PATH)
+      dfHdape094 -> getInputsKirby(HDAPE094_LIST, CFG_HDAPE094_PATH),
+      dfTasaCambio -> getInputsStandardTasa(LIST_TASA_COLUMNS, CFG_TASA_PATH),
+      dfEndeuda -> getInputsStandard(LIST_ENDEU, CFG_ENDEUDA),
+      dfSectorization -> getInputsStandard(LIST_SECTORIZATION, CFG_SECTORIZATION)
     )
     inputs
   }
@@ -61,11 +65,19 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
       )
   }
 
-
   def getInputsKirby(columnList: List[String], inputLevel: String): DataFrame = {
     val columns = columnList.map(columnName => trim(col(columnName)).as(columnName))
     val dateMax = LocalDate.parse(config.getString(CFG_LAST_DAY_MONTH)).plusDays(DAY_MAX)
     new ReaderCalculatedDataproc(spark, config).lastDataLoadDateParquet(inputLevel, dateMax.toString)
       .select(columns: _*)
   }
+
+  def getInputsStandardTasa(columnList: List[String], inputLevel: String): DataFrame = {
+    val columns = columnList.map(columnName => trim(col(columnName)).as(columnName))
+    new ReaderWithDataproc(spark, config).apply(inputLevel)
+      .filter(col(CURRENCY_ID)==="EUR" && col(EXCHANGE_CURRENCY_TYPE)===param(TIPO_TASA_CAMBIO)
+        && col(EXCHANGE_RATE_APPLY_ENTITY_ID)===param(G_ENTITY))
+      .select(col(EXCHANGE_RATE_AMOUNT))
+  }
+
 }

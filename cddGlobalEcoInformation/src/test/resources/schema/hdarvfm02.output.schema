@@ -1,0 +1,1531 @@
+{
+  "namespace" : "CDAR",
+  "name" : "t_cdar_hdarvfm02_endeudamiento",
+  "doc" : "CDAR",
+  "database" : "master",
+  "storageZone" : "Masterdata",
+  "storageType" : "HDFS-Parquet",
+  "physicalPath" : "/data/master/risk/cdar/data/t_cdar_hdarvfm02_endeudamiento",
+  "securityLevel" : "L2",
+  "objectVersion" : "2.0.0",
+  "partitions" : [ "partition_data_year_id", "partition_data_month_id" ],
+  "type" : "record",
+  "fields" : [ {
+    "name" : "personal_type",
+    "type" : "string",
+    "legacyName" : "personal_type",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "personal_id",
+    "type" : "string",
+    "legacyName" : "personal_id",
+    "logicalFormat" : "ALPHANUMERIC(15)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "personal_verif_digit_type",
+    "type" : "string",
+    "legacyName" : "personal_verif_digit_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_branch_id",
+    "type" : "string",
+    "legacyName" : "contract_branch_id",
+    "logicalFormat" : "ALPHANUMERIC(4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_product_id",
+    "type" : "string",
+    "legacyName" : "contract_product_id",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_sequence_id",
+    "type" : "string",
+    "legacyName" : "contract_sequence_id",
+    "logicalFormat" : "ALPHANUMERIC(8)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "obligation_class_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "obligation_class_type",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "origin_contract_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "origin_contract_type",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "manager_branch_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "manager_branch_id",
+    "logicalFormat" : "ALPHANUMERIC(4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_register_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "contract_register_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "capital_expiry_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "capital_expiry_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "interest_expiry_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "interest_expiry_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "current_expiry_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "current_expiry_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "initial_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "initial_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "own_res_obligation_captl_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "own_res_obligation_captl_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "redesc_capital_obligation_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "redesc_capital_obligation_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "current_interest_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "current_interest_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_interest_rate_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "contract_interest_rate_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "initial_interest_per",
+    "type" : [ "decimal(7,4)", "null" ],
+    "legacyName" : "initial_interest_per",
+    "logicalFormat" : "DECIMAL(7,4)",
+    "format" : "(7,4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "sign_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "sign_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "overrate_dtf_interest_per",
+    "type" : [ "decimal(6,4)", "null" ],
+    "legacyName" : "overrate_dtf_interest_per",
+    "logicalFormat" : "DECIMAL(6,4)",
+    "format" : "(6,4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "rdisc_curr_int_collection_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "rdisc_curr_int_collection_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "rdisc_curr_int_rate_apply_per",
+    "type" : [ "decimal(7,4)", "null" ],
+    "legacyName" : "rdisc_curr_int_rate_apply_per",
+    "logicalFormat" : "DECIMAL(7,4)",
+    "format" : "(7,4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "sign1_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "sign1_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "overrate_dtf_rediscount_int_per",
+    "type" : [ "decimal(6,4)", "null" ],
+    "legacyName" : "overrate_dtf_rediscount_int_per",
+    "logicalFormat" : "DECIMAL(6,4)",
+    "format" : "(6,4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "default_balance_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "default_balance_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "own_resources_default_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "own_resources_default_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "default_interest_per",
+    "type" : [ "decimal(7,4)", "null" ],
+    "legacyName" : "default_interest_per",
+    "logicalFormat" : "DECIMAL(7,4)",
+    "format" : "(7,4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "sign2_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "sign2_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "own_res_over_dft_default_int_per",
+    "type" : [ "decimal(6,4)", "null" ],
+    "legacyName" : "own_res_over_dft_default_int_per",
+    "logicalFormat" : "DECIMAL(6,4)",
+    "format" : "(6,4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "rediscount_default_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "rediscount_default_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "rdisc_dflt_int_collection_per",
+    "type" : [ "decimal(7,4)", "null" ],
+    "legacyName" : "rdisc_dflt_int_collection_per",
+    "logicalFormat" : "DECIMAL(7,4)",
+    "format" : "(7,4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "rdisc_dflt_int_collection_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "rdisc_dflt_int_collection_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "rdisc_over_dft_default_int_per",
+    "type" : [ "decimal(6,4)", "null" ],
+    "legacyName" : "rdisc_over_dft_default_int_per",
+    "logicalFormat" : "DECIMAL(6,4)",
+    "format" : "(6,4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "capital_prvsn_real_gntee_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "capital_prvsn_real_gntee_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "interest_prvsn_real_gntee_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "interest_prvsn_real_gntee_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "customer_group_classif_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "customer_group_classif_id",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "payment_frequency_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "payment_frequency_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_duration_number",
+    "type" : [ "int32", "null" ],
+    "legacyName" : "contract_duration_number",
+    "logicalFormat" : "NUMERIC LARGE",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : null
+  }, {
+    "name" : "grace_settlement_freq_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "grace_settlement_freq_id",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "grace_settle_freq_number",
+    "type" : [ "int32", "null" ],
+    "legacyName" : "grace_settle_freq_number",
+    "logicalFormat" : "NUMERIC LARGE",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : null
+  }, {
+    "name" : "capital_payment_period_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "capital_payment_period_type",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "capital_instlmt_payment_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "capital_instlmt_payment_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "interest_payment_period_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "interest_payment_period_type",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "settlement_interest_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "settlement_interest_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "rediscount_per",
+    "type" : [ "decimal(5,2)", "null" ],
+    "legacyName" : "rediscount_per",
+    "logicalFormat" : "DECIMAL(5,2)",
+    "format" : "(5,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "rediscount_entity_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "rediscount_entity_type",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "accounts_receivable_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "accounts_receivable_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "employee_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "employee_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "portfolio_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "portfolio_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "drag_final_quantitative_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "drag_final_quantitative_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_status_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "contract_status_type",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "destination_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "destination_id",
+    "logicalFormat" : "ALPHANUMERIC(6)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "guarantee_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "guarantee_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "guarantee_class_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "guarantee_class_type",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_currency_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "contract_currency_id",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "gl_account_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "gl_account_id",
+    "logicalFormat" : "ALPHANUMERIC(4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "gl_subaccount_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "gl_subaccount_id",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "gl_account_auxiliary_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "gl_account_auxiliary_id",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "gl_account_auxiliary1_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "gl_account_auxiliary1_id",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "credit_line_product_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "credit_line_product_id",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "credit_line_product_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "credit_line_product_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "credit_line_subproduct_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "credit_line_subproduct_id",
+    "logicalFormat" : "ALPHANUMERIC(4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "credit_line_activity_sbprdt_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "credit_line_activity_sbprdt_type",
+    "logicalFormat" : "ALPHANUMERIC(6)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "credit_line_redesc_entity_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "credit_line_redesc_entity_id",
+    "logicalFormat" : "ALPHANUMERIC(4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "cutoff_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "cutoff_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "source_system_record_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "source_system_record_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "company_size_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "company_size_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contingent_interest_amount",
+    "type" : [ "decimal(17,2)", "null" ],
+    "legacyName" : "contingent_interest_amount",
+    "logicalFormat" : "DECIMAL(17,2)",
+    "format" : "(17,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "oldst_overdue_installment_number",
+    "type" : [ "int32", "null" ],
+    "legacyName" : "oldst_overdue_installment_number",
+    "logicalFormat" : "NUMERIC SHORT",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : null
+  }, {
+    "name" : "pastdue_cap_amount",
+    "type" : [ "decimal(14,2)", "null" ],
+    "legacyName" : "pastdue_cap_amount",
+    "logicalFormat" : "DECIMAL(14,2)",
+    "format" : "(14,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "overdue_interest_amount",
+    "type" : [ "decimal(14,2)", "null" ],
+    "legacyName" : "overdue_interest_amount",
+    "logicalFormat" : "DECIMAL(14,2)",
+    "format" : "(14,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "past_due_payment_number",
+    "type" : [ "decimal(14,2)", "null" ],
+    "legacyName" : "past_due_payment_number",
+    "logicalFormat" : "DECIMAL(14,2)",
+    "format" : "(14,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "life_insrnc_ovdue_instlmt_amount",
+    "type" : [ "decimal(10,2)", "null" ],
+    "legacyName" : "life_insrnc_ovdue_instlmt_amount",
+    "logicalFormat" : "DECIMAL(10,2)",
+    "format" : "(10,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "fire_insrnc_ovdue_instlmt_amount",
+    "type" : [ "decimal(10,2)", "null" ],
+    "legacyName" : "fire_insrnc_ovdue_instlmt_amount",
+    "logicalFormat" : "DECIMAL(10,2)",
+    "format" : "(10,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "veh_insrnc_ovdue_instlmt_amount",
+    "type" : [ "decimal(10,2)", "null" ],
+    "legacyName" : "veh_insrnc_ovdue_instlmt_amount",
+    "logicalFormat" : "DECIMAL(10,2)",
+    "format" : "(10,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "direct_debit_start_date",
+    "type" : [ "timestamp", "null" ],
+    "legacyName" : "direct_debit_start_date",
+    "logicalFormat" : "TIMESTAMP",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "loan_next_installment_number",
+    "type" : [ "int32", "null" ],
+    "legacyName" : "loan_next_installment_number",
+    "logicalFormat" : "NUMERIC SHORT",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : null
+  }, {
+    "name" : "next_installment_capital_amount",
+    "type" : [ "decimal(14,2)", "null" ],
+    "legacyName" : "next_installment_capital_amount",
+    "logicalFormat" : "DECIMAL(14,2)",
+    "format" : "(14,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "next_installment_interest_amount",
+    "type" : [ "decimal(14,2)", "null" ],
+    "legacyName" : "next_installment_interest_amount",
+    "logicalFormat" : "DECIMAL(14,2)",
+    "format" : "(14,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "next_installment_amount",
+    "type" : [ "decimal(14,2)", "null" ],
+    "legacyName" : "next_installment_amount",
+    "logicalFormat" : "DECIMAL(14,2)",
+    "format" : "(14,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "life_insurance_instlmt_amount",
+    "type" : [ "decimal(10,2)", "null" ],
+    "legacyName" : "life_insurance_instlmt_amount",
+    "logicalFormat" : "DECIMAL(10,2)",
+    "format" : "(10,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "fire_insurance_instlmt_amount",
+    "type" : [ "decimal(10,2)", "null" ],
+    "legacyName" : "fire_insurance_instlmt_amount",
+    "logicalFormat" : "DECIMAL(10,2)",
+    "format" : "(10,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "vehicle_insurance_instlmt_amount",
+    "type" : [ "decimal(10,2)", "null" ],
+    "legacyName" : "vehicle_insurance_instlmt_amount",
+    "logicalFormat" : "DECIMAL(10,2)",
+    "format" : "(10,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "current_expiration_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "current_expiration_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "insurance_company_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "insurance_company_id",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "analytic_concept_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "analytic_concept_id",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "accounting_operations_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "accounting_operations_id",
+    "logicalFormat" : "ALPHANUMERIC(4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "capital_last_provision_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "capital_last_provision_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "obligation_approval_amount",
+    "type" : [ "decimal(18,2)", "null" ],
+    "legacyName" : "obligation_approval_amount",
+    "logicalFormat" : "DECIMAL(18,2)",
+    "format" : "(18,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "available_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "available_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_register_branch_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "contract_register_branch_id",
+    "logicalFormat" : "ALPHANUMERIC(4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "container_approval_orgn_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "container_approval_orgn_id",
+    "logicalFormat" : "ALPHANUMERIC(5)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "mortgage_security_amount",
+    "type" : [ "decimal(18,2)", "null" ],
+    "legacyName" : "mortgage_security_amount",
+    "logicalFormat" : "DECIMAL(18,2)",
+    "format" : "(18,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "department_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "department_id",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "town_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "town_id",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "guarantee_letter_balance_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "guarantee_letter_balance_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "real_guarantee_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "real_guarantee_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "financial_guarantee_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "financial_guarantee_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "deed_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "deed_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "default_contract_rpt_mark_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "default_contract_rpt_mark_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "own_card_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "own_card_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "value_title_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "value_title_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "promissory_note_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "promissory_note_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "counter_guarantee_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "counter_guarantee_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "tittle_study_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "tittle_study_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "insurance_policy_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "insurance_policy_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "life_insurance_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "life_insurance_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "fire_insurance_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "fire_insurance_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "earthquake_insurance_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "earthquake_insurance_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "vehicle_insurance_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "vehicle_insurance_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "customer_delivery_document_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "customer_delivery_document_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "cer_tradition_liberty_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "cer_tradition_liberty_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "register_pledge_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "register_pledge_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "registered_vehicle_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "registered_vehicle_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "photo_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "photo_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "copy_personal_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "copy_personal_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "associated_nit_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "associated_nit_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "legal_rep_certificate_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "legal_rep_certificate_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "legal_representative_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "legal_representative_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "verify_document_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "verify_document_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "customer_register_branch_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "customer_register_branch_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "peace_and_save_certificate_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "peace_and_save_certificate_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "credit_evaluation_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "credit_evaluation_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "app_score_required_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "app_score_required_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "authorization_desc",
+    "type" : [ "string", "null" ],
+    "legacyName" : "authorization_desc",
+    "logicalFormat" : "ALPHANUMERIC(80)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "authorizer_name",
+    "type" : [ "string", "null" ],
+    "legacyName" : "authorizer_name",
+    "logicalFormat" : "ALPHANUMERIC(30)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "repayment_plan_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "repayment_plan_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "default_interest_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "default_interest_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "interests_susp_recidivism_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "interests_susp_recidivism_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "account_product_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "account_product_id",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "account_sequence_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "account_sequence_id",
+    "logicalFormat" : "ALPHANUMERIC(9)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "direct_debit_last_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "direct_debit_last_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "residential_appraisal_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "residential_appraisal_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "repayment_calculation_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "repayment_calculation_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "mortgage_plan_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "mortgage_plan_type",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "object_default_scoring_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "object_default_scoring_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "subject_default_scoring_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "subject_default_scoring_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "portfolio_maduration_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "portfolio_maduration_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_guarantee_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "contract_guarantee_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "guaranteed_amount",
+    "type" : [ "string", "null" ],
+    "legacyName" : "guaranteed_amount",
+    "logicalFormat" : "ALPHANUMERIC(16)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "guarantee_appraisal_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "guarantee_appraisal_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "loan_grace_period_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "loan_grace_period_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "starting_grace_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "starting_grace_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "ending_grace_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "ending_grace_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "int_gp_start_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "int_gp_start_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "int_gp_end_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "int_gp_end_date",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "real_guaranteed_amount",
+    "type" : [ "decimal(19,2)", "null" ],
+    "legacyName" : "real_guaranteed_amount",
+    "logicalFormat" : "DECIMAL(19,2)",
+    "format" : "(19,2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "active_emergency_relief_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "active_emergency_relief_type",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "five_level_ctrct_score_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "five_level_ctrct_score_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "seven_level_ctrct_score_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "seven_level_ctrct_score_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "calification_drag_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "calification_drag_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "contract_restructure_scor_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "contract_restructure_scor_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "entity_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "entity_id",
+    "logicalFormat" : "ALPHANUMERIC(4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "sbs_classification_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "sbs_classification_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "activity_refinanced_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "activity_refinanced_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "hist_emergency_relief_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "hist_emergency_relief_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "payment_agreement_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "payment_agreement_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "installments_paid_number",
+    "type" : [ "int32", "null" ],
+    "legacyName" : "installments_paid_number",
+    "logicalFormat" : "NUMERIC SHORT",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : null
+  }, {
+    "name" : "provision_cause_suspen_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "provision_cause_suspen_type",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "partition_data_year_id",
+    "type" : "string",
+    "legacyName" : "partition_data_year_id",
+    "logicalFormat" : "ALPHANUMERIC(4)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "partition_data_month_id",
+    "type" : "string",
+    "legacyName" : "partition_data_month_id",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  }, {
+    "name" : "operational_audit_insert_date",
+    "type" : "timestamp",
+    "legacyName" : "Calculated",
+    "logicalFormat" : "TIMESTAMP",
+    "format" : "yyyy-MM-dd HH:mm:ss.SSSSSS",
+    "deleted" : false,
+    "metadata" : false,
+    "locale" : "es-CO",
+    "default" : ""
+  } ]
+}
