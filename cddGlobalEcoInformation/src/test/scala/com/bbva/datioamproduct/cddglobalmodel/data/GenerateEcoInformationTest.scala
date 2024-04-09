@@ -6,7 +6,7 @@ import com.typesafe.config.{Config, ConfigFactory}
 import org.apache.spark.sql.DataFrame
 import org.scalatest.{FlatSpec, Matchers}
 
-class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextProvider {
+class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProvider {
 
   val config: Config = ConfigFactory.load("config/cddGlobalEcoInformation.conf").getConfig("cddGlobalEcoInformation")
   val dfSegmentsPath = "inputs.dfSegmentsPath"
@@ -20,14 +20,19 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
   val dfJoinTaxPath = "inputs.dfJoinTaxPath"
   val dfPayCapacPath = "inputs.dfPayCapacPath"
   val dfPerimeterPath = "inputs.dfPerimeterPath"
-  val dfPerimeterWithHdape094Path = "inputs.dfPerimeterWithHdape094Path"
   val dfPerimeterFilterPath = "inputs.dfPerimeterFilterPath"
   val dfSegmentTaxonomyPath = "inputs.dfSegmentTaxonomyPath"
-  val dfGeneralAttributesFilterPath = "inputs.dfGeneralAttributesFilterPath"
-  val dfGeneralAtrbWithAccountLvlBySingleJoinPath = "inputs.dfGeneralAtrbWithAccountLvlBySingleJoinPath"
-  val dfAccountLevelPath ="inputs.dfAccountLevelPath"
-  val dfPerimeterUnnPath = "inputs.dfPerimeterUnnPath"
-  val t_dx42_ffss_general_atrb = "inputs.t_dx42_ffss_general_atrb"
+  val dfTasaCambioPath = "inputs.dfTasaCambioPath"
+  val dfPerimCltePath = "inputs.dfPerimCltePath"
+  val dfEndeudaPath = "inputs.dfEndeudaPath"
+  val dfInfCusPath = "inputs.dfInfCusPath"
+  val dfEndeuProrityPath = "inputs.dfEndeuProrityPath"
+  val dfGetTasaPath = "inputs.dfGetTasaPath"
+  val dfInfoEndeuPath = "inputs.dfInfoEndeuPath"
+  val dfJoinCustoPath = "inputs.dfJoinCustoPath"
+  val dfSectorizationPath = "inputs.dfSectorizationPath"
+  val dfJoinTypePath = "inputs.dfJoinTypePath"
+  val dfGetTypePath = "inputs.dfGetTypePath"
 
   val configStringcddEcoInformation: String =
     """
@@ -77,10 +82,6 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
       |         type = parquet
       |         path = "src/test/resources/data/inputsTmp/dfPerimeter"
       |      }
-      |      dfPerimeterWithHdape094Path{
-      |         type = parquet
-      |         path = "src/test/resources/data/inputsTmp/dfPerimeterWithHdape094"
-      |      }
       |      dfPerimeterFilterPath{
       |         type = parquet
       |         path = "src/test/resources/data/inputsTmp/dfPerimeterFilter"
@@ -89,26 +90,49 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
       |         type = parquet
       |         path = "src/test/resources/data/inputsTmp/dfSegmentTaxonomy"
       |      }
-      |      dfGeneralAttributesFilterPath{
+      |      dfTasaCambioPath{
       |         type = parquet
-      |         path = "src/test/resources/data/inputsTmp/dfGeneralAttributesFilter"
+      |         path = "src/test/resources/data/inputsTmp/dfTasaCambio"
       |      }
-      |      dfGeneralAtrbWithAccountLvlBySingleJoinPath{
+      |      dfPerimCltePath{
       |         type = parquet
-      |         path = "src/test/resources/data/inputsTmp/dfGeneralAtrbWithAccountLvlBySingleJoin"
+      |         path = "src/test/resources/data/inputsTmp/dfPerimClte"
       |      }
-      |      dfAccountLevelPath{
+      |      dfEndeudaPath{
       |         type = parquet
-      |         path = "src/test/resources/data/inputs/t_dx42_ffss_account_level"
-      |         partitions= ["g_entific_id=CO"]
+      |         path = "src/test/resources/data/inputsTmp/dfEndeuda"
       |      }
-      |      dfPerimeterUnnPath{
+      |      dfInfCusPath{
       |         type = parquet
-      |         path = "src/test/resources/data/inputsTmp/dfPerimeterUnn"
+      |         path = "src/test/resources/data/inputsTmp/dfInfCus"
       |      }
-      |      t_dx42_ffss_general_atrb{
+      |      dfEndeuProrityPath{
       |         type = parquet
-      |         path = "src/test/resources/data/inputs/t_dx42_ffss_general_atrb"
+      |         path = "src/test/resources/data/inputsTmp/dfEndeuPrority"
+      |      }
+      |      dfGetTasaPath{
+      |         type = parquet
+      |         path = "src/test/resources/data/inputsTmp/dfGetTasa"
+      |      }
+      |      dfInfoEndeuPath{
+      |         type = parquet
+      |         path = "src/test/resources/data/inputsTmp/dfInfoEndeu"
+      |      }
+      |      dfJoinCustoPath{
+      |         type = parquet
+      |         path = "src/test/resources/data/inputsTmp/dfjoinCusto"
+      |      }
+      |      dfSectorizationPath{
+      |         type = parquet
+      |         path = "src/test/resources/data/inputsTmp/dfSectorization"
+      |      }
+      |      dfJoinTypePath{
+      |         type = parquet
+      |         path = "src/test/resources/data/inputsTmp/dfJoinType"
+      |      }
+      |      dfGetTypePath{
+      |         type = parquet
+      |         path = "src/test/resources/data/inputsTmp/dfGetType"
       |      }
       |   }
       |}
@@ -118,16 +142,16 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
 
   "1. The test of GenerateEcoInformation.generateEcoInformation" should "be correct, obtain a object type dataframe with 14 columns and 16 records" in {
     spark.sparkContext.setCheckpointDir(config.getString(ParametryEcoInformation.WRITE_TEMP_DELETE))
-    val inputs = new GetDataProcessEcoInformation(spark,config).getInputs
+    val inputs = new GetDataProcessEcoInformation(spark, config).getInputs
     val evaluate = new GenerateEcoInformation(spark, config).generateEcoInformation(inputs)
-    assert(evaluate.isInstanceOf[DataFrame],"the object is not a dataframe")
-    assert(evaluate.schema.fieldNames.length == 14,"wrong number of columns" )
-    assert(evaluate.count() == 16, "wrong number of records")
+    assert(evaluate.isInstanceOf[DataFrame], "the object is not a dataframe")
+    assert(evaluate.schema.fieldNames.length == 14, "wrong number of columns")
+    assert(evaluate.count() == 7, "wrong number of records")
   }
 
   "2. When read the function createPerimeter  " should "return a Dataframe with 16 rows and 4 columns" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
-    val dfCustomer= reader.apply(customerPath)
+    val dfCustomer = reader.apply(customerPath)
     val dfInfCus = reader.apply(infoCusPath)
     val evaluate = new GenerateEcoInformation(spark, config).createPerimeter(dfInfCus, dfCustomer)
     assert(evaluate.isInstanceOf[DataFrame] && evaluate.count() === 16 && evaluate.columns.length === 4)
@@ -158,30 +182,30 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
     assert(evaluate.schema.length == 2)
   }
 
-  "6. When read the function joinPerimClte" should " return a dataframe with 15 rows and 14 columns " in {
+  "6. When read the function joinPerimClte" should " return a dataframe with 15 rows and 13 columns " in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfJoinTax = reader.apply(dfJoinTaxPath)
     val dfAggClte = reader.apply(dfAggCltePath)
     val evaluate = new GenerateEcoInformation(spark, config).joinPerimClte(dfJoinTax, dfAggClte)
     assert(evaluate.count() == 15, " number of records")
-    assert(evaluate.schema.length == 14)
+    assert(evaluate.schema.length == 13)
   }
 
-  "7. When read the function getPerimeterWithTaxoR019" should " return a dataframe with 23 rows and 9 columns " in {
+  "7. When read the function getPerimeterWithTaxoR019" should " return a dataframe with 23 rows and 8 columns " in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfPerimeterFilter = reader.apply(dfPerimeterFilterPath)
     val dfSegmentTaxonomy = reader.apply(dfSegmentTaxonomyPath)
     val evaluate = new GenerateEcoInformation(spark, config).getPerimeterWithTaxoR019(dfPerimeterFilter, dfSegmentTaxonomy)
     assert(evaluate.count() == 23, " number of records")
-    assert(evaluate.schema.length == 9)
+    assert(evaluate.schema.length == 8)
   }
 
-  "8. When read the function getSalesBaseWithInformationCus " should "return a dataframe with 16 rows and 34 columns " in {
+  "8. When read the function getSalesBaseWithInformationCus " should "return a dataframe with 17 rows and 34 columns " in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfsaleBase = reader.apply(dfsaleBasePath)
     val dfinfoCus = reader.apply(infoCusPath)
-    val evaluate = new GenerateEcoInformation(spark, config).getSalesBaseWithInformationCus(dfsaleBase,dfinfoCus)
-    assert(evaluate.count() == 16, " number of records")
+    val evaluate = new GenerateEcoInformation(spark, config).getSalesBaseWithInformationCus(dfsaleBase, dfinfoCus)
+    assert(evaluate.count() == 17, " number of records")
     assert(evaluate.schema.length == 34)
   }
 
@@ -189,8 +213,61 @@ class GenerateEcoInformationTest  extends FlatSpec with Matchers with ContextPro
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfSegments = reader.apply(dfSegmentsPath)
     val dftaxR019 = reader.apply(taxR019Path)
-    val evaluate = new GenerateEcoInformation(spark, config).getSegmentTaxonmy(dfSegments,dftaxR019)
+    val evaluate = new GenerateEcoInformation(spark, config).getSegmentTaxonmy(dfSegments, dftaxR019)
     assert(evaluate.count() == 15, " number of records")
     assert(evaluate.schema.length == 3)
+  }
+
+  "10. When read the function getTasaCambio" should "return a dataframe with 49 rows and 15 columns" in {
+    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
+    val dfTasaCambio = reader.apply(dfTasaCambioPath)
+    val dfPerimClte = reader.apply(dfPerimCltePath)
+    val evaluate = new GenerateEcoInformation(spark, config).getTasaCambio(dfPerimClte, dfTasaCambio)
+    assert(evaluate.count == 49 && evaluate.columns.length == 15)
+  }
+
+  "11. When read the function getFilterPriorityENDEU" should "return a dataframe with 12 rows and 4 columns" in {
+    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
+    val dfEndeuda = reader.apply(dfEndeudaPath)
+    val evaluate = new GenerateEcoInformation(spark, config).getFilterPriorityENDEU(dfEndeuda)
+    assert(evaluate.count == 12 && evaluate.columns.length == 4)
+  }
+
+  "12. When read the function joinInfoendeu" should "return a dataframe with 9 rows and 3 columns" in {
+    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
+    val dfInfCus = reader.apply(dfInfCusPath)
+    val dfEndeuPrority = reader.apply(dfEndeuProrityPath)
+    val evaluate = new GenerateEcoInformation(spark, config).joinInfoendeu(dfInfCus, dfEndeuPrority)
+    assert(evaluate.count == 9 && evaluate.columns.length == 3)
+  }
+
+  "13. When read the function joinCust" should "return a dataframe with 65 rows and 18 columns" in {
+    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
+    val dfGetTasa = reader.apply(dfGetTasaPath)
+    val dfInfoEndeu = reader.apply(dfInfoEndeuPath)
+    val evaluate = new GenerateEcoInformation(spark, config).joinCust(dfGetTasa, dfInfoEndeu)
+    assert(evaluate.count == 65 && evaluate.columns.length == 18)
+  }
+
+  "14. When read the function joinTypeSize" should "return a dataframe with 97 rows and 19 columns" in {
+    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
+    val dfjoinCusto = reader.apply(dfJoinCustoPath)
+    val dfSectorization = reader.apply(dfSectorizationPath)
+    val evaluate = new GenerateEcoInformation(spark, config).joinTypeSize(dfjoinCusto, dfSectorization)
+    assert(evaluate.count == 97 && evaluate.columns.length == 19)
+  }
+
+  "15. When read the function getFilterType" should "return a dataframe with 86 rows and 14 columns" in {
+    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
+    val dfJoinType = reader.apply(dfJoinTypePath)
+    val evaluate = new GenerateEcoInformation(spark, config).getFilterType(dfJoinType)
+    assert(evaluate.count == 86 && evaluate.columns.length == 14)
+  }
+
+  "16. When read the function getFilterPrioritySIZE" should "return a dataframe with 7 rows and 14 columns" in {
+    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
+    val dfGetType = reader.apply(dfGetTypePath)
+    val evaluate = new GenerateEcoInformation(spark, config).getFilterPrioritySIZE(dfGetType)
+    assert(evaluate.count == 7 && evaluate.columns.length == 14)
   }
 }

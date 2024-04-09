@@ -1,7 +1,5 @@
 package com.bbva.datioamproduct.cddglobalmodel.data
 
-import com.bbva.datioamproduct.cddglobalmodel.data.ParametryEcoInformation.dfEndeuda
-
 object ParametryEcoInformation {
 
   lazy val EXIT_CODE_INITIAL = 1
@@ -56,13 +54,15 @@ object ParametryEcoInformation {
   lazy val LIST_CUST_COLUMNS: List[String] = List(G_CUSTOMER_ID)
   lazy val LIST_INFCUS_COLUMNS: List[String] = List(PERSONAL_TYPE, PERSONAL_ID, CUSTOMER_ID)
   lazy val LIST_PAYCAPAC_COLUMNS: List[String] = List(PERSONAL_TYPE, PERSONAL_ID, PROPOSAL_ID, SEC_VRDT_LT_PMT_CAP_AMOUNT)
-  lazy val LIST_TASA_COLUMNS: List[String] = List(EXCHANGE_RATE_AMOUNT,CURRENCY_ID,EXCHANGE_RATE_REPORT_DATE,EXCHANGE_CURRENCY_TYPE,EXCHANGE_RATE_APPLY_ENTITY_ID)
-  lazy val LIST_ENDEU: List[String] = List(PERSONAL_TYPE, PERSONAL_ID, PERSONAL_VERIF_DIGIT_TYPE, CONTRACT_BRANCH_ID, CONTRACT_PRODUCT_ID, CONTRACT_SEQUENCE_ID, GL_ACCOUNT_ID, PORTFOLIO_TYPE, CUSTOMER_GROUP_CLASSIF_ID)
+  lazy val LIST_ENDEU: List[String] = List(PERSONAL_TYPE, PERSONAL_ID, PERSONAL_VERIF_DIGIT_TYPE, CONTRACT_BRANCH_ID, CONTRACT_PRODUCT_ID, CONTRACT_SEQUENCE_ID,
+    GL_ACCOUNT_ID, PORTFOLIO_TYPE, CUSTOMER_GROUP_CLASSIF_ID)
   lazy val LIST_SECTORIZATION: List[String] = List(G_CUSTOMER_ID, G_ASSET_ALLOCATION_SECTOR_TYPE)
-  lazy val LIST_CLASSIFID: List[String] = List(CUSTOMER_GROUP_CLASSIF_G00, CUSTOMER_GROUP_CLASSIF_G01, CUSTOMER_GROUP_CLASSIF_G02, CUSTOMER_GROUP_CLASSIF_G03, CUSTOMER_GROUP_CLASSIF_G04, CUSTOMER_GROUP_CLASSIF_M20, CUSTOMER_GROUP_CLASSIF_M21, CUSTOMER_GROUP_CLASSIF_M22, CUSTOMER_GROUP_CLASSIF_M23, CUSTOMER_GROUP_CLASSIF_M24, CUSTOMER_GROUP_CLASSIF_M25, CUSTOMER_GROUP_CLASSIF_M26)
+  lazy val LIST_CLASSIFID: List[String] = List(CUSTOMER_GROUP_CLASSIF_G00, CUSTOMER_GROUP_CLASSIF_G01, CUSTOMER_GROUP_CLASSIF_G02, CUSTOMER_GROUP_CLASSIF_G03,
+    CUSTOMER_GROUP_CLASSIF_G04, CUSTOMER_GROUP_CLASSIF_M20, CUSTOMER_GROUP_CLASSIF_M21, CUSTOMER_GROUP_CLASSIF_M22, CUSTOMER_GROUP_CLASSIF_M23,
+    CUSTOMER_GROUP_CLASSIF_M24, CUSTOMER_GROUP_CLASSIF_M25, CUSTOMER_GROUP_CLASSIF_M26)
   lazy val CUSTOMER_GROUP_CLASSIF_G00 = "customer_group_classif_G00"
   lazy val CUSTOMER_GROUP_CLASSIF_G01 = "customer_group_classif_G01"
-  lazy val CUSTOMER_GROUP_CLASSIF_G02= "customer_group_classif_G02"
+  lazy val CUSTOMER_GROUP_CLASSIF_G02 = "customer_group_classif_G02"
   lazy val CUSTOMER_GROUP_CLASSIF_G03 = "customer_group_classif_G03"
   lazy val CUSTOMER_GROUP_CLASSIF_G04 = "customer_group_classif_G04"
   lazy val CUSTOMER_GROUP_CLASSIF_M20 = "customer_group_classif_M20"
@@ -82,7 +82,6 @@ object ParametryEcoInformation {
   lazy val CONTRACT_PRODUCT_ID = "contract_product_id"
   lazy val PERSONAL_VERIF_DIGIT_TYPE = "personal_verif_digit_type"
   lazy val CURRENCY_ID = "currency_id"
-  lazy val EXCHANGE_RATE_REPORT_DATE = "exchange_rate_report_date"
   lazy val EXCHANGE_CURRENCY_TYPE = "exchange_currency_type"
   lazy val EXCHANGE_RATE_APPLY_ENTITY_ID = "exchange_rate_apply_entity_id"
   lazy val TIPO_TASA_CAMBIO = "tipo_tasa_cambio"
@@ -115,20 +114,18 @@ object ParametryEcoInformation {
   lazy val AS_IBC = "ibc"
   lazy val AS_NUM = "num"
   lazy val AS_CLTE = "clte"
-  lazy val AS_PERIM = "perim"
-  lazy val AS_TASA = "tasa"
   lazy val ROW = "ROW"
   lazy val ONE = 1
   lazy val TAX = "tax"
   lazy val C289 = "C289"
   lazy val LEFT_JOIN = "left"
-  lazy val INNER_JOIN ="inner"
+  lazy val INNER_JOIN = "inner"
   lazy val G_ENTITY_ID = "g_entity_id"
   lazy val dfTaxonomy = "dfTaxonomy"
   lazy val dfSegment = "dfSegment"
   lazy val dfCustomer = "dfCustomer"
   lazy val dfInfCus = "dfInfCus"
-  lazy val dfTasaCambio ="dfTasaCambio"
+  lazy val dfTasaCambio = "dfTasaCambio"
   lazy val dfEndeuda = "dfEndeuda"
   lazy val dfSectorization = "dfSectorization"
   lazy val dfPayCapac = "dfPayCapac"
@@ -156,19 +153,9 @@ object ParametryEcoInformation {
   lazy val dfHdape094 = "dfHdape094"
   lazy val HDAPE094_LIST: List[String] = List(EMPLOYEES_NUMBER, CUSTOMER_ID)
   lazy val CFG_HDAPE094_PATH = "inputs.hdape094_info_mercadeo"
-  lazy val CFG_TASCAMB_PATH = "inputs.ctch_hdatc081_tasas_cambio"
   lazy val NUMBER_ONE_THOUSAND = 1000
   lazy val MASTER = "master"
   lazy val PARAMETER_NULL = "parameter_null"
-  lazy val GF_CO_SIZE_CAL_TL_ASSET_AMOUNT= "gf_co_size_cal_tl_asset_amount"
-  lazy val GF_CO_SIZE_CAL_EMPLYS_NUMBER= "gf_co_size_cal_emplys_number"
-  val MODE_COMPACTOR = "coalesce"
-  val BLOCK_SIZE_COMPACTOR = 128
-  val COMPACTOR_OVERWRITE = true
-  val SLASH = "/"
-  val EQUALS = "="
-  val SUFFIX_COMPACTOR_PATH: String = "_tmp_compactor"
-  val FORMAT = "parquet"
-  val PATH_OUTPUT = "output.economicalinformation.path"
-  val PARTITIONS = "output.economicalinformation.partition"
+  lazy val GF_CO_SIZE_CAL_TL_ASSET_AMOUNT = "gf_co_size_cal_tl_asset_amount"
+  lazy val GF_CO_SIZE_CAL_EMPLYS_NUMBER = "gf_co_size_cal_emplys_number"
 }

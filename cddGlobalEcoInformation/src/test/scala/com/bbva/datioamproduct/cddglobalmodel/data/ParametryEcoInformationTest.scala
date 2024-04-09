@@ -1,11 +1,11 @@
 package com.bbva.datioamproduct.cddglobalmodel.data
 
-import org.scalatest.{FlatSpec, Matchers}
 import com.bbva.datioamproduct.cddglobalmodel.ContextProvider
+import org.scalatest.{FlatSpec, Matchers}
 
 class ParametryEcoInformationTest extends FlatSpec with Matchers with ContextProvider {
 
-  "1. When get Parametrys value" should "get a string values" in{
+  "1. When get Parametrys value" should "get a string values" in {
     assert(ParametryEcoInformation.EXIT_CODE_INITIAL.equals(1))
     assert(ParametryEcoInformation.EXIT_CODE_SUCCESS.equals(0))
     assert(ParametryEcoInformation.EXIT_CODE_FAIL_PERMISSION.equals(-2))
@@ -23,7 +23,7 @@ class ParametryEcoInformationTest extends FlatSpec with Matchers with ContextPro
     assert(ParametryEcoInformation.STRING_TYPE.equals("String"))
     assert(ParametryEcoInformation.CFG_CUST_PATH.equals("inputs.kbtq_eom_customer"))
     assert(ParametryEcoInformation.CFG_LAST_DAY_MONTH.equals("params.last_day_month"))
-    assert(ParametryEcoInformation.CFG_INFCUST_PATH.equals("inputs.hdape001_info_basica_clte") )
+    assert(ParametryEcoInformation.CFG_INFCUST_PATH.equals("inputs.hdape001_info_basica_clte"))
     assert(ParametryEcoInformation.CFG_PAYCAPAC_PATH.equals("inputs.hdarvpcocp_pco_capac_pago"))
     assert(ParametryEcoInformation.OUTPUT_ROUTE.equals("output.economicalinformation"))
     assert(ParametryEcoInformation.LAUNCHER.equals("cddGlobalEcoInformation"))
@@ -93,9 +93,67 @@ class ParametryEcoInformationTest extends FlatSpec with Matchers with ContextPro
     assert(ParametryEcoInformation.HDAPE094_LIST.length == 2)
     assert(ParametryEcoInformation.NUMBER_ONE_THOUSAND.equals(1000))
     assert(ParametryEcoInformation.LOGGER_ERROR.equals("Parameter configuration file path is mandatory. Exiting..."))
+    assert(ParametryEcoInformation.NUMBER_ONE_STR.equals("1"))
+    assert(ParametryEcoInformation.NUMBER_FOUR.equals("4"))
+    assert(ParametryEcoInformation.NUMBER_THREE.equals("3"))
+    assert(ParametryEcoInformation.NUMBER_TWO.equals("2"))
+    assert(ParametryEcoInformation.NUMBER_FIVE.equals("5"))
+    assert(ParametryEcoInformation.CFG_TASA_PATH.equals("inputs.ctch_hdatc081_tasas_cambio"))
+    assert(ParametryEcoInformation.CFG_ENDEUDA.equals("inputs.hdarvfm02"))
+    assert(ParametryEcoInformation.CFG_SECTORIZATION.equals("inputs.sectorization"))
+    assert(ParametryEcoInformation.G_COMPANY_SIZE_TYPE_NUM.equals("g_company_size_type_NUM"))
+    assert(ParametryEcoInformation.MARCA_EMPRESAGRANDE.equals("Marca_EmpresaGrande"))
+    assert(ParametryEcoInformation.MARCA_MEDIANAEMPRESA.equals("Marca_MedianaEmpresa"))
+    assert(ParametryEcoInformation.MARCA_PEQEMPRESA.equals("Marca_PeqEmpresa"))
+    assert(ParametryEcoInformation.MARCA_MICROEMPRESA.equals("Marca_MicroEmpresa"))
+    assert(ParametryEcoInformation.MARCA_EMPRESAGRANDE_FALTAINFO.equals("Marca_EmpresaGrande_faltaINFO"))
+    assert(ParametryEcoInformation.LIST_ENDEU.length == 9)
+    assert(ParametryEcoInformation.LIST_SECTORIZATION.length == 2)
+    assert(ParametryEcoInformation.LIST_CLASSIFID.length == 12)
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_G00.equals("customer_group_classif_G00"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_G01.equals("customer_group_classif_G01"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_G02.equals("customer_group_classif_G02"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_G03.equals("customer_group_classif_G03"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_G04.equals("customer_group_classif_G04"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_M20.equals("customer_group_classif_M20"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_M21.equals("customer_group_classif_M21"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_M22.equals("customer_group_classif_M22"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_M23.equals("customer_group_classif_M23"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_M24.equals("customer_group_classif_M24"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_M25.equals("customer_group_classif_M25"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_M26.equals("customer_group_classif_M26"))
+    assert(ParametryEcoInformation.G_ASSET_ALLOCATION_SECTOR_TYPE.equals("g_asset_allocation_sector_type"))
+    assert(ParametryEcoInformation.EXCHANGE_RATE_AMOUNT.equals("exchange_rate_amount"))
+    assert(ParametryEcoInformation.CONTRACT_BRANCH_ID.equals("contract_branch_id"))
+    assert(ParametryEcoInformation.CONTRACT_SEQUENCE_ID.equals("contract_sequence_id"))
+    assert(ParametryEcoInformation.GL_ACCOUNT_ID.equals("gl_account_id"))
+    assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_ID.equals("customer_group_classif_id"))
+    assert(ParametryEcoInformation.PORTFOLIO_TYPE.equals("portfolio_type"))
+    assert(ParametryEcoInformation.CONTRACT_PRODUCT_ID.equals("contract_product_id"))
+    assert(ParametryEcoInformation.PERSONAL_VERIF_DIGIT_TYPE.equals("personal_verif_digit_type"))
+    assert(ParametryEcoInformation.CURRENCY_ID.equals("currency_id"))
+    assert(ParametryEcoInformation.EXCHANGE_CURRENCY_TYPE.equals("exchange_currency_type"))
+    assert(ParametryEcoInformation.EXCHANGE_RATE_APPLY_ENTITY_ID.equals("exchange_rate_apply_entity_id"))
+    assert(ParametryEcoInformation.TIPO_TASA_CAMBIO.equals("tipo_tasa_cambio"))
+    assert(ParametryEcoInformation.G_ENTITY.equals("g_entity"))
+    assert(ParametryEcoInformation.MICROEMPREAS_EMPLEADOS.equals("MicroEmpreas_empleados"))
+    assert(ParametryEcoInformation.MEDIANAEMPREAS_EMPLEADOS.equals("MedianaEmpreas_empleados"))
+    assert(ParametryEcoInformation.MEDIANAEMPRESA_ACTIVOS.equals("MedianaEmpresa_activos"))
+    assert(ParametryEcoInformation.MEDIANAEMPRESA_VOLUMEN.equals("MedianaEmpresa_volumen"))
+    assert(ParametryEcoInformation.PORTFOLIO_TYPE_2.equals("portfolio_type_2"))
+    assert(ParametryEcoInformation.ASSET_ALLOCATION_SECTOR_TYPE_O.equals("asset_allocation_sector_type_O"))
+    assert(ParametryEcoInformation.GF_CUSTOMER_SALES_AMOUNT_EUR.equals("gf_customer_sales_amount_EUR"))
+    assert(ParametryEcoInformation.MICROEMPRESA_IMPORTE.equals("MicroEmpresa_importe "))
+    assert(ParametryEcoInformation.PEQEMPRESA_IMPORTE.equals("PeqEmpresa_importe"))
+    assert(ParametryEcoInformation.PEQEMPRESA_EMPLEADOS.equals("PeqEmpresa_empleados"))
+    assert(ParametryEcoInformation.GF_TOTAL_ASSET_AMOUNT_EUR.equals("gf_total_asset_amount_EUR"))
+    assert(ParametryEcoInformation.ROW.equals("ROW"))
+    assert(ParametryEcoInformation.ONE.equals(1))
+    assert(ParametryEcoInformation.dfEndeuda.equals("dfEndeuda"))
+    assert(ParametryEcoInformation.dfSectorization.equals("dfSectorization"))
   }
 
-  "2. When get Parametry" should "get a not null values" in{
+  "2. When get Parametry" should "get a not null values" in {
     assert(ParametryEcoInformation != null)
   }
 }
