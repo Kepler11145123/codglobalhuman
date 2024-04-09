@@ -54,7 +54,6 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
   }
 
   def getSegmentIFRS9: DataFrame = {
-    val param = new ParametersCDD(spark, config, MASTER).param
     val columns = LIST_SEGME_COLUMNS.map(columnName => trim(col(columnName)).as(columnName))
     val dfInput = new GenerateAgileDocs(spark, PARAM_EMPTY, PARAM_EMPTY).generateSegments(config).checkpoint()
     dfInput.select(columns: _*).select(col(IFRS9), concat(lit(param(G_ENTITY_ID).toString), lit(NUMBER_ZERO), col(CUSTOMER_ID)).as(CUSTOMER_ID)

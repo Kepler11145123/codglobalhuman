@@ -120,7 +120,7 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
       |      }
       |      dfJoinCustoPath{
       |         type = parquet
-      |         path = "src/test/resources/data/inputsTmp/dfjoinCusto"
+      |         path = "src/test/resources/data/inputsTmp/dfJoinCusto"
       |      }
       |      dfSectorizationPath{
       |         type = parquet
