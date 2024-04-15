@@ -128,28 +128,43 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   }
 
   def joinTypeSize(joinCusto: DataFrame, dfSecto: DataFrame): DataFrame = {
-    joinCusto.as(A).join(dfSecto.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT) === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
+    joinCusto.as(A).join(dfSecto.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT)
+      === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
       .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + G_ASSET_ALLOCATION_SECTOR_TYPE)
       )
   }
 
   def getFilterType(joinSize: DataFrame): DataFrame = {
-    val firstCondition = col(GF_EMPLOYEES_NUMBER) < param(MICROEMPREAS_EMPLEADOS) && (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE)
-      or col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE))
-    val secondCondition = (col(GF_EMPLOYEES_NUMBER) < param(PEQEMPRESA_EMPLEADOS) && (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(PEQEMPRESA_IMPORTE)
-      or col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(PEQEMPRESA_IMPORTE))) && (col(GF_EMPLOYEES_NUMBER) >= param(MICROEMPREAS_EMPLEADOS)
-      && (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MICROEMPRESA_IMPORTE) or col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MICROEMPRESA_IMPORTE)))
-    val thirdCondition = (col(GF_EMPLOYEES_NUMBER) < param(MEDIANAEMPREAS_EMPLEADOS) && (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MEDIANAEMPRESA_VOLUMEN)
-      or col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MEDIANAEMPRESA_ACTIVOS))) && (col(GF_EMPLOYEES_NUMBER) >= param(PEQEMPRESA_EMPLEADOS)
-      && (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(PEQEMPRESA_IMPORTE) or col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(PEQEMPRESA_IMPORTE)))
-    val fourthCondition = col(GF_EMPLOYEES_NUMBER) >= param(MEDIANAEMPREAS_EMPLEADOS) && (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MEDIANAEMPRESA_VOLUMEN)
-      or col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MEDIANAEMPRESA_ACTIVOS))
-    joinSize.select(col(ALL_COLUMN_EXPR),
-        when(firstCondition, NUMBER_FOUR).when(secondCondition, NUMBER_THREE).when(thirdCondition, NUMBER_TWO).when(fourthCondition, NUMBER_ONE_STR)
-          .otherwise(NUMBER_FIVE).as(G_COMPANY_SIZE_TYPE_NUM))
-      .filter(col(PORTFOLIO_TYPE) === param(PORTFOLIO_TYPE_2) && col(G_ASSET_ALLOCATION_SECTOR_TYPE) != param(ASSET_ALLOCATION_SECTOR_TYPE_O) && !col(
-        CUSTOMER_GROUP_CLASSIF_ID).isin(LIST_CLASSIFID: _*))
-      .drop(G_ASSET_ALLOCATION_SECTOR_TYPE, CUSTOMER_GROUP_CLASSIF_ID, PORTFOLIO_TYPE, CUSTOMER_ID, GF_TOTAL_ASSET_AMOUNT_EUR, GF_CUSTOMER_SALES_AMOUNT_EUR)
+    val condition = when(
+      col(GF_EMPLOYEES_NUMBER) < param(MICROEMPREAS_EMPLEADOS) &&
+        (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE) ||
+          col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE)), NUMBER_FOUR)
+      .when(
+        col(GF_EMPLOYEES_NUMBER) < param(PEQEMPRESA_EMPLEADOS) &&
+          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(PEQEMPRESA_IMPORTE) ||
+            col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(PEQEMPRESA_IMPORTE)) &&
+          col(GF_EMPLOYEES_NUMBER) >= param(MICROEMPREAS_EMPLEADOS), NUMBER_THREE)
+      .when(
+        col(GF_EMPLOYEES_NUMBER) < param(MEDIANAEMPREAS_EMPLEADOS) &&
+          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MEDIANAEMPRESA_VOLUMEN) ||
+            col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MEDIANAEMPRESA_ACTIVOS)) &&
+          col(GF_EMPLOYEES_NUMBER) >= param(PEQEMPRESA_EMPLEADOS), NUMBER_TWO)
+      .when(
+        col(GF_EMPLOYEES_NUMBER) >= param(MEDIANAEMPREAS_EMPLEADOS) &&
+          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MEDIANAEMPRESA_VOLUMEN) ||
+            col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MEDIANAEMPRESA_ACTIVOS)), NUMBER_ONE_STR)
+      .otherwise(NUMBER_FIVE)
+    joinSize.select(
+      col(ALL_COLUMN_EXPR),
+      condition.as(G_COMPANY_SIZE_TYPE_NUM)
+    ).filter(
+      col(PORTFOLIO_TYPE) === param(PORTFOLIO_TYPE_2) &&
+        col(G_ASSET_ALLOCATION_SECTOR_TYPE) != param(ASSET_ALLOCATION_SECTOR_TYPE_O) &&
+        !col(CUSTOMER_GROUP_CLASSIF_ID).isin(LIST_CLASSIFID: _*)
+    ).drop(
+      G_ASSET_ALLOCATION_SECTOR_TYPE, CUSTOMER_GROUP_CLASSIF_ID, PORTFOLIO_TYPE,
+      CUSTOMER_ID, GF_TOTAL_ASSET_AMOUNT_EUR, GF_CUSTOMER_SALES_AMOUNT_EUR
+    )
   }
 
   def getFilterPrioritySIZE(joinSize: DataFrame): DataFrame = {

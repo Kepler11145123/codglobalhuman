@@ -87,7 +87,7 @@ object ParametryEcoInformation {
   lazy val CURRENCY_ID = "currency_id"
   lazy val EXCHANGE_CURRENCY_TYPE = "exchange_currency_type"
   lazy val EXCHANGE_RATE_APPLY_ENTITY_ID = "exchange_rate_apply_entity_id"
-  lazy val TIPO_TASA_CAMBIO = "tipo_tasa_cambio"
+  lazy val TASA_TYPE = "tipo_tasa_cambio"
   lazy val G_ENTITY = "g_entity"
   lazy val MICROEMPREAS_EMPLEADOS = "MicroEmpreas_empleados"
   lazy val MEDIANAEMPREAS_EMPLEADOS = "MedianaEmpreas_empleados"
@@ -140,6 +140,7 @@ object ParametryEcoInformation {
   lazy val dfSalesBase = "dfSalesBase"
   lazy val CFG_SALES_PATH = "inputs.udapebaven_base_de_ventas"
   lazy val IN_SALES_BASE_PERSONAL_ID = "personal_id"
+  lazy val EUR = "EUR"
   lazy val LIST_SALES_BASE_COLUMNS: List[String] = List(
     PERSONAL_TYPE,
     IN_SALES_BASE_PERSONAL_ID,

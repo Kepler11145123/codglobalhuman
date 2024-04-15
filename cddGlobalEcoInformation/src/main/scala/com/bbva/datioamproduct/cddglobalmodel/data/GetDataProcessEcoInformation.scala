@@ -69,7 +69,7 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
 
   def getInputsStandardTasa(inputLevel: String): DataFrame = {
     new ReaderWithDataproc(spark, config).apply(inputLevel)
-      .filter(col(CURRENCY_ID) === "EUR" && col(EXCHANGE_CURRENCY_TYPE) === param(TIPO_TASA_CAMBIO)
+      .filter(col(CURRENCY_ID) === EUR && col(EXCHANGE_CURRENCY_TYPE) === param(TASA_TYPE)
         && col(EXCHANGE_RATE_APPLY_ENTITY_ID) === param(G_ENTITY))
       .select(col(EXCHANGE_RATE_AMOUNT))
   }
