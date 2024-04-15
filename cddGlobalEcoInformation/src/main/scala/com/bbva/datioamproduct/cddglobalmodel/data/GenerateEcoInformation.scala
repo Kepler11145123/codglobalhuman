@@ -6,7 +6,7 @@ import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.spark.sql.expressions.Window
 import org.apache.spark.sql.functions._
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.{Column, DataFrame, SparkSession}
 
 class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLogging {
 
@@ -26,7 +26,9 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
     val InfoEndeu = joinInfoendeu(inputs(dfInfCus), EndeuPrority)
     val join_Custo = joinCust(get_Tasa, InfoEndeu)
     val joinType = joinTypeSize(join_Custo, inputs(dfSectorization))
-    val getType = getFilterType(joinType)
+    val firstConditions = applyConditionsPart1(joinType)
+    val secondCondition = applyConditionsPart2(joinType)
+    val getType = getFilterType(joinType, firstConditions, secondCondition)
     getFilterPrioritySIZE(getType)
   }
 
@@ -134,8 +136,8 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
       )
   }
 
-  def getFilterType(joinSize: DataFrame): DataFrame = {
-    val condition = when(
+  def applyConditionsPart1(joinSize: DataFrame): Column = {
+    when(
       col(GF_EMPLOYEES_NUMBER) < param(MICROEMPREAS_EMPLEADOS) &&
         (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE) ||
           col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE)), NUMBER_FOUR)
@@ -144,16 +146,23 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
           (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(PEQEMPRESA_IMPORTE) ||
             col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(PEQEMPRESA_IMPORTE)) &&
           col(GF_EMPLOYEES_NUMBER) >= param(MICROEMPREAS_EMPLEADOS), NUMBER_THREE)
-      .when(
-        col(GF_EMPLOYEES_NUMBER) < param(MEDIANAEMPREAS_EMPLEADOS) &&
-          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MEDIANAEMPRESA_VOLUMEN) ||
-            col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MEDIANAEMPRESA_ACTIVOS)) &&
-          col(GF_EMPLOYEES_NUMBER) >= param(PEQEMPRESA_EMPLEADOS), NUMBER_TWO)
+  }
+
+  def applyConditionsPart2(joinSize: DataFrame): Column = {
+    when(
+      col(GF_EMPLOYEES_NUMBER) < param(MEDIANAEMPREAS_EMPLEADOS) &&
+        (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MEDIANAEMPRESA_VOLUMEN) ||
+          col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MEDIANAEMPRESA_ACTIVOS)) &&
+        col(GF_EMPLOYEES_NUMBER) >= param(PEQEMPRESA_EMPLEADOS), NUMBER_TWO)
       .when(
         col(GF_EMPLOYEES_NUMBER) >= param(MEDIANAEMPREAS_EMPLEADOS) &&
           (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MEDIANAEMPRESA_VOLUMEN) ||
             col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MEDIANAEMPRESA_ACTIVOS)), NUMBER_ONE_STR)
       .otherwise(NUMBER_FIVE)
+  }
+
+  def getFilterType(joinSize: DataFrame, firstCondition: Column,secondCondition : Column): DataFrame = {
+    val condition = coalesce(firstCondition, secondCondition)
     joinSize.select(
       col(ALL_COLUMN_EXPR),
       condition.as(G_COMPANY_SIZE_TYPE_NUM)
