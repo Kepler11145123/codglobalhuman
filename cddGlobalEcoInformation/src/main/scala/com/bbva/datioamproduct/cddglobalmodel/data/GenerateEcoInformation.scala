@@ -170,9 +170,9 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   def getFilterPrioritySIZE(joinSize: DataFrame): DataFrame = {
     val window = Window.partitionBy(G_CUSTOMER_ID).orderBy(col(G_COMPANY_SIZE_TYPE_NUM).asc)
     joinSize.select(col(ALL_COLUMN_EXPR),
-        when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_ONE_STR, MARCA_EMPRESAGRANDE).when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_TWO, MARCA_MEDIANAEMPRESA)
-          .when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_THREE, MARCA_PEQEMPRESA).when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_FOUR, MARCA_MICROEMPRESA)
-          .otherwise(MARCA_EMPRESAGRANDE_FALTAINFO).as(G_COMPANY_SIZE_TYPE), row_number().over(window).as(ROW)).filter(col(ROW) === ONE)
+        when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_ONE_STR, STRING_BIG).when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_TWO, STRING_MEDIAN)
+          .when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_THREE, STRING_SMALL).when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_FOUR, STRING_MICRO)
+          .otherwise(STRING_DEFOULT_COMPANY).as(G_COMPANY_SIZE_TYPE), row_number().over(window).as(ROW)).filter(col(ROW) === ONE)
       .drop(ROW, G_COMPANY_SIZE_TYPE_NUM)
   }
 }
