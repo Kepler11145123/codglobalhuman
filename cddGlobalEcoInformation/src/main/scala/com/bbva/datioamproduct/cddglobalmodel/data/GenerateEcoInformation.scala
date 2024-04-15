@@ -27,8 +27,6 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
     val join_Custo = joinCust(get_Tasa, InfoEndeu)
     val joinType = joinTypeSize(join_Custo, inputs(dfSectorization))
     val getType = getFilterType(joinType)
-//    getType.repartition(1).write.mode(SaveMode.Overwrite)
-//      .parquet("D:\\ReposCdd\\codatakbtqcddeconinformati\\cddGlobalEcoInformation\\src\\test\\resources\\data\\inputsTmp\\dfGetType")
     getFilterPrioritySIZE(getType)
   }
 
@@ -102,7 +100,7 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   }
 
   def getTasaCambio(dfJoinPerim: DataFrame, dfTasaCambio: DataFrame): DataFrame = {
-    val rate = dfTasaCambio.first().getDecimal(0)
+    val rate = dfTasaCambio.first().getDecimal(NUMBER_ZERO)
     dfJoinPerim.as(A).select(col(A_POINT + ALL_COLUMN_EXPR), (col(A_POINT + GF_CUSTOMER_SALES_AMOUNT) / rate).as(GF_CUSTOMER_SALES_AMOUNT_EUR),
       (col(A_POINT + GF_TOTAL_ASSET_AMOUNT) / rate).as(GF_TOTAL_ASSET_AMOUNT_EUR))
   }
@@ -117,20 +115,20 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
 
   def joinInfoendeu(dfInfBas: DataFrame, priprityEndeu: DataFrame): DataFrame = {
     dfInfBas.as(A).join(priprityEndeu.as(B),
-        regexp_replace(col(A_POINT + PERSONAL_ID), "^0*", "") === regexp_replace(col(B_POINT + PERSONAL_ID), "^0*", "") && regexp_replace(
-          col(A_POINT + PERSONAL_TYPE), "^0*", "") === regexp_replace(col(B_POINT + PERSONAL_TYPE), "^0*", ""), INNER_JOIN)
+        regexp_replace(col(A_POINT + PERSONAL_ID), ZEROS, PARAM_EMPTY) === regexp_replace(col(B_POINT + PERSONAL_ID), ZEROS, PARAM_EMPTY) && regexp_replace(
+          col(A_POINT + PERSONAL_TYPE), ZEROS, PARAM_EMPTY) === regexp_replace(col(B_POINT + PERSONAL_TYPE), ZEROS, PARAM_EMPTY), INNER_JOIN)
       .select(col(A_POINT + CUSTOMER_ID), col(B_POINT + PORTFOLIO_TYPE).as(PORTFOLIO_TYPE), col(B_POINT + CUSTOMER_GROUP_CLASSIF_ID)
       )
   }
 
   def joinCust(getTasa: DataFrame, joinEndeu: DataFrame): DataFrame = {
-    getTasa.as(A).join(joinEndeu.as(B), substring(col(A_POINT + G_CUSTOMER_ID), -8, 8) === col(B_POINT + CUSTOMER_ID), LEFT_JOIN)
+    getTasa.as(A).join(joinEndeu.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT) === col(B_POINT + CUSTOMER_ID), LEFT_JOIN)
       .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + ALL_COLUMN_EXPR)
       )
   }
 
   def joinTypeSize(joinCusto: DataFrame, dfSecto: DataFrame): DataFrame = {
-    joinCusto.as(A).join(dfSecto.as(B), substring(col(A_POINT + G_CUSTOMER_ID), -8, 8) === substring(col(B_POINT + G_CUSTOMER_ID), -8, 8), LEFT_JOIN)
+    joinCusto.as(A).join(dfSecto.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT) === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
       .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + G_ASSET_ALLOCATION_SECTOR_TYPE)
       )
   }

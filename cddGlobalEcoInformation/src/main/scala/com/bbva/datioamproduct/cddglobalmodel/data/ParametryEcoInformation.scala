@@ -10,6 +10,9 @@ object ParametryEcoInformation {
   lazy val TIME_STAMP_FORMAT = "yyyy-MM-dd HH:mm:ss.SSSSSS"
   lazy val NUMBER_ZERO = 0
   lazy val NUMBER_ONE = 1
+  lazy val NUMBER_EIGHT = 8
+  lazy val NUMBER_EIGHT_M = -8
+  lazy val ZEROS = "^0*"
   lazy val NUMBER_ONE_STR = "1"
   lazy val NUMBER_FOUR = "4"
   lazy val NUMBER_THREE = "3"
