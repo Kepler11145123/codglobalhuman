@@ -33,7 +33,6 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
   val dfSectorizationPath = "inputs.dfSectorizationPath"
   val dfJoinTypePath = "inputs.dfJoinTypePath"
   val dfGetTypePath = "inputs.dfGetTypePath"
-
   val configStringcddEcoInformation: String =
     """
       |cddEcoInformation {
@@ -139,8 +138,7 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
       |""".stripMargin
   val configccddEcoInformation: Config = ConfigFactory.parseString(configStringcddEcoInformation).getConfig("cddEcoInformation")
 
-
-  "1. The test of GenerateEcoInformation.generateEcoInformation" should "be correct, obtain a object type dataframe with 14 columns and 16 records" in {
+  "1. The test of GenerateEcoInformation.generateEcoInformation" should "be correct, obtain a object type dataframe with 14 columns and 7 records" in {
     spark.sparkContext.setCheckpointDir(config.getString(ParametryEcoInformation.WRITE_TEMP_DELETE))
     val inputs = new GetDataProcessEcoInformation(spark, config).getInputs
     val evaluate = new GenerateEcoInformation(spark, config).generateEcoInformation(inputs)

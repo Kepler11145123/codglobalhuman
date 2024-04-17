@@ -14,7 +14,6 @@ import java.time.LocalDate
 class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) extends LazyLogging {
 
   val param: Map[String, Any] = new ParametersCDD(spark, config, MASTER).param
-
   def getInputs: Map[String, DataFrame] = {
     val inputs = Map(
       dfTaxonomy -> getTaxonomy,
