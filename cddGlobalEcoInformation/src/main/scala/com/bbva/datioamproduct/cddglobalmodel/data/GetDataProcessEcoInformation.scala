@@ -72,5 +72,4 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
         && col(EXCHANGE_RATE_APPLY_ENTITY_ID) === param(G_ENTITY))
       .select(col(EXCHANGE_RATE_AMOUNT))
   }
-
 }
