@@ -257,16 +257,14 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     assert(evaluate.count == 97 && evaluate.columns.length == 19)
   }
 
-  "15. When read partialPerimeter and process getValidationColumn" +
-    "" should "get a column" in {
+  "15. When read applyConditionsPart1n" should "get a column" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfJoinType = reader.apply(dfJoinTypePath)
     val evaluate = new GenerateEcoInformation(spark, config).applyConditionsPart1(dfJoinType)
     assert(evaluate.isInstanceOf[Column])
   }
 
-  "16. When read partialPerimeter and process getValidationColumn" +
-    "" should "get a column" in {
+  "16. When read applyConditionsPart2" should "get a column" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfJoinType = reader.apply(dfJoinTypePath)
     val evaluate = new GenerateEcoInformation(spark, config).applyConditionsPart2(dfJoinType)
