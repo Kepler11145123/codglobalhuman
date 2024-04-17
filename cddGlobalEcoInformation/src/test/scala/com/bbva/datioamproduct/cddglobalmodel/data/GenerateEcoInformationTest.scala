@@ -3,7 +3,7 @@ package com.bbva.datioamproduct.cddglobalmodel.data
 import com.bbva.datioamproduct.cddglobalmodel.ContextProvider
 import com.bbva.datioamproduct.utils.io.ReaderWithDataproc
 import com.typesafe.config.{Config, ConfigFactory}
-import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.{Column, DataFrame}
 import org.scalatest.{FlatSpec, Matchers}
 
 class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProvider {
@@ -257,14 +257,32 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     assert(evaluate.count == 97 && evaluate.columns.length == 19)
   }
 
-  "15. When read the function getFilterType" should "return a dataframe with 86 rows and 14 columns" in {
+  "15. When read partialPerimeter and process getValidationColumn" +
+    "" should "get a column" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfJoinType = reader.apply(dfJoinTypePath)
-    val evaluate = new GenerateEcoInformation(spark, config).getFilterType(dfJoinType)
+    val evaluate = new GenerateEcoInformation(spark, config).applyConditionsPart1(dfJoinType)
+    assert(evaluate.isInstanceOf[Column])
+  }
+
+  "16. When read partialPerimeter and process getValidationColumn" +
+    "" should "get a column" in {
+    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
+    val dfJoinType = reader.apply(dfJoinTypePath)
+    val evaluate = new GenerateEcoInformation(spark, config).applyConditionsPart2(dfJoinType)
+    assert(evaluate.isInstanceOf[Column])
+  }
+
+  "17. When read the function getFilterType" should "return a dataframe with 86 rows and 14 columns" in {
+    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
+    val dfJoinType = reader.apply(dfJoinTypePath)
+    val clumnFirstJointype = new GenerateEcoInformation(spark, config).applyConditionsPart1(dfJoinType)
+    val clumnSecondJointype = new GenerateEcoInformation(spark, config).applyConditionsPart2(dfJoinType)
+    val evaluate = new GenerateEcoInformation(spark, config).getFilterType(dfJoinType,clumnFirstJointype,clumnSecondJointype)
     assert(evaluate.count == 86 && evaluate.columns.length == 14)
   }
 
-  "16. When read the function getFilterPrioritySIZE" should "return a dataframe with 7 rows and 14 columns" in {
+  "18. When read the function getFilterPrioritySIZE" should "return a dataframe with 7 rows and 14 columns" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfGetType = reader.apply(dfGetTypePath)
     val evaluate = new GenerateEcoInformation(spark, config).getFilterPrioritySIZE(dfGetType)
