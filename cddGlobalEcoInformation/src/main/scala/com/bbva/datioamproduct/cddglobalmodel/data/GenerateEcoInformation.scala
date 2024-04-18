@@ -108,10 +108,9 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   }
 
   def getFilterPriorityENDEU(dfEndeuda: DataFrame): DataFrame = {
-    val dfEndeudaNotDuplicates = dfEndeuda.dropDuplicates(PERSONAL_TYPE, PERSONAL_ID, PERSONAL_VERIF_DIGIT_TYPE)
-    val window = Window.partitionBy(PERSONAL_ID, PERSONAL_TYPE)
-      .orderBy(col(CONTRACT_BRANCH_ID), col(CONTRACT_PRODUCT_ID), col(CONTRACT_SEQUENCE_ID), col(GL_ACCOUNT_ID).desc)
-    dfEndeudaNotDuplicates.select(col(PERSONAL_TYPE), col(PERSONAL_ID), col(PORTFOLIO_TYPE), col(CUSTOMER_GROUP_CLASSIF_ID), row_number().over(window).as(ROW))
+    val window = Window.partitionBy(PERSONAL_TYPE, PERSONAL_ID, PERSONAL_VERIF_DIGIT_TYPE)
+      .orderBy(col(CONTRACT_BRANCH_ID).desc, col(CONTRACT_PRODUCT_ID).desc, col(CONTRACT_SEQUENCE_ID).desc, col(GL_ACCOUNT_ID).desc)
+    dfEndeuda.select(col(PERSONAL_TYPE), col(PERSONAL_ID), col(PORTFOLIO_TYPE), col(CUSTOMER_GROUP_CLASSIF_ID), row_number().over(window).as(ROW))
       .filter(col(ROW) === ONE).drop(col(ROW))
   }
 
