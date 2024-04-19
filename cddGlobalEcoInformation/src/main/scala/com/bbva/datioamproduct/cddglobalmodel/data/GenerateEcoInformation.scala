@@ -110,8 +110,11 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   def getFilterPriorityENDEU(dfEndeuda: DataFrame): DataFrame = {
     val window = Window.partitionBy(PERSONAL_TYPE, PERSONAL_ID, PERSONAL_VERIF_DIGIT_TYPE)
       .orderBy(col(CONTRACT_BRANCH_ID).desc, col(CONTRACT_PRODUCT_ID).desc, col(CONTRACT_SEQUENCE_ID).desc, col(GL_ACCOUNT_ID).desc)
-    dfEndeuda.select(col(PERSONAL_TYPE), col(PERSONAL_ID), col(PORTFOLIO_TYPE), col(CUSTOMER_GROUP_CLASSIF_ID), row_number().over(window).as(ROW))
-      .filter(col(ROW) === ONE).drop(col(ROW))
+    dfEndeuda.select(col(PERSONAL_TYPE), col(PERSONAL_ID), col(PORTFOLIO_TYPE),
+      col(CUSTOMER_GROUP_CLASSIF_ID), row_number().over(window).as(ROW))
+      .filter(col(ROW) === ONE && col(PORTFOLIO_TYPE) === param(PORTFOLIO_TYPE_2) &&
+        !col(CUSTOMER_GROUP_CLASSIF_ID).isin(LIST_CLASSIFID: _*))
+      .drop(col(ROW))
   }
 
   def joinInfoendeu(dfInfBas: DataFrame, priprityEndeu: DataFrame): DataFrame = {
@@ -123,13 +126,15 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   }
 
   def joinCust(getTasa: DataFrame, joinEndeu: DataFrame): DataFrame = {
-    getTasa.as(A).join(joinEndeu.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT) === col(B_POINT + CUSTOMER_ID), LEFT_JOIN)
+    getTasa.as(A).join(joinEndeu.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT)
+      === substring(col(B_POINT + CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
       .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + ALL_COLUMN_EXPR)
       )
   }
 
   def joinTypeSize(joinCusto: DataFrame, dfSecto: DataFrame): DataFrame = {
-    joinCusto.as(A).join(dfSecto.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT)
+    val dfSecto_filter = dfSecto.filter(col(G_ASSET_ALLOCATION_SECTOR_TYPE) =!= param(ASSET_ALLOCATION_SECTOR_TYPE_O))
+    joinCusto.as(A).join(dfSecto_filter.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT)
       === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
       .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + G_ASSET_ALLOCATION_SECTOR_TYPE)
       )
@@ -165,10 +170,6 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
     joinSize.select(
       col(ALL_COLUMN_EXPR),
       condition.as(G_COMPANY_SIZE_TYPE_NUM)
-    ).filter(
-      col(PORTFOLIO_TYPE) === param(PORTFOLIO_TYPE_2) &&
-        col(G_ASSET_ALLOCATION_SECTOR_TYPE) != param(ASSET_ALLOCATION_SECTOR_TYPE_O) &&
-        !col(CUSTOMER_GROUP_CLASSIF_ID).isin(LIST_CLASSIFID: _*)
     ).drop(
       G_ASSET_ALLOCATION_SECTOR_TYPE, CUSTOMER_GROUP_CLASSIF_ID, PORTFOLIO_TYPE,
       CUSTOMER_ID, GF_TOTAL_ASSET_AMOUNT_EUR, GF_CUSTOMER_SALES_AMOUNT_EUR

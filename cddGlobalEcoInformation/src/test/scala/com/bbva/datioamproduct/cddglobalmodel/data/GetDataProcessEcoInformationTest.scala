@@ -40,11 +40,11 @@ class GetDataProcessEcoInformationTest extends FlatSpec with Matchers with Conte
     assert(df.columns.length == 2, "number of columns")
   }
 
-  "5. When read the function GetDataProcess.getSegmentoFinRep" should "get a dataframe with 27 rows and 2 columns" in {
+  "5. When read the function GetDataProcess.getSegmentoFinRep" should "get a dataframe with 28 rows and 2 columns" in {
     spark.sparkContext.setCheckpointDir(config.getString(ParametryEcoInformation.WRITE_TEMP_DELETE))
     val proc = new GetDataProcessEcoInformation(spark, config)
     val dfReturn = proc.getSegmentIFRS9
-    assert(dfReturn.count() === 27)
+    assert(dfReturn.count() === 28)
     assert(dfReturn.columns.length === 2)
   }
 

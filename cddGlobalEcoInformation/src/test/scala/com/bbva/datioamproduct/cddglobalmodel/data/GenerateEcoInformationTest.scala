@@ -138,13 +138,13 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
       |""".stripMargin
   val configccddEcoInformation: Config = ConfigFactory.parseString(configStringcddEcoInformation).getConfig("cddEcoInformation")
 
-  "1. The test of GenerateEcoInformation.generateEcoInformation" should "be correct, obtain a object type dataframe with 14 columns and 7 records" in {
+  "1. The test of GenerateEcoInformation.generateEcoInformation" should "be correct, obtain a object type dataframe with 14 columns and 15 records" in {
     spark.sparkContext.setCheckpointDir(config.getString(ParametryEcoInformation.WRITE_TEMP_DELETE))
     val inputs = new GetDataProcessEcoInformation(spark, config).getInputs
     val evaluate = new GenerateEcoInformation(spark, config).generateEcoInformation(inputs)
     assert(evaluate.isInstanceOf[DataFrame], "the object is not a dataframe")
     assert(evaluate.schema.fieldNames.length == 14, "wrong number of columns")
-    assert(evaluate.count() == 7, "wrong number of records")
+    assert(evaluate.count() == 15, "wrong number of records")
   }
 
   "2. When read the function createPerimeter  " should "return a Dataframe with 16 rows and 4 columns" in {
@@ -269,13 +269,13 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     assert(evaluate.isInstanceOf[Column])
   }
 
-  "17. When read the function getFilterType" should "return a dataframe with 86 rows and 14 columns" in {
+  "17. When read the function getFilterType" should "return a dataframe with 97 rows and 14 columns" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfJoinType = reader.apply(dfJoinTypePath)
     val clumnFirstJointype = new GenerateEcoInformation(spark, config).applyConditionsPart1(dfJoinType)
     val clumnSecondJointype = new GenerateEcoInformation(spark, config).applyConditionsPart2(dfJoinType)
     val evaluate = new GenerateEcoInformation(spark, config).getFilterType(dfJoinType,clumnFirstJointype,clumnSecondJointype)
-    assert(evaluate.count == 86 && evaluate.columns.length == 14)
+    assert(evaluate.count == 97 && evaluate.columns.length == 14)
   }
 
   "18. When read the function getFilterPrioritySIZE" should "return a dataframe with 7 rows and 14 columns" in {
