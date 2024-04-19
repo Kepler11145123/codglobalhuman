@@ -22,14 +22,13 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
     val agg_clte = aggClte(join_clte)
     val Perim_Clte = joinPerimClte(joinTax, agg_clte)
     val get_Tasa = getTasaCambio(Perim_Clte, inputs(dfTasaCambio))
-    val EndeuPrority = getFilterPriorityENDEU(inputs(dfEndeuda))
+    val EndeuPrority  = getFilterPriorityENDEU(inputs(dfEndeuda))
     val InfoEndeu = joinInfoendeu(inputs(dfInfCus), EndeuPrority)
-    val join_Custo = joinCust(get_Tasa, InfoEndeu)
-    val joinType = joinTypeSize(join_Custo, inputs(dfSectorization))
-    val firstConditions = applyConditionsPart1(joinType)
-    val secondCondition = applyConditionsPart2(joinType)
-    val getType = getFilterType(joinType, firstConditions, secondCondition)
-    getFilterPrioritySIZE(getType)
+    val joinCusto = joinCust(InfoEndeu, inputs(dfSectorization))
+    val firstConditions = applyConditionsPart1(joinCusto)
+    val secondCondition = applyConditionsPart2(joinCusto)
+    val joinType = joinTypeSize(get_Tasa, joinCusto, firstConditions, secondCondition)
+    getFilterPrioritySIZE(joinType)
   }
 
   def getSalesBaseWithInformationCus(dfSalesBase: DataFrame, dfInfCus: DataFrame): DataFrame = {
@@ -66,10 +65,10 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
 
   def joinClte(dfInfoBasic: DataFrame, dfPayCapac: DataFrame): DataFrame = {
     dfInfoBasic.as(AS_IBC).join(dfPayCapac.as(AS_PCO),
-        regexp_replace(col(AS_IBC + DOT + PERSONAL_TYPE), REGEX_LEFT_ZERO, PARAM_EMPTY) ===
-          regexp_replace(col(AS_PCO + DOT + PERSONAL_TYPE), REGEX_LEFT_ZERO, PARAM_EMPTY) &&
-          regexp_replace(col(AS_IBC + DOT + PERSONAL_ID), REGEX_LEFT_ZERO, PARAM_EMPTY) ===
-            regexp_replace(col(AS_PCO + DOT + PERSONAL_ID), REGEX_LEFT_ZERO, PARAM_EMPTY), INNER_JOIN)
+      regexp_replace(col(AS_IBC + DOT + PERSONAL_TYPE), REGEX_LEFT_ZERO, PARAM_EMPTY) ===
+        regexp_replace(col(AS_PCO + DOT + PERSONAL_TYPE), REGEX_LEFT_ZERO, PARAM_EMPTY) &&
+        regexp_replace(col(AS_IBC + DOT + PERSONAL_ID), REGEX_LEFT_ZERO, PARAM_EMPTY) ===
+          regexp_replace(col(AS_PCO + DOT + PERSONAL_ID), REGEX_LEFT_ZERO, PARAM_EMPTY), INNER_JOIN)
       .select(col(CUSTOMER_ID).as(CUSTOMER_ID), col(PROPOSAL_ID).as(PROPOSAL_ID), col(SEC_VRDT_LT_PMT_CAP_AMOUNT).as(SEC_VRDT_LT_PMT_CAP_AMOUNT)
       )
   }
@@ -108,7 +107,7 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   }
 
   def getFilterPriorityENDEU(dfEndeuda: DataFrame): DataFrame = {
-    val itemList = LIST_CLASSIFID.map(x=>param(x))
+    val itemList = LIST_CLASSIFID.map(x => param(x))
     val window = Window.partitionBy(PERSONAL_TYPE, PERSONAL_ID, PERSONAL_VERIF_DIGIT_TYPE)
       .orderBy(col(CONTRACT_BRANCH_ID).desc, col(CONTRACT_PRODUCT_ID).desc, col(CONTRACT_SEQUENCE_ID).desc, col(GL_ACCOUNT_ID).desc)
     dfEndeuda.select(col(PERSONAL_TYPE), col(PERSONAL_ID), col(PORTFOLIO_TYPE),
@@ -120,28 +119,21 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
 
   def joinInfoendeu(dfInfBas: DataFrame, priprityEndeu: DataFrame): DataFrame = {
     dfInfBas.as(A).join(priprityEndeu.as(B),
-        regexp_replace(col(A_POINT + PERSONAL_ID), ZEROS, PARAM_EMPTY) === regexp_replace(col(B_POINT + PERSONAL_ID), ZEROS, PARAM_EMPTY) && regexp_replace(
-          col(A_POINT + PERSONAL_TYPE), ZEROS, PARAM_EMPTY) === regexp_replace(col(B_POINT + PERSONAL_TYPE), ZEROS, PARAM_EMPTY), INNER_JOIN)
+      regexp_replace(col(A_POINT + PERSONAL_ID), ZEROS, PARAM_EMPTY) === regexp_replace(col(B_POINT + PERSONAL_ID), ZEROS, PARAM_EMPTY) && regexp_replace(
+        col(A_POINT + PERSONAL_TYPE), ZEROS, PARAM_EMPTY) === regexp_replace(col(B_POINT + PERSONAL_TYPE), ZEROS, PARAM_EMPTY), INNER_JOIN)
       .select(col(A_POINT + CUSTOMER_ID), col(B_POINT + PORTFOLIO_TYPE).as(PORTFOLIO_TYPE), col(B_POINT + CUSTOMER_GROUP_CLASSIF_ID)
       )
   }
 
-  def joinCust(getTasa: DataFrame, joinEndeu: DataFrame): DataFrame = {
-    getTasa.as(A).join(joinEndeu.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT)
-      === substring(col(B_POINT + CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
-      .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + ALL_COLUMN_EXPR)
-      )
-  }
-
-  def joinTypeSize(joinCusto: DataFrame, dfSecto: DataFrame): DataFrame = {
+  def joinCust(joinEndeu: DataFrame, dfSecto: DataFrame): DataFrame = {
     val dfSecto_filter = dfSecto.filter(col(G_ASSET_ALLOCATION_SECTOR_TYPE) =!= param(ASSET_ALLOCATION_SECTOR_TYPE_O))
-    joinCusto.as(A).join(dfSecto_filter.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT)
-      === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
-      .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + G_ASSET_ALLOCATION_SECTOR_TYPE)
+    joinEndeu.as(A).join(dfSecto_filter.as(B), substring(col(A_POINT + CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT)
+      === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), INNER_JOIN)
+      .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + ALL_COLUMN_EXPR),lit(NUMBER_ONE).as(IDENTITY)
       )
   }
 
-  def applyConditionsPart1(joinSize: DataFrame): Column = {
+  def applyConditionsPart1(dfjoinCust: DataFrame): Column = {
     when(
       col(GF_EMPLOYEES_NUMBER) < param(MICROEMPREAS_EMPLEADOS) &&
         (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE) ||
@@ -153,7 +145,7 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
           col(GF_EMPLOYEES_NUMBER) >= param(MICROEMPREAS_EMPLEADOS), NUMBER_THREE)
   }
 
-  def applyConditionsPart2(joinSize: DataFrame): Column = {
+  def applyConditionsPart2(dfjoinCust: DataFrame): Column = {
     when(
       col(GF_EMPLOYEES_NUMBER) < param(MEDIANAEMPREAS_EMPLEADOS) &&
         (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MEDIANAEMPRESA_VOLUMEN) ||
@@ -166,23 +158,27 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
       .otherwise(NUMBER_FIVE)
   }
 
-  def getFilterType(joinSize: DataFrame, firstCondition: Column,secondCondition : Column): DataFrame = {
+  def joinTypeSize(getTasa: DataFrame, dfJoinCus: DataFrame, firstCondition: Column, secondCondition: Column): DataFrame = {
     val condition = coalesce(firstCondition, secondCondition)
-    joinSize.select(
-      col(ALL_COLUMN_EXPR),
-      condition.as(G_COMPANY_SIZE_TYPE_NUM)
-    ).drop(
+    getTasa.as(A).join(dfJoinCus.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT)
+      === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
+      .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + G_ASSET_ALLOCATION_SECTOR_TYPE),
+        when(col(B_POINT + G_CUSTOMER_ID).isNotNull, condition)
+          .otherwise(NUMBER_FIVE)
+          .as(G_COMPANY_SIZE_TYPE_NUM)).drop(
       G_ASSET_ALLOCATION_SECTOR_TYPE, CUSTOMER_GROUP_CLASSIF_ID, PORTFOLIO_TYPE,
       CUSTOMER_ID, GF_TOTAL_ASSET_AMOUNT_EUR, GF_CUSTOMER_SALES_AMOUNT_EUR
     )
   }
 
-  def getFilterPrioritySIZE(joinSize: DataFrame): DataFrame = {
+  def getFilterPrioritySIZE(dfjoinTypeSize: DataFrame): DataFrame = {
     val window = Window.partitionBy(G_CUSTOMER_ID).orderBy(col(G_COMPANY_SIZE_TYPE_NUM).asc)
-    joinSize.select(col(ALL_COLUMN_EXPR),
-        when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_ONE_STR, STRING_BIG).when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_TWO, STRING_MEDIAN)
-          .when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_THREE, STRING_SMALL).when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_FOUR, STRING_MICRO)
-          .otherwise(STRING_DEFOULT_COMPANY).as(G_COMPANY_SIZE_TYPE), row_number().over(window).as(ROW)).filter(col(ROW) === ONE)
-      .drop(ROW, G_COMPANY_SIZE_TYPE_NUM)
+    dfjoinTypeSize.select(col(ALL_COLUMN_EXPR),
+      when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_ONE_STR, STRING_BIG)
+        .when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_TWO, STRING_MEDIAN)
+        .when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_THREE, STRING_SMALL)
+        .when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_FOUR, STRING_MICRO)
+        .otherwise(STRING_DEFOULT_COMPANY).as(G_COMPANY_SIZE_TYPE), row_number().over(window).as(ROW)).filter(col(ROW) === ONE)
+      .drop(ROW, G_COMPANY_SIZE_TYPE_NUM, IDENTITY)
   }
 }

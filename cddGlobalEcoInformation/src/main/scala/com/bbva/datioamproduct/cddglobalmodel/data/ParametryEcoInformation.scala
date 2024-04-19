@@ -141,6 +141,7 @@ object ParametryEcoInformation {
   lazy val CFG_SALES_PATH = "inputs.udapebaven_base_de_ventas"
   lazy val IN_SALES_BASE_PERSONAL_ID = "personal_id"
   lazy val EUR = "EUR"
+  lazy val IDENTITY = "indentity"
   lazy val LIST_SALES_BASE_COLUMNS: List[String] = List(
     PERSONAL_TYPE,
     IN_SALES_BASE_PERSONAL_ID,

@@ -239,20 +239,22 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     assert(evaluate.count == 9 && evaluate.columns.length == 3)
   }
 
-  "13. When read the function joinCust" should "return a dataframe with 65 rows and 18 columns" in {
+  "13. When read the function joinCust" should "return a dataframe with 9 rows and 6 columns" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
-    val dfGetTasa = reader.apply(dfGetTasaPath)
     val dfInfoEndeu = reader.apply(dfInfoEndeuPath)
-    val evaluate = new GenerateEcoInformation(spark, config).joinCust(dfGetTasa, dfInfoEndeu)
-    assert(evaluate.count == 65 && evaluate.columns.length == 18)
+    val dfSectorization = reader.apply(dfSectorizationPath)
+    val evaluate = new GenerateEcoInformation(spark, config).joinCust(dfInfoEndeu, dfSectorization)
+    assert(evaluate.count == 9 && evaluate.columns.length == 6)
   }
 
-  "14. When read the function joinTypeSize" should "return a dataframe with 97 rows and 19 columns" in {
+  "14. When read the function joinTypeSize" should "return a dataframe with 97 rows and 14 columns" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfjoinCusto = reader.apply(dfJoinCustoPath)
+    val clumnFirstJointype = new GenerateEcoInformation(spark, config).applyConditionsPart1(dfjoinCusto)
+    val clumnSecondJointype = new GenerateEcoInformation(spark, config).applyConditionsPart2(dfjoinCusto)
     val dfSectorization = reader.apply(dfSectorizationPath)
-    val evaluate = new GenerateEcoInformation(spark, config).joinTypeSize(dfjoinCusto, dfSectorization)
-    assert(evaluate.count == 97 && evaluate.columns.length == 19)
+    val evaluate = new GenerateEcoInformation(spark, config).joinTypeSize(dfjoinCusto, dfSectorization,clumnFirstJointype ,clumnSecondJointype )
+    assert(evaluate.count == 97 && evaluate.columns.length == 14)
   }
 
   "15. When read applyConditionsPart1n" should "get a column" in {
@@ -267,15 +269,6 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     val dfJoinType = reader.apply(dfJoinTypePath)
     val evaluate = new GenerateEcoInformation(spark, config).applyConditionsPart2(dfJoinType)
     assert(evaluate.isInstanceOf[Column])
-  }
-
-  "17. When read the function getFilterType" should "return a dataframe with 97 rows and 14 columns" in {
-    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
-    val dfJoinType = reader.apply(dfJoinTypePath)
-    val clumnFirstJointype = new GenerateEcoInformation(spark, config).applyConditionsPart1(dfJoinType)
-    val clumnSecondJointype = new GenerateEcoInformation(spark, config).applyConditionsPart2(dfJoinType)
-    val evaluate = new GenerateEcoInformation(spark, config).getFilterType(dfJoinType,clumnFirstJointype,clumnSecondJointype)
-    assert(evaluate.count == 97 && evaluate.columns.length == 14)
   }
 
   "18. When read the function getFilterPrioritySIZE" should "return a dataframe with 7 rows and 14 columns" in {
