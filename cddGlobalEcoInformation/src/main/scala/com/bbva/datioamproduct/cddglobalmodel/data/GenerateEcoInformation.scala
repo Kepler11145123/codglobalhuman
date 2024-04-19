@@ -108,12 +108,13 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   }
 
   def getFilterPriorityENDEU(dfEndeuda: DataFrame): DataFrame = {
+    val itemList = LIST_CLASSIFID.map(x=>param(x))
     val window = Window.partitionBy(PERSONAL_TYPE, PERSONAL_ID, PERSONAL_VERIF_DIGIT_TYPE)
       .orderBy(col(CONTRACT_BRANCH_ID).desc, col(CONTRACT_PRODUCT_ID).desc, col(CONTRACT_SEQUENCE_ID).desc, col(GL_ACCOUNT_ID).desc)
     dfEndeuda.select(col(PERSONAL_TYPE), col(PERSONAL_ID), col(PORTFOLIO_TYPE),
       col(CUSTOMER_GROUP_CLASSIF_ID), row_number().over(window).as(ROW))
       .filter(col(ROW) === ONE && col(PORTFOLIO_TYPE) === param(PORTFOLIO_TYPE_2) &&
-        !col(CUSTOMER_GROUP_CLASSIF_ID).isin(LIST_CLASSIFID: _*))
+        !col(CUSTOMER_GROUP_CLASSIF_ID).isin(itemList: _*))
       .drop(col(ROW))
   }
 
