@@ -129,33 +129,36 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
     val dfSecto_filter = dfSecto.filter(col(G_ASSET_ALLOCATION_SECTOR_TYPE) =!= param(ASSET_ALLOCATION_SECTOR_TYPE_O))
     joinEndeu.as(A).join(dfSecto_filter.as(B), substring(col(A_POINT + CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT)
       === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), INNER_JOIN)
-      .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + ALL_COLUMN_EXPR),lit(NUMBER_ONE).as(IDENTITY)
-      )
+      .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + ALL_COLUMN_EXPR))
   }
 
   def applyConditionsPart1(dfjoinCust: DataFrame): Column = {
     when(
-      col(GF_EMPLOYEES_NUMBER) < param(MICROEMPREAS_EMPLEADOS) &&
+      (col(GF_EMPLOYEES_NUMBER) < param(MICROEMPREAS_EMPLEADOS)) &&
         (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE) ||
-          col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE)), NUMBER_FOUR)
+          col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE)), param(MARCA_MICROEMPRESA))
       .when(
-        col(GF_EMPLOYEES_NUMBER) < param(PEQEMPRESA_EMPLEADOS) &&
+        (col(GF_EMPLOYEES_NUMBER) < param(PEQEMPRESA_EMPLEADOS)) &&
           (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(PEQEMPRESA_IMPORTE) ||
             col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(PEQEMPRESA_IMPORTE)) &&
-          col(GF_EMPLOYEES_NUMBER) >= param(MICROEMPREAS_EMPLEADOS), NUMBER_THREE)
+          (col(GF_EMPLOYEES_NUMBER) >= param(MICROEMPREAS_EMPLEADOS) ||
+            (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MICROEMPRESA_IMPORTE) &&
+            col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MICROEMPRESA_IMPORTE))), param(MARCA_PEQEMPRESA))
   }
 
   def applyConditionsPart2(dfjoinCust: DataFrame): Column = {
     when(
-      col(GF_EMPLOYEES_NUMBER) < param(MEDIANAEMPREAS_EMPLEADOS) &&
+      (col(GF_EMPLOYEES_NUMBER) < param(MEDIANAEMPREAS_EMPLEADOS)) &&
         (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MEDIANAEMPRESA_VOLUMEN) ||
           col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MEDIANAEMPRESA_ACTIVOS)) &&
-        col(GF_EMPLOYEES_NUMBER) >= param(PEQEMPRESA_EMPLEADOS), NUMBER_TWO)
+        (col(GF_EMPLOYEES_NUMBER) >= param(PEQEMPRESA_EMPLEADOS) ||
+          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(PEQEMPRESA_IMPORTE) &&
+            col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(PEQEMPRESA_IMPORTE))), param(MARCA_MEDIANAEMPRESA))
       .when(
-        col(GF_EMPLOYEES_NUMBER) >= param(MEDIANAEMPREAS_EMPLEADOS) &&
-          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MEDIANAEMPRESA_VOLUMEN) ||
-            col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MEDIANAEMPRESA_ACTIVOS)), NUMBER_ONE_STR)
-      .otherwise(NUMBER_FIVE)
+        (col(GF_EMPLOYEES_NUMBER) >= param(MEDIANAEMPREAS_EMPLEADOS)) &&
+          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MEDIANAEMPRESA_VOLUMEN)) &&
+          (col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MEDIANAEMPRESA_ACTIVOS)), param(MARCA_EMPRESAGRANDE))
+      .otherwise(param(MARCA_EMPRESAGRANDE_FALTAINFO))
   }
 
   def joinTypeSize(getTasa: DataFrame, dfJoinCus: DataFrame, firstCondition: Column, secondCondition: Column): DataFrame = {
@@ -164,21 +167,16 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
       === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
       .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + G_ASSET_ALLOCATION_SECTOR_TYPE),
         when(col(B_POINT + G_CUSTOMER_ID).isNotNull, condition)
-          .otherwise(NUMBER_FIVE)
-          .as(G_COMPANY_SIZE_TYPE_NUM)).drop(
+          .otherwise(param(MARCA_EMPRESAGRANDE_FALTAINFO))
+          .as(G_COMPANY_SIZE_TYPE)).drop(
       G_ASSET_ALLOCATION_SECTOR_TYPE, CUSTOMER_GROUP_CLASSIF_ID, PORTFOLIO_TYPE,
       CUSTOMER_ID, GF_TOTAL_ASSET_AMOUNT_EUR, GF_CUSTOMER_SALES_AMOUNT_EUR
     )
   }
 
   def getFilterPrioritySIZE(dfjoinTypeSize: DataFrame): DataFrame = {
-    val window = Window.partitionBy(G_CUSTOMER_ID).orderBy(col(G_COMPANY_SIZE_TYPE_NUM).asc)
-    dfjoinTypeSize.select(col(ALL_COLUMN_EXPR),
-      when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_ONE_STR, STRING_BIG)
-        .when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_TWO, STRING_MEDIAN)
-        .when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_THREE, STRING_SMALL)
-        .when(col(G_COMPANY_SIZE_TYPE_NUM) === NUMBER_FOUR, STRING_MICRO)
-        .otherwise(STRING_DEFOULT_COMPANY).as(G_COMPANY_SIZE_TYPE), row_number().over(window).as(ROW)).filter(col(ROW) === ONE)
-      .drop(ROW, G_COMPANY_SIZE_TYPE_NUM, IDENTITY)
+    val window = Window.partitionBy(G_CUSTOMER_ID).orderBy(col(G_COMPANY_SIZE_TYPE).asc)
+    dfjoinTypeSize.select(col(ALL_COLUMN_EXPR), row_number().over(window).as(ROW)).filter(col(ROW) === ONE)
+      .drop(ROW)
   }
 }

@@ -239,12 +239,12 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     assert(evaluate.count == 9 && evaluate.columns.length == 3)
   }
 
-  "13. When read the function joinCust" should "return a dataframe with 9 rows and 6 columns" in {
+  "13. When read the function joinCust" should "return a dataframe with 9 rows and 5 columns" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfInfoEndeu = reader.apply(dfInfoEndeuPath)
     val dfSectorization = reader.apply(dfSectorizationPath)
     val evaluate = new GenerateEcoInformation(spark, config).joinCust(dfInfoEndeu, dfSectorization)
-    assert(evaluate.count == 9 && evaluate.columns.length == 6)
+    assert(evaluate.count == 9 && evaluate.columns.length == 5)
   }
 
   "14. When read the function joinTypeSize" should "return a dataframe with 97 rows and 14 columns" in {
@@ -275,6 +275,6 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfGetType = reader.apply(dfGetTypePath)
     val evaluate = new GenerateEcoInformation(spark, config).getFilterPrioritySIZE(dfGetType)
-    assert(evaluate.count == 7 && evaluate.columns.length == 14)
+    assert(evaluate.count == 15 && evaluate.columns.length == 14)
   }
 }
