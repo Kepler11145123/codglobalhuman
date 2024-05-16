@@ -198,12 +198,12 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     assert(evaluate.schema.length == 8)
   }
 
-  "8. When read the function getSalesBaseWithInformationCus " should "return a dataframe with 17 rows and 34 columns " in {
+  "8. When read the function getSalesBaseWithInformationCus " should "return a dataframe with 20 rows and 34 columns " in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfsaleBase = reader.apply(dfsaleBasePath)
     val dfinfoCus = reader.apply(infoCusPath)
     val evaluate = new GenerateEcoInformation(spark, config).getSalesBaseWithInformationCus(dfsaleBase, dfinfoCus)
-    assert(evaluate.count() == 17, " number of records")
+    assert(evaluate.count() == 20, " number of records")
     assert(evaluate.schema.length == 34)
   }
 

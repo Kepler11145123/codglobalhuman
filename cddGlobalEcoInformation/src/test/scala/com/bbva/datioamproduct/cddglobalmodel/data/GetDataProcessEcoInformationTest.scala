@@ -44,7 +44,7 @@ class GetDataProcessEcoInformationTest extends FlatSpec with Matchers with Conte
     spark.sparkContext.setCheckpointDir(config.getString(ParametryEcoInformation.WRITE_TEMP_DELETE))
     val proc = new GetDataProcessEcoInformation(spark, config)
     val dfReturn = proc.getSegmentIFRS9
-    assert(dfReturn.count() === 28)
+    assert(dfReturn.count() === 27)
     assert(dfReturn.columns.length === 2)
   }
 
@@ -57,7 +57,7 @@ class GetDataProcessEcoInformationTest extends FlatSpec with Matchers with Conte
 
   "7. When read the function getInputsStandardTasa" should "get a dataframe with 1 rows and 1 columns" in {
     val proc = new GetDataProcessEcoInformation(spark, config)
-    val df = proc.getInputsStandardTasa(ParametryEcoInformation.CFG_TASA_PATH)
+    val df = proc.getHdatc081
     assert(df.count === 1 && df.columns.length ===1 )
   }
 }

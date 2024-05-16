@@ -146,7 +146,20 @@ object ParametryEcoInformation {
   lazy val CFG_SALES_PATH = "inputs.udapebaven_base_de_ventas"
   lazy val IN_SALES_BASE_PERSONAL_ID = "personal_id"
   lazy val EUR = "EUR"
-  lazy val IDENTITY = "indentity"
+  lazy val CUTOFF_DATE_FORMAT = "dd/MM/yyyy"
+  lazy val AMOUNT_COLUMN_SUFFIX = "_amount"
+  lazy val DECIMAL_15_8 = "decimal(15,8)"
+  lazy val DATE_COLUMN_SUFFIX = "_date"
+  lazy val TCDT081_PATH = "inputs.ctch_hdatc081_tasas_cambio"
+  lazy val PARTITION_DATA_DAY_ID = "partition_data_day_id"
+  lazy val PARTITION_DATA_YEAR_ID = "partition_data_year_id"
+  lazy val PARTITION_DATA_MONTH_ID = "partition_data_month_id"
+  lazy val YEAR_PREV = "params.YEAR_PREV"
+  lazy val MONTH_PREV = "params.MONTH_PREV"
+  lazy val FIRST_ELEMENT = 0
+  lazy val COLUMN_DATE = "date"
+  lazy val STRING = "string"
+  lazy val CURRENCY_COLUMNS = List(CURRENCY_ID,EXCHANGE_CURRENCY_TYPE,EXCHANGE_RATE_APPLY_ENTITY_ID,EXCHANGE_RATE_AMOUNT)
   lazy val LIST_SALES_BASE_COLUMNS: List[String] = List(
     PERSONAL_TYPE,
     IN_SALES_BASE_PERSONAL_ID,

@@ -6,6 +6,7 @@ import com.bbva.datioamproduct.utils.catalogs.{ParametersCDD, Taxonomy}
 import com.bbva.datioamproduct.utils.io.{ReaderCalculatedDataproc, ReaderWithDataproc}
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
+import org.apache.spark.internal.config
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
@@ -23,7 +24,7 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
       dfPayCapac -> getStandardControlDF(LIST_PAYCAPAC_COLUMNS, CFG_PAYCAPAC_PATH),
       dfSalesBase -> getInputsStandard(LIST_SALES_BASE_COLUMNS, CFG_SALES_PATH),
       dfHdape094 -> getInputsKirby(HDAPE094_LIST, CFG_HDAPE094_PATH),
-      dfTasaCambio -> getInputsStandardTasa(CFG_TASA_PATH),
+      dfTasaCambio -> getHdatc081,
       dfEndeuda -> getInputsStandard(LIST_ENDEU, CFG_ENDEUDA),
       dfSectorization -> getInputsStandard(LIST_SECTORIZATION, CFG_SECTORIZATION)
     )
@@ -66,10 +67,27 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
       .select(columns: _*)
   }
 
-  def getInputsStandardTasa(inputLevel: String): DataFrame = {
-    new ReaderWithDataproc(spark, config).apply(inputLevel)
+  def getHdatc081: DataFrame = {
+    val businessDate = config.getString(CFG_LAST_DAY_MONTH)
+    val columns = CURRENCY_COLUMNS.map(columnName =>
+      if (columnName.endsWith(DATE_COLUMN_SUFFIX)) {
+        to_date(col(columnName).cast(STRING), CUTOFF_DATE_FORMAT).cast(COLUMN_DATE).as(columnName)
+      }
+      else if (columnName.endsWith(AMOUNT_COLUMN_SUFFIX)) {
+        trim(col(columnName)).cast(DECIMAL_15_8).as(columnName)
+      }
+      else {
+        trim(col(columnName)).as(columnName)
+      })
+    val dfInput = new ReaderWithDataproc(spark, config).apply(TCDT081_PATH)
+      .filter(col(PARTITION_DATA_YEAR_ID) === config.getString(YEAR_PREV)
+        && col(PARTITION_DATA_MONTH_ID) === config.getString(MONTH_PREV))
+    val maxValue = dfInput.select(max(col(PARTITION_DATA_DAY_ID))).first().get(FIRST_ELEMENT)
+    dfInput
+      .filter(col(PARTITION_DATA_DAY_ID).equalTo(maxValue))
       .filter(col(CURRENCY_ID) === EUR && col(EXCHANGE_CURRENCY_TYPE) === param(TASA_TYPE)
         && col(EXCHANGE_RATE_APPLY_ENTITY_ID) === param(G_ENTITY))
       .select(col(EXCHANGE_RATE_AMOUNT))
+      .distinct()
   }
 }
