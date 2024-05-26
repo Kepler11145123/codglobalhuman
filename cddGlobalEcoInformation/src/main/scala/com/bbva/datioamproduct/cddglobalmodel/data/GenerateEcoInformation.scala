@@ -133,7 +133,10 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   }
 
   def applyConditionsPart1(dfjoinCust: DataFrame): Column = {
-    when(
+    when((col(GF_EMPLOYEES_NUMBER).isNull || trim(col(GF_EMPLOYEES_NUMBER)) == "") ||
+      ((col(GF_CUSTOMER_SALES_AMOUNT_EUR).isNull || trim(col(GF_CUSTOMER_SALES_AMOUNT_EUR)) == "") &&
+        (col(GF_TOTAL_ASSET_AMOUNT_EUR).isNull || trim(col(GF_TOTAL_ASSET_AMOUNT_EUR)) == "")), param(MARCA_EMPRESAGRANDE_FALTAINFO))
+    .when(
       (col(GF_EMPLOYEES_NUMBER) < param(MICROEMPREAS_EMPLEADOS)) &&
         (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE) ||
           col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE)), param(MARCA_MICROEMPRESA))
@@ -155,9 +158,9 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
           (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(PEQEMPRESA_IMPORTE) &&
             col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(PEQEMPRESA_IMPORTE))), param(MARCA_MEDIANAEMPRESA))
       .when(
-        (col(GF_EMPLOYEES_NUMBER) >= param(MEDIANAEMPREAS_EMPLEADOS)) &&
-          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MEDIANAEMPRESA_VOLUMEN)) &&
-          (col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MEDIANAEMPRESA_ACTIVOS)), param(MARCA_EMPRESAGRANDE))
+        (col(GF_EMPLOYEES_NUMBER) >= param(MEDIANAEMPREAS_EMPLEADOS)) ||
+          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MEDIANAEMPRESA_VOLUMEN) &&
+          col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MEDIANAEMPRESA_ACTIVOS)), param(MARCA_EMPRESAGRANDE))
       .otherwise(param(MARCA_EMPRESAGRANDE_FALTAINFO))
   }
 
