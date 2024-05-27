@@ -138,12 +138,12 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
       |""".stripMargin
   val configccddEcoInformation: Config = ConfigFactory.parseString(configStringcddEcoInformation).getConfig("cddEcoInformation")
 
-  "1. The test of GenerateEcoInformation.generateEcoInformation" should "be correct, obtain a object type dataframe with 14 columns and 15 records" in {
+  "1. The test of GenerateEcoInformation.generateEcoInformation" should "be correct, obtain a object type dataframe with 16 columns and 15 records" in {
     spark.sparkContext.setCheckpointDir(config.getString(ParametryEcoInformation.WRITE_TEMP_DELETE))
     val inputs = new GetDataProcessEcoInformation(spark, config).getInputs
     val evaluate = new GenerateEcoInformation(spark, config).generateEcoInformation(inputs)
     assert(evaluate.isInstanceOf[DataFrame], "the object is not a dataframe")
-    assert(evaluate.schema.fieldNames.length == 14, "wrong number of columns")
+    assert(evaluate.schema.fieldNames.length == 16, "wrong number of columns")
     assert(evaluate.count() == 15, "wrong number of records")
   }
 
@@ -247,27 +247,34 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     assert(evaluate.count == 9 && evaluate.columns.length == 5)
   }
 
-  "14. When read the function joinTypeSize" should "return a dataframe with 97 rows and 14 columns" in {
+  "14. When read the function joinTypeSize" should "return a dataframe with 97 rows and 19 columns" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfjoinCusto = reader.apply(dfJoinCustoPath)
-    val clumnFirstJointype = new GenerateEcoInformation(spark, config).applyConditionsPart1(dfjoinCusto)
-    val clumnSecondJointype = new GenerateEcoInformation(spark, config).applyConditionsPart2(dfjoinCusto)
+    val clumnNullJointype = new GenerateEcoInformation(spark, config).applyConditionsNull
+    val clumnFirstJointype = new GenerateEcoInformation(spark, config).applyConditionsPart1
+    val clumnSecondJointype = new GenerateEcoInformation(spark, config).applyConditionsPart2
     val dfSectorization = reader.apply(dfSectorizationPath)
-    val evaluate = new GenerateEcoInformation(spark, config).joinTypeSize(dfjoinCusto, dfSectorization,clumnFirstJointype ,clumnSecondJointype )
-    assert(evaluate.count == 97 && evaluate.columns.length == 14)
+    val evaluate = new GenerateEcoInformation(spark, config).joinTypeSize(dfjoinCusto, dfSectorization,clumnNullJointype, clumnFirstJointype ,clumnSecondJointype )
+    assert(evaluate.count == 97 && evaluate.columns.length == 19)
   }
 
-  "15. When read applyConditionsPart1n" should "get a column" in {
+  "15. When read applyConditionsNull" should "get a column" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
-    val dfJoinType = reader.apply(dfJoinTypePath)
-    val evaluate = new GenerateEcoInformation(spark, config).applyConditionsPart1(dfJoinType)
+    val evaluate = new GenerateEcoInformation(spark, config).applyConditionsNull
     assert(evaluate.isInstanceOf[Column])
   }
 
-  "16. When read applyConditionsPart2" should "get a column" in {
+  "16. When read applyConditionsPart1" should "get a column" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfJoinType = reader.apply(dfJoinTypePath)
-    val evaluate = new GenerateEcoInformation(spark, config).applyConditionsPart2(dfJoinType)
+    val evaluate = new GenerateEcoInformation(spark, config).applyConditionsPart1
+    assert(evaluate.isInstanceOf[Column])
+  }
+
+  "17. When read applyConditionsPart2" should "get a column" in {
+    val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
+    val dfJoinType = reader.apply(dfJoinTypePath)
+    val evaluate = new GenerateEcoInformation(spark, config).applyConditionsPart2
     assert(evaluate.isInstanceOf[Column])
   }
 

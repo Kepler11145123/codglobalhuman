@@ -25,9 +25,10 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
     val EndeuPrority  = getFilterPriorityENDEU(inputs(dfEndeuda))
     val InfoEndeu = joinInfoendeu(inputs(dfInfCus), EndeuPrority)
     val joinCusto = joinCust(InfoEndeu, inputs(dfSectorization))
-    val firstConditions = applyConditionsPart1(joinCusto)
-    val secondCondition = applyConditionsPart2(joinCusto)
-    val joinType = joinTypeSize(get_Tasa, joinCusto, firstConditions, secondCondition)
+    val NullConditions = applyConditionsNull
+    val firstCondition = applyConditionsPart1
+    val secondCondition = applyConditionsPart2
+    val joinType = joinTypeSize(get_Tasa, joinCusto, NullConditions, firstCondition, secondCondition).checkpoint()
     getFilterPrioritySIZE(joinType)
   }
 
@@ -132,11 +133,14 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
       .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + ALL_COLUMN_EXPR))
   }
 
-  def applyConditionsPart1(dfjoinCust: DataFrame): Column = {
-    when((col(GF_EMPLOYEES_NUMBER).isNull || trim(col(GF_EMPLOYEES_NUMBER)) === "") ||
-      ((col(GF_CUSTOMER_SALES_AMOUNT_EUR).isNull || trim(col(GF_CUSTOMER_SALES_AMOUNT_EUR)) === "") &&
-        (col(GF_TOTAL_ASSET_AMOUNT_EUR).isNull || trim(col(GF_TOTAL_ASSET_AMOUNT_EUR)) === "")), param(MARCA_EMPRESAGRANDE_FALTAINFO))
-    .when(
+  def applyConditionsNull: Column = {
+    when((col(GF_EMPLOYEES_NUMBER).isNull || trim(col(GF_EMPLOYEES_NUMBER)) === PARAM_EMPTY) ||
+      ((col(GF_CUSTOMER_SALES_AMOUNT_EUR).isNull || trim(col(GF_CUSTOMER_SALES_AMOUNT_EUR)) === PARAM_EMPTY) &&
+        (col(GF_TOTAL_ASSET_AMOUNT_EUR).isNull || trim(col(GF_TOTAL_ASSET_AMOUNT_EUR)) === PARAM_EMPTY)),
+      param(MARCA_EMPRESAGRANDE_FALTAINFO))}
+
+  def applyConditionsPart1: Column = {
+    when(
       (col(GF_EMPLOYEES_NUMBER) < param(MICROEMPREAS_EMPLEADOS)) &&
         (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE) ||
           col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE)), param(MARCA_MICROEMPRESA))
@@ -149,7 +153,7 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
             col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MICROEMPRESA_IMPORTE))), param(MARCA_PEQEMPRESA))
   }
 
-  def applyConditionsPart2(dfjoinCust: DataFrame): Column = {
+  def applyConditionsPart2: Column = {
     when(
       ((col(GF_EMPLOYEES_NUMBER) < param(MEDIANAEMPREAS_EMPLEADOS)) &&
         (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MEDIANAEMPRESA_VOLUMEN) ||
@@ -164,17 +168,14 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
       .otherwise(param(MARCA_EMPRESAGRANDE_FALTAINFO))
   }
 
-  def joinTypeSize(getTasa: DataFrame, dfJoinCus: DataFrame, firstCondition: Column, secondCondition: Column): DataFrame = {
-    val condition = coalesce(firstCondition, secondCondition)
+  def joinTypeSize(getTasa: DataFrame, dfJoinCus: DataFrame, NullCondition: Column, firstCondition: Column, secondCondition: Column): DataFrame = {
+    val condition = coalesce(NullCondition, firstCondition, secondCondition)
     getTasa.as(A).join(dfJoinCus.as(B), substring(col(A_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT)
       === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
-      .select(col(A_POINT + ALL_COLUMN_EXPR), col(B_POINT + G_ASSET_ALLOCATION_SECTOR_TYPE),
+      .select(col(A_POINT + ALL_COLUMN_EXPR),
         when(col(B_POINT + G_CUSTOMER_ID).isNotNull, condition)
           .otherwise(param(MARCA_EMPRESAGRANDE_FALTAINFO))
-          .as(G_COMPANY_SIZE_TYPE)).drop(
-      G_ASSET_ALLOCATION_SECTOR_TYPE, CUSTOMER_GROUP_CLASSIF_ID, PORTFOLIO_TYPE,
-      CUSTOMER_ID, GF_TOTAL_ASSET_AMOUNT_EUR, GF_CUSTOMER_SALES_AMOUNT_EUR
-    )
+          .as(G_COMPANY_SIZE_TYPE))
   }
 
   def getFilterPrioritySIZE(dfjoinTypeSize: DataFrame): DataFrame = {
