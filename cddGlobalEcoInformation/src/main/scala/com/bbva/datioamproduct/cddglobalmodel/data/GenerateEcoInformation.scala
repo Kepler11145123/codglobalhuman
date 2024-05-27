@@ -133,9 +133,9 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
   }
 
   def applyConditionsPart1(dfjoinCust: DataFrame): Column = {
-    when((col(GF_EMPLOYEES_NUMBER).isNull || trim(col(GF_EMPLOYEES_NUMBER)) == "") ||
-      ((col(GF_CUSTOMER_SALES_AMOUNT_EUR).isNull || trim(col(GF_CUSTOMER_SALES_AMOUNT_EUR)) == "") &&
-        (col(GF_TOTAL_ASSET_AMOUNT_EUR).isNull || trim(col(GF_TOTAL_ASSET_AMOUNT_EUR)) == "")), param(MARCA_EMPRESAGRANDE_FALTAINFO))
+    when((col(GF_EMPLOYEES_NUMBER).isNull || trim(col(GF_EMPLOYEES_NUMBER)) === "") ||
+      ((col(GF_CUSTOMER_SALES_AMOUNT_EUR).isNull || trim(col(GF_CUSTOMER_SALES_AMOUNT_EUR)) === "") &&
+        (col(GF_TOTAL_ASSET_AMOUNT_EUR).isNull || trim(col(GF_TOTAL_ASSET_AMOUNT_EUR)) === "")), param(MARCA_EMPRESAGRANDE_FALTAINFO))
     .when(
       (col(GF_EMPLOYEES_NUMBER) < param(MICROEMPREAS_EMPLEADOS)) &&
         (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE) ||
