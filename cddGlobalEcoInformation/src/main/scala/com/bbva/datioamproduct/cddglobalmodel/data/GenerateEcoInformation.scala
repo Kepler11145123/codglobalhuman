@@ -18,7 +18,7 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
     val dfPerimeterWithHdape094 = getPerimeterWithHdape094(dfPerimeterCustomer, inputs(dfHdape094))
     val dfSegmentTaxonomy = getSegmentTaxonmy(inputs(dfSegment), inputs(dfTaxonomy))
     val joinTax = getPerimeterWithTaxoR019(dfPerimeterWithHdape094, dfSegmentTaxonomy)
-    val join_clte = joinClte(inputs(dfInfCus), inputs(dfPayCapac))
+    val join_clte = joinClte(inputs(dfInfCus), inputs(dfPayCapac)).checkpoint()
     val agg_clte = aggClte(join_clte)
     val Perim_Clte = joinPerimClte(joinTax, agg_clte)
     val get_Tasa = getTasaCambio(Perim_Clte, inputs(dfTasaCambio))
@@ -28,7 +28,7 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
     val NullConditions = applyConditionsNull
     val firstCondition = applyConditionsPart1
     val secondCondition = applyConditionsPart2
-    val joinType = joinTypeSize(get_Tasa, joinCusto, NullConditions, firstCondition, secondCondition).checkpoint()
+    val joinType = joinTypeSize(get_Tasa, joinCusto, NullConditions, firstCondition, secondCondition)
     getFilterPrioritySIZE(joinType)
   }
 
