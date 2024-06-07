@@ -176,6 +176,7 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
         when(col(B_POINT + G_CUSTOMER_ID).isNotNull, condition)
           .otherwise(param(MARCA_EMPRESAGRANDE_FALTAINFO))
           .as(G_COMPANY_SIZE_TYPE))
+      .drop(GF_CUSTOMER_SALES_AMOUNT_EUR, GF_TOTAL_ASSET_AMOUNT_EUR)
   }
 
   def getFilterPrioritySIZE(dfjoinTypeSize: DataFrame): DataFrame = {
