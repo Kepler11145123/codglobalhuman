@@ -278,7 +278,7 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     assert(evaluate.isInstanceOf[Column])
   }
 
-  "18. When read the function getFilterPrioritySIZE" should "return a dataframe with 7 rows and 14 columns" in {
+  "18. When read the function getFilterPrioritySIZE" should "return a dataframe with 15 rows and 14 columns" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
     val dfGetType = reader.apply(dfGetTypePath)
     val evaluate = new GenerateEcoInformation(spark, config).getFilterPrioritySIZE(dfGetType)

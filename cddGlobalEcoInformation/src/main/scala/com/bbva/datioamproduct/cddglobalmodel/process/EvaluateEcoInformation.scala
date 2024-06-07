@@ -21,9 +21,7 @@ class EvaluateEcoInformation(runtimeContext: RuntimeContext) extends LazyLogging
       val spark = datioSparkSession.getSparkSession
       val inputs = new GetDataProcessEcoInformation(spark, config).getInputs
       val dfEcoInformation = new GenerateEcoInformation(spark, config).generateEcoInformation(inputs)
-      dfEcoInformation.write.partitionBy("g_entific_id", "gf_cutoff_date")
-        .option("partitionOverwriteMode", "dynamic")
-        .mode("overwrite").parquet(config.getString(ParametryEcoInformation.OUTPUT_ROUTE + ".path"))
+      new WriterWithDataproc(config).apply(dfEcoInformation, ParametryEcoInformation.OUTPUT_ROUTE)
       exitCode = ParametryEcoInformation.EXIT_CODE_SUCCESS
     } catch {
       case permissionException: org.apache.hadoop.security.AccessControlException =>
