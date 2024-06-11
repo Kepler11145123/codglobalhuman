@@ -24,7 +24,7 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
       dfPayCapac -> getStandardControlDF(LIST_PAYCAPAC_COLUMNS, CFG_PAYCAPAC_PATH),
       dfSalesBase -> getInputsStandard(LIST_SALES_BASE_COLUMNS, CFG_SALES_PATH),
       dfHdape094 -> getInputsKirby(HDAPE094_LIST, CFG_HDAPE094_PATH),
-      dfTasaCambio -> getHdatc081,
+      dfChangeRate -> getHdatc081,
       dfEndeuda -> getInputsStandard(LIST_ENDEU, CFG_ENDEUDA),
       dfSectorization -> getInputsStandard(LIST_SECTORIZATION, CFG_SECTORIZATION)
     )

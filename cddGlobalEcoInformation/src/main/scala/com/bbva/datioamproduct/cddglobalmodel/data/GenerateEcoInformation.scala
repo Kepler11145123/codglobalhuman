@@ -21,14 +21,14 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
     val join_clte = joinClte(inputs(dfInfCus), inputs(dfPayCapac)).checkpoint()
     val agg_clte = aggClte(join_clte)
     val Perim_Clte = joinPerimClte(joinTax, agg_clte)
-    val get_Tasa = getTasaCambio(Perim_Clte, inputs(dfTasaCambio))
+    val get_Rate = getRateChange(Perim_Clte, inputs(dfChangeRate))
     val EndeuPrority  = getFilterPriorityENDEU(inputs(dfEndeuda))
     val InfoEndeu = joinInfoendeu(inputs(dfInfCus), EndeuPrority)
     val joinCusto = joinCust(InfoEndeu, inputs(dfSectorization))
     val NullConditions = applyConditionsNull
     val firstCondition = applyConditionsPart1
     val secondCondition = applyConditionsPart2
-    val joinType = joinTypeSize(get_Tasa, joinCusto, NullConditions, firstCondition, secondCondition)
+    val joinType = joinTypeSize(get_Rate, joinCusto, NullConditions, firstCondition, secondCondition)
     getFilterPrioritySIZE(joinType)
   }
 
@@ -101,8 +101,8 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
       )
   }
 
-  def getTasaCambio(dfJoinPerim: DataFrame, dfTasaCambio: DataFrame): DataFrame = {
-    val rate = dfTasaCambio.first().getDecimal(NUMBER_ZERO)
+  def getRateChange(dfJoinPerim: DataFrame, dfChangeRate: DataFrame): DataFrame = {
+    val rate = dfChangeRate.first().getDecimal(NUMBER_ZERO)
     dfJoinPerim.as(A).select(col(A_POINT + ALL_COLUMN_EXPR), (col(A_POINT + GF_CUSTOMER_SALES_AMOUNT) / rate).as(GF_CUSTOMER_SALES_AMOUNT_EUR),
       (col(A_POINT + GF_TOTAL_ASSET_AMOUNT) / rate).as(GF_TOTAL_ASSET_AMOUNT_EUR))
   }
@@ -137,35 +137,35 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
     when((col(GF_EMPLOYEES_NUMBER).isNull || trim(col(GF_EMPLOYEES_NUMBER)) === PARAM_EMPTY) ||
       ((col(GF_CUSTOMER_SALES_AMOUNT_EUR).isNull || trim(col(GF_CUSTOMER_SALES_AMOUNT_EUR)) === PARAM_EMPTY) &&
         (col(GF_TOTAL_ASSET_AMOUNT_EUR).isNull || trim(col(GF_TOTAL_ASSET_AMOUNT_EUR)) === PARAM_EMPTY)),
-      param(MARCA_EMPRESAGRANDE_FALTAINFO))}
+      param(COMPANY_DEFAULT))}
 
   def applyConditionsPart1: Column = {
     when(
-      (col(GF_EMPLOYEES_NUMBER) < param(MICROEMPREAS_EMPLEADOS)) &&
-        (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE) ||
-          col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MICROEMPRESA_IMPORTE)), param(MARCA_MICROEMPRESA))
+      (col(GF_EMPLOYEES_NUMBER) < param(MICRO_EMPLOYEES)) &&
+        (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MICRO_IMPORT) ||
+          col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MICRO_IMPORT)), param(MARCA_MICROEMPRESA))
       .when(
-        ((col(GF_EMPLOYEES_NUMBER) < param(PEQEMPRESA_EMPLEADOS)) &&
-          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(PEQEMPRESA_IMPORTE) ||
-            col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(PEQEMPRESA_IMPORTE))) &&
-          (col(GF_EMPLOYEES_NUMBER) >= param(MICROEMPREAS_EMPLEADOS) ||
-            (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MICROEMPRESA_IMPORTE) &&
-            col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MICROEMPRESA_IMPORTE))), param(MARCA_PEQEMPRESA))
+        ((col(GF_EMPLOYEES_NUMBER) < param(SMALL_EMPLOYEES)) &&
+          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(SMALL_IMPORT) ||
+            col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(SMALL_IMPORT))) &&
+          (col(GF_EMPLOYEES_NUMBER) >= param(MICRO_EMPLOYEES) ||
+            (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MICRO_IMPORT) &&
+            col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MICRO_IMPORT))), param(COMPANY_SMALL))
   }
 
   def applyConditionsPart2: Column = {
     when(
-      ((col(GF_EMPLOYEES_NUMBER) < param(MEDIANAEMPREAS_EMPLEADOS)) &&
-        (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MEDIANAEMPRESA_VOLUMEN) ||
-          col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MEDIANAEMPRESA_ACTIVOS))) &&
-        (col(GF_EMPLOYEES_NUMBER) >= param(PEQEMPRESA_EMPLEADOS) ||
-          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(PEQEMPRESA_IMPORTE) &&
-            col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(PEQEMPRESA_IMPORTE))), param(MARCA_MEDIANAEMPRESA))
+      ((col(GF_EMPLOYEES_NUMBER) < param(MEDIUM_EMPLOYEES)) &&
+        (col(GF_CUSTOMER_SALES_AMOUNT_EUR) < param(MEDIUM_TURNOVER) ||
+          col(GF_TOTAL_ASSET_AMOUNT_EUR) < param(MEDIUM_ASSET))) &&
+        (col(GF_EMPLOYEES_NUMBER) >= param(SMALL_EMPLOYEES) ||
+          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(SMALL_IMPORT) &&
+            col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(SMALL_IMPORT))), param(COMPANY_MEDIUM))
       .when(
-        (col(GF_EMPLOYEES_NUMBER) >= param(MEDIANAEMPREAS_EMPLEADOS)) ||
-          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MEDIANAEMPRESA_VOLUMEN) &&
-          col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MEDIANAEMPRESA_ACTIVOS)), param(MARCA_EMPRESAGRANDE))
-      .otherwise(param(MARCA_EMPRESAGRANDE_FALTAINFO))
+        (col(GF_EMPLOYEES_NUMBER) >= param(MEDIUM_EMPLOYEES)) ||
+          (col(GF_CUSTOMER_SALES_AMOUNT_EUR) >= param(MEDIUM_TURNOVER) &&
+          col(GF_TOTAL_ASSET_AMOUNT_EUR) >= param(MEDIUM_ASSET)), param(COMPANY_BIG))
+      .otherwise(param(COMPANY_DEFAULT))
   }
 
   def joinTypeSize(getTasa: DataFrame, dfJoinCus: DataFrame, NullCondition: Column, firstCondition: Column, secondCondition: Column): DataFrame = {
@@ -174,7 +174,7 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
       === substring(col(B_POINT + G_CUSTOMER_ID), NUMBER_EIGHT_M, NUMBER_EIGHT), LEFT_JOIN)
       .select(col(A_POINT + ALL_COLUMN_EXPR),
         when(col(B_POINT + G_CUSTOMER_ID).isNotNull, condition)
-          .otherwise(param(MARCA_EMPRESAGRANDE_FALTAINFO))
+          .otherwise(param(COMPANY_DEFAULT))
           .as(G_COMPANY_SIZE_TYPE))
       .drop(GF_CUSTOMER_SALES_AMOUNT_EUR, GF_TOTAL_ASSET_AMOUNT_EUR)
   }

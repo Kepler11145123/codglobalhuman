@@ -22,7 +22,7 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
   val dfPerimeterPath = "inputs.dfPerimeterPath"
   val dfPerimeterFilterPath = "inputs.dfPerimeterFilterPath"
   val dfSegmentTaxonomyPath = "inputs.dfSegmentTaxonomyPath"
-  val dfTasaCambioPath = "inputs.dfTasaCambioPath"
+  val dfChangeRatePath = "inputs.dfChangeRatePath"
   val dfPerimCltePath = "inputs.dfPerimCltePath"
   val dfEndeudaPath = "inputs.dfEndeudaPath"
   val dfInfCusPath = "inputs.dfInfCusPath"
@@ -89,9 +89,9 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
       |         type = parquet
       |         path = "src/test/resources/data/inputsTmp/dfSegmentTaxonomy"
       |      }
-      |      dfTasaCambioPath{
+      |      dfChangeRatePath{
       |         type = parquet
-      |         path = "src/test/resources/data/inputsTmp/dfTasaCambio"
+      |         path = "src/test/resources/data/inputsTmp/dfChangeRate"
       |      }
       |      dfPerimCltePath{
       |         type = parquet
@@ -216,11 +216,11 @@ class GenerateEcoInformationTest extends FlatSpec with Matchers with ContextProv
     assert(evaluate.schema.length == 3)
   }
 
-  "10. When read the function getTasaCambio" should "return a dataframe with 49 rows and 15 columns" in {
+  "10. When read the function getRateChange" should "return a dataframe with 49 rows and 15 columns" in {
     val reader = new ReaderWithDataproc(spark, configccddEcoInformation)
-    val dfTasaCambio = reader.apply(dfTasaCambioPath)
+    val dfChangeRate = reader.apply(dfChangeRatePath)
     val dfPerimClte = reader.apply(dfPerimCltePath)
-    val evaluate = new GenerateEcoInformation(spark, config).getTasaCambio(dfPerimClte, dfTasaCambio)
+    val evaluate = new GenerateEcoInformation(spark, config).getRateChange(dfPerimClte, dfChangeRate)
     assert(evaluate.count == 49 && evaluate.columns.length == 15)
   }
 
