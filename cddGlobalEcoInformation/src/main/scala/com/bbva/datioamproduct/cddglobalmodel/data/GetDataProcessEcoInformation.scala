@@ -67,16 +67,6 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
   }
 
   def getHdatc081: DataFrame = {
-    CURRENCY_COLUMNS.map(columnName =>
-      if (columnName.endsWith(DATE_COLUMN_SUFFIX)) {
-        to_date(col(columnName).cast(STRING), CUTOFF_DATE_FORMAT).cast(COLUMN_DATE).as(columnName)
-      }
-      else if (columnName.endsWith(AMOUNT_COLUMN_SUFFIX)) {
-        trim(col(columnName)).cast(DECIMAL_15_8).as(columnName)
-      }
-      else {
-        trim(col(columnName)).as(columnName)
-      })
     val dfInput = new ReaderWithDataproc(spark, config).apply(TCDT081_PATH)
       .filter(col(PARTITION_DATA_YEAR_ID) === config.getString(YEAR_PREV)
         && col(PARTITION_DATA_MONTH_ID) === config.getString(MONTH_PREV))
