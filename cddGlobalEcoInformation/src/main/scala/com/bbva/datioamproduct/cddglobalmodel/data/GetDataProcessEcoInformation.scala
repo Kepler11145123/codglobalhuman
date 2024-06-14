@@ -6,7 +6,6 @@ import com.bbva.datioamproduct.utils.catalogs.{ParametersCDD, Taxonomy}
 import com.bbva.datioamproduct.utils.io.{ReaderCalculatedDataproc, ReaderWithDataproc}
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
-import org.apache.spark.internal.config
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
@@ -68,8 +67,7 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
   }
 
   def getHdatc081: DataFrame = {
-    val businessDate = config.getString(CFG_LAST_DAY_MONTH)
-    val columns = CURRENCY_COLUMNS.map(columnName =>
+    CURRENCY_COLUMNS.map(columnName =>
       if (columnName.endsWith(DATE_COLUMN_SUFFIX)) {
         to_date(col(columnName).cast(STRING), CUTOFF_DATE_FORMAT).cast(COLUMN_DATE).as(columnName)
       }

@@ -2,8 +2,7 @@
   "params": {
     "artifactUrl": "${repository.endpoint.vdc}/${repository.repo.proc}/com/bbva/gl/kbtq/cddGlobalEcoInformation/${version}/cddGlobalEcoInformation-${version}-jar-with-dependencies.jar",
     "configUrl": "${repository.endpoint.vdc}/${repository.repo.proc}/com/bbva/gl/kbtq/cddGlobalEcoInformation/${version}/cddGlobalEcoInformation.conf",
-    "mainClass": "com.bbva.datioamproduct.cddglobalmodel.CddGlobalEcoInformationLauncher",
-    "dataprocSdkOverrideVersion": "0.4.9-3.1"
+    "mainClass": "com.bbva.datioamproduct.cddglobalmodel.CddGlobalEcoInformationLauncher"
   },
   "size": "XL",
   "description": "Job kbtq-co-spk-inm-cddglobalecoinformation-01.json created for CDD BR Processing",
