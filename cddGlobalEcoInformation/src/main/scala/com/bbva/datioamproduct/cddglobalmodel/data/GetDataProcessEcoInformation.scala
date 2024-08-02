@@ -28,6 +28,7 @@ class GetDataProcessEcoInformation(val spark: SparkSession, config: Config) exte
       dfSectorization -> getInputsStandard(LIST_SECTORIZATION, CFG_SECTORIZATION)
     )
     inputs
+
   }
 
   def getInputsStandard(columnList: List[String], inputLevel: String): DataFrame = {
