@@ -49,8 +49,10 @@ class GenerateEcoInformation(spark: SparkSession, config: Config) extends LazyLo
         col(TOTAL_NET_ANNUAL_SALES_AMOUNT).cast(DECIMAL_TYPE_26_6).as(GF_CUSTOMER_SALES_AMOUNT),
         when(col(B_POINT + EMPLOYEES_NUMBER).isNull, lit(param(GF_EMPLOYEES_NUMBER)))
           .otherwise(col(B_POINT + EMPLOYEES_NUMBER)).cast(DECIMAL_TYPE_17).as(GF_EMPLOYEES_NUMBER),
-        to_date(col(A_POINT + FINANCIAL_STATEMENTS_DATE), DATE_FORMAT).cast(DATE_TYPE).as(GF_COMPANY_SIZE_DATE),
-        to_date(col(A_POINT + FINANCIAL_STATEMENTS_DATE), DATE_FORMAT).cast(DATE_TYPE).as(GF_BILLING_DATE)
+        when(col(A_POINT + LY_FIN_STMT_LAST_YEAR_ID).isNull, lit(param(GF_BILL_DATE)))
+          .otherwise( to_date(concat(col(A_POINT + LY_FIN_STMT_LAST_YEAR_ID), lit(param(MES_DIA_DIC))),DATE_FORMAT)).cast(DATE_TYPE).as(GF_COMPANY_SIZE_DATE),
+        when(col(A_POINT + LY_FIN_STMT_LAST_YEAR_ID).isNull, lit(param(GF_BILL_DATE)))
+          .otherwise( to_date(concat(col(A_POINT + LY_FIN_STMT_LAST_YEAR_ID), lit(param(MES_DIA_DIC))),DATE_FORMAT)).cast(DATE_TYPE).as(GF_BILLING_DATE)
       )
   }
 

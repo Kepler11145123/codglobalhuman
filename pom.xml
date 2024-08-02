@@ -11,7 +11,7 @@
     <groupId>com.bbva.gl.kbtq</groupId>
     <artifactId>codatakbtqcddeconinformati</artifactId>
     <packaging>pom</packaging>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.3.0-SNAPSHOT</version>
 
     <name>Parent codatakbtqcddeconinformati</name>
 
@@ -24,7 +24,7 @@
             <dependency>
                 <groupId>com.datio.dataproc.sdk</groupId>
                 <artifactId>dataproc-sdk-bom</artifactId>
-                <version>0.4.11-3.1</version>
+                <version>0.4.13-3.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

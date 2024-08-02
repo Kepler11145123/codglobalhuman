@@ -53,6 +53,8 @@ object ParametryEcoInformation {
   lazy val G_ENTIFIC_ID = "g_entific_id"
   lazy val GF_AUDIT_DATE = "gf_audit_date"
   lazy val PERSONAL_ID = "personal_id"
+  lazy val MES_DIA_DIC = "mes_dia_diciembre"
+  lazy val GF_BILL_DATE = "gf_billing_date"
   lazy val LIST_SEGME_COLUMNS: List[String] = List(CUSTOMER_ID, IFRS9)
   lazy val LIST_CUST_COLUMNS: List[String] = List(G_CUSTOMER_ID)
   lazy val LIST_INFCUS_COLUMNS: List[String] = List(PERSONAL_TYPE, PERSONAL_ID, CUSTOMER_ID)
@@ -77,6 +79,7 @@ object ParametryEcoInformation {
   lazy val CUSTOMER_GROUP_CLASSIF_M26 = "customer_group_classif_M26"
   lazy val G_ASSET_ALLOCATION_SECTOR_TYPE = "g_asset_allocation_sector_type"
   lazy val EXCHANGE_RATE_AMOUNT = "exchange_rate_amount"
+  lazy val LY_FIN_STMT_LAST_YEAR_ID = "ly_financial_stmt_last_year_id"
   lazy val CONTRACT_BRANCH_ID = "contract_branch_id"
   lazy val CONTRACT_SEQUENCE_ID = "contract_sequence_id"
   lazy val GL_ACCOUNT_ID = "gl_account_id"
@@ -165,7 +168,8 @@ object ParametryEcoInformation {
     IN_SALES_BASE_PERSONAL_ID,
     FFSS_TOTAL_ASSET_AMOUNT,
     TOTAL_NET_ANNUAL_SALES_AMOUNT,
-    FINANCIAL_STATEMENTS_DATE
+    FINANCIAL_STATEMENTS_DATE,
+    LY_FIN_STMT_LAST_YEAR_ID
   )
   lazy val DAY_MAX = 5
   lazy val A = "A"
