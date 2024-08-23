@@ -89,7 +89,7 @@ class ParametryEcoInformationTest extends FlatSpec with Matchers with ContextPro
     assert(ParametryEcoInformation.LIST_INFCUS_COLUMNS.length == 3)
     assert(ParametryEcoInformation.LIST_PAYCAPAC_COLUMNS.length == 4)
     assert(ParametryEcoInformation.IN_TAX_COLUMN_LIST.length == 2)
-    assert(ParametryEcoInformation.LIST_SALES_BASE_COLUMNS.length == 5)
+    assert(ParametryEcoInformation.LIST_SALES_BASE_COLUMNS.length == 6)
     assert(ParametryEcoInformation.HDAPE094_LIST.length == 2)
     assert(ParametryEcoInformation.NUMBER_ONE_THOUSAND.equals(1000))
     assert(ParametryEcoInformation.LOGGER_ERROR.equals("Parameter configuration file path is mandatory. Exiting..."))

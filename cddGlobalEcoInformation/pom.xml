@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.bbva.datioamproduct</groupId>
             <artifactId>cddutilitiesdataproc</artifactId>
-            <version>0.1.22</version>
+            <version>0.2.0</version>
         </dependency>
         <dependency>
             <groupId>com.bbva.co.csan</groupId>
@@ -42,42 +42,42 @@
         <dependency>
             <groupId>com.datio.dataproc.sdk</groupId>
             <artifactId>dataproc-sdk-api</artifactId>
-
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.datio.dataproc.sdk</groupId>
             <artifactId>dataproc-sdk-functions</artifactId>
-
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.datio.dataproc.sdk</groupId>
             <artifactId>dataproc-sdk-io</artifactId>
-
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.datio.dataproc.sdk</groupId>
             <artifactId>dataproc-sdk-schema</artifactId>
-
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.datio.dataproc.sdk</groupId>
             <artifactId>dataproc-sdk-datiosparksession</artifactId>
-
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.datio.dataproc.sdk</groupId>
             <artifactId>dataproc-sdk-launcher</artifactId>
-
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_${scala.binary.version}</artifactId>
-
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_${scala.binary.version}</artifactId>
-
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.scalatest</groupId>
@@ -102,7 +102,7 @@
         <dependency>
             <groupId>com.datio.dataproc.sdk</groupId>
             <artifactId>dataproc-sdk-datiofilesystem</artifactId>
-
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
