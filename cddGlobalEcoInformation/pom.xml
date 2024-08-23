@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.bbva.datioamproduct</groupId>
             <artifactId>cddutilitiesdataproc</artifactId>
-            <version>0.2.0</version>
+            <version>0.1.22</version>
         </dependency>
         <dependency>
             <groupId>com.bbva.co.csan</groupId>
