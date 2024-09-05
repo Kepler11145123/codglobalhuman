@@ -5,7 +5,7 @@
     "mainClass": "com.bbva.datioamproduct.cddglobalmodel.CddGlobalEcoInformationLauncher"
   },
   "size": "XL",
-  "description": "Job kbtq-co-spk-inm-cddglobalecoinformation-01.json created for CDD BR Processing ",
+  "description": "Job kbtq-co-spk-inm-cddglobalecoinformation-01.json created for CDD BR Processing",
   "_id": "kbtq-co-spk-inm-cddglobalecoinformation-01",
   "runtime": "spark:3.1",
   "kind": "processing"
