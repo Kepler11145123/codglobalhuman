@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.datio</groupId>
         <artifactId>spark-pom-parent</artifactId>
-        <version>2.0.0-3.1</version>
+        <version>2.0.5-3.1</version>
     </parent>
 
     <groupId>com.bbva.gl.kbtq</groupId>
