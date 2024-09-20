@@ -43,6 +43,7 @@ class ParametryEcoInformationTest extends FlatSpec with Matchers with ContextPro
     assert(ParametryEcoInformation.GF_FINAL_CATALOG_VAL_ID.equals("gf_final_catalog_val_id"))
     assert(ParametryEcoInformation.PERSONAL_TYPE.equals("personal_type"))
     assert(ParametryEcoInformation.PERSONAL_ID.equals("personal_id"))
+    assert(ParametryEcoInformation.MES_DIA_DIC.equals("mes_dia_diciembre"))
     assert(ParametryEcoInformation.CUSTOMER_ID.equals("customer_id"))
     assert(ParametryEcoInformation.PROPOSAL_ID.equals("proposal_id"))
     assert(ParametryEcoInformation.SEC_VRDT_LT_PMT_CAP_AMOUNT.equals("sec_vrdt_lt_pmt_cap_amount"))
