@@ -125,6 +125,7 @@ class ParametryEcoInformationTest extends FlatSpec with Matchers with ContextPro
     assert(ParametryEcoInformation.CUSTOMER_GROUP_CLASSIF_M26.equals("customer_group_classif_M26"))
     assert(ParametryEcoInformation.G_ASSET_ALLOCATION_SECTOR_TYPE.equals("g_asset_allocation_sector_type"))
     assert(ParametryEcoInformation.EXCHANGE_RATE_AMOUNT.equals("exchange_rate_amount"))
+    assert(ParametryEcoInformation.LY_FIN_STMT_LAST_YEAR_ID.equals("ly_financial_stmt_last_year_id"))
     assert(ParametryEcoInformation.CONTRACT_BRANCH_ID.equals("contract_branch_id"))
     assert(ParametryEcoInformation.CONTRACT_SEQUENCE_ID.equals("contract_sequence_id"))
     assert(ParametryEcoInformation.GL_ACCOUNT_ID.equals("gl_account_id"))
