@@ -1,0 +1,24 @@
+package com.bbva.datioamproduct.cddglobalmodel
+
+import com.bbva.datioamproduct.cddglobalmodel.data.ParametryEcoHuman
+import com.bbva.datioamproduct.cddglobalmodel.data.ParametryEcoHuman.{LAUNCHER, WRITE_TEMP}
+import com.bbva.datioamproduct.cddglobalmodel.process.EvaluateEcoInformation
+import com.datio.dataproc.sdk.api.SparkProcess
+import com.datio.dataproc.sdk.api.context.RuntimeContext
+import com.datio.dataproc.sdk.datiosparksession.DatioSparkSession
+
+
+class CddGlobalEcoHuman extends SparkProcess {
+
+  override def runProcess(runtimeContext: RuntimeContext): Int = {
+    var exitCode = ParametryEcoHuman.EXIT_CODE_INITIAL
+    val spark = DatioSparkSession.getOrCreate().getSparkSession
+    val config = runtimeContext.getConfig
+    spark.sparkContext.setCheckpointDir(config.getString(WRITE_TEMP))
+    val evaluate = new EvaluateEcoInformation(runtimeContext)
+    exitCode = evaluate.run
+    exitCode
+  }
+
+  override def getProcessId: String = LAUNCHER
+}

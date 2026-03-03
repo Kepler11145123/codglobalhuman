@@ -1,0 +1,45 @@
+{
+  "namespace": "ctny",
+  "name": "t_ctny_utaparcdd_parametros_cdd",
+  "doc": "Tabla que contiene los valores de parametros del CDD (Cross Domain Data).",
+  "database": "master",
+  "storageZone": "Masterdata",
+  "storageType": "HDFS-Parquet",
+  "physicalPath": "/data/master/ctny/data/t_ctny_utaparcdd_parametros_cdd",
+  "partitions": ["cutoff_date"],
+  "securityLevel": "L1",
+  "type": "record",
+  "fields": [{
+    "name": "cutoff_date",
+    "type": "date",
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "co"
+  }, {
+    "name": "container_constant_field_desc",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(50)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "reference_field_value_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(50)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "operational_audit_insert_date",
+    "type": "timestamp",
+    "logicalFormat": "TIMESTAMP",
+    "deleted": false,
+    "metadata": true,
+    "default": "",
+    "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+    "locale": "co"
+  }]
+}

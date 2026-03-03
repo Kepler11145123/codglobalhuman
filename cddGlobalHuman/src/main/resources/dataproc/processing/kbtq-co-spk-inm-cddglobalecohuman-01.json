@@ -1,0 +1,13 @@
+{
+  "params": {
+    "artifactUrl": "${repository.endpoint.vdc}/${repository.repo.proc}/com/bbva/gl/kbtq/cddGlobalEcoHuman/${version}/cddGlobalEcohuman-${version}-jar-with-dependencies.jar",
+    "configUrl": "${repository.endpoint.vdc}/${repository.repo.proc}/com/bbva/gl/kbtq/cddGlobalEcoHuman/${version}/cddGlobalEcoHuman.conf",
+    "mainClass": "com.bbva.datioamproduct.cddglobalmodel.CddGlobalEcoHumanLauncher"
+  },
+  "size": "XL",
+  "description": "Job kbtq-co-spk-inm-cddglobalecohuman-01.json created for CDD BR Processing",
+  "_id": "kbtq-co-spk-inm-cddglobalecohuman-01",
+  "runtime": "spark:3.1",
+  "kind": "processing"
+}
+

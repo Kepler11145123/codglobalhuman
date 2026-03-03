@@ -1,0 +1,13 @@
+{
+  "_id": "kbtq-co-krb-trn-cddglobalecohuman-02",
+  "description": "Job kbtq-co-krb-trn-cddglobalecohuman-02 created for CDD Processing",
+  "kind": "processing",
+  "params": {
+    "artifactUrl": "${repository.endpoint.vdc}/${repository.repo.proc.releases}/com/bbva/projectsdatio/CDD-extkirby3/3.1.0/CDD-extkirby3-3.1.0-jar-with-dependencies.jar",
+    "configUrl": "${repository.endpoint.vdc}/${repository.repo.proc}/com/bbva/gl/kbtq/cddGlobalEcoHuman/${version}/cddGlobalEcoHumanCTL.conf",
+    "mainClass": "com.bbva.projectsdatio.cdd.ctlgenerator.Launcher"
+  },
+  "runtime": "spark:3.1",
+  "size": "XS",
+  "streaming": false
+}

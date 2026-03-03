@@ -1,0 +1,131 @@
+{
+  "namespace" : "kbtq",
+  "name" : "t_kbtq_eom_econ_information",
+  "doc" : "kbtq",
+  "database" : "master",
+  "storageZone" : "Masterdata",
+  "storageType" : "HDFS-Parquet",
+  "physicalPath" : "/data/master/kbtq/data/t_kbtq_eom_econ_information",
+  "securityLevel" : "L1",
+  "objectVersion" : "3.4.0",
+  "profiledByCompany" : true,
+  "partitions" : [ "g_entific_id", "gf_cutoff_date" ],
+  "type" : "record",
+  "fields" : [ {
+    "name" : "gf_cutoff_date",
+    "type" : "date",
+    "legacyName" : "",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_customer_id",
+    "type" : "string",
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(15)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_total_asset_amount",
+    "type" : [ "decimal(26,6)", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "DECIMAL(26,6)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_customer_sales_amount",
+    "type" : [ "decimal(26,6)", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "DECIMAL(26,6)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_employees_number",
+    "type" : [ "decimal(17)", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "DECIMAL(17)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_company_size_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(5)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_company_size_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_billing_date",
+    "type" : [ "date", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_entific_id",
+    "type" : "string",
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_audit_date",
+    "type" : "timestamp",
+    "legacyName" : "",
+    "logicalFormat" : "TIMESTAMP",
+    "format" : "yyyy-MM-dd HH:mm:ss.SSSSSS",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_rtl_cust_pmt_ablty_amount",
+    "type" : [ "decimal(26,6)", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "DECIMAL(26,6)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_rntl_icm_cre_in_exp_per",
+    "type" : [ "decimal(12,9)", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "DECIMAL(12,9)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_co_size_cal_tl_asset_amount",
+    "type" : [ "decimal(26,6)", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "DECIMAL(26,6)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_co_size_cal_emplys_number",
+    "type" : [ "decimal(17)", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "DECIMAL(17)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  } ]
+}

@@ -1,0 +1,233 @@
+{
+  "namespace" : "ksag",
+  "name" : "t_ksag_eom_sectorization",
+  "doc" : "ksag",
+  "database" : "master",
+  "storageZone" : "Masterdata",
+  "storageType" : "HDFS-Parquet",
+  "physicalPath" : "/data/master/ksag/data/t_ksag_eom_sectorization",
+  "securityLevel" : "L1",
+  "objectVersion" : "5.5.0",
+  "profiledByCompany" : true,
+  "partitions" : [ "g_entific_id", "gf_cutoff_date", "gf_information_origin_id" ],
+  "type" : "record",
+  "fields" : [ {
+    "name" : "gf_cutoff_date",
+    "type" : "date",
+    "legacyName" : "",
+    "logicalFormat" : "DATE",
+    "format" : "yyyy-MM-dd",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_customer_id",
+    "type" : "string",
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(15)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_intl_organisations_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_nace_activity_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(20)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_asset_allocation_actvy_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_asset_allocation_sector_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_asset_allocation_subsec_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_finrep_segment_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_inst_sector_cirbe_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_inst_sector_cntl_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(5)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_institutional_sector_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(8)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_institution_agg_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_cust_lqdty_gp_perim_ind_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_spclz_lending_cust_ind_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_cust_real_estate_ind_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_eca_customer_ind_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_customer_holding_activity_id",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(32)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_entific_id",
+    "type" : "string",
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_audit_date",
+    "type" : "timestamp",
+    "legacyName" : "",
+    "logicalFormat" : "TIMESTAMP",
+    "format" : "yyyy-MM-dd HH:mm:ss.SSSSSS",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "gf_information_origin_id",
+    "type" : "string",
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(4)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : "XXXX"
+  }, {
+    "name" : "g_fnl_hold_actvy_risk_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(3)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_spv_debtor_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_pi_customer_ind_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_mltrl_customer_ind_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(1)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_esg_fin_institution_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_ctpty_lqdt_sector_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(2)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  }, {
+    "name" : "g_nmd_model_segment_type",
+    "type" : [ "string", "null" ],
+    "legacyName" : "",
+    "logicalFormat" : "ALPHANUMERIC(10)",
+    "deleted" : false,
+    "metadata" : false,
+    "default" : ""
+  } ]
+}

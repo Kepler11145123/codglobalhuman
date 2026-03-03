@@ -1,0 +1,45 @@
+{
+  "namespace": "cplm",
+  "name": "t_cplm_ml_ajuste_segmento_stage",
+  "doc": "Tablon de proceso para acumular los ajustes de Segmento FINREP enviados por el area financiera",
+  "database": "master",
+  "storageZone": "Masterdata",
+  "storageType": "HDFS-Parquet",
+  "physicalPath": "/data/master/cplm/data/t_cplm_ml_ajuste_segmento_stage",
+  "partitions": ["cutoff_date"],
+  "securityLevel": "L1",
+  "type": "record",
+  "fields": [{
+    "name": "cutoff_date",
+    "type": "date",
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": true,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "co"
+  }, {
+    "name": "contract_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(42)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "finrep_segment_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(3)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "audit_date",
+    "type": ["timestamp", "null"],
+    "logicalFormat": "TIMESTAMP",
+    "deleted": false,
+    "metadata": true,
+    "default": "",
+    "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+    "locale": "co"
+  }]
+}

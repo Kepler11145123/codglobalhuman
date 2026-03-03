@@ -1,0 +1,124 @@
+{
+  "namespace": "ccog",
+  "name": "t_ccog_htatcvsam_param_general",
+  "doc": "Archivo donde se encuentra el detalle e informacion de cada una de las tablas corporativas, las tablas corporativas, son aquellas que contienen paramentros transversales de las diferentes areas de la entidad.",
+  "database": "master",
+  "storageZone": "Masterdata",
+  "storageType": "HDFS-Parquet",
+  "physicalPath": "/data/master/structuraldata/ccog/data/t_ccog_htatcvsam_param_general",
+  "partitions": ["partition_data_year_id", "partition_data_month_id", "partition_data_day_id"],
+  "securityLevel": "L1",
+  "type": "record",
+  "fields": [{
+    "name": "corporate_table_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "entity_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "language_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(1)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "search_key_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(19)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "registration_data_desc",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(250)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "registry_end_date",
+    "type": ["date", "null"],
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "co"
+  }, {
+    "name": "last_change_date",
+    "type": ["date", "null"],
+    "logicalFormat": "DATE",
+    "deleted": false,
+    "metadata": false,
+    "default": "",
+    "format": "yyyy-MM-dd",
+    "locale": "co"
+  }, {
+    "name": "last_change_entity_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "last_change_branch_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "last_change_terminal_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "last_change_user_id",
+    "type": ["string", "null"],
+    "logicalFormat": "ALPHANUMERIC(8)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "partition_data_year_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(4)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "partition_data_month_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "partition_data_day_id",
+    "type": "string",
+    "logicalFormat": "ALPHANUMERIC(2)",
+    "deleted": false,
+    "metadata": false,
+    "default": ""
+  }, {
+    "name": "operational_audit_insert_date",
+    "type": "timestamp",
+    "logicalFormat": "TIMESTAMP",
+    "deleted": false,
+    "metadata": true,
+    "default": "",
+    "format": "yyyy-MM-dd HH:mm:ss.SSSSSS",
+    "locale": "co"
+  }]
+}
