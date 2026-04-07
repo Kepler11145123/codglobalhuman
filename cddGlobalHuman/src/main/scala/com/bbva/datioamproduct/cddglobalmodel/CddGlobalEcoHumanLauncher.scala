@@ -11,5 +11,6 @@ object CddGlobalEcoHumanLauncher extends LazyLogging {
       System.exit(NUMBER_ONE_THOUSAND)
     }
     SparkLauncher.main(Array(args(NUMBER_ZERO), LAUNCHER))
+    SparkLauncher.main(Array(args(NUMBER_ZERO), LAUNCHER))
   }
 }

@@ -11,6 +11,8 @@ local.properties
 .loadpath
 .recommenders
 
+*.parquet
+*.crc
 # External tool builders
 .externalToolBuilders/
 
